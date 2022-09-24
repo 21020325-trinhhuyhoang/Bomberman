@@ -1,6 +1,7 @@
 package Tile;
 
 import main.GamePanel;
+import Convert.Convert;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TileManager {
 
@@ -52,13 +56,20 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
+            String firstLine = br.readLine();
+
+            List <Integer> arr = Convert.takeNumberFromString(firstLine);
+            Integer worldWidth = arr.get(0);
+            Integer worldHeight = arr.get(1);
+            gp.maxWorldCol = worldWidth.intValue();
+            gp.maxWorldRow = worldHeight.intValue();
+
             int col = 0;
             int row = 0;
 
             while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 
                 String line = br.readLine();
-
 
                 for (int i = 0; i < line.length(); ++i) {
 
