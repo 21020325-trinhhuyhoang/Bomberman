@@ -1,6 +1,7 @@
 package object;
 
 import main.GamePanel;
+import Convert.PositionScreen;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,8 +14,10 @@ public class SuperObject {
     public int worldX, worldY;
 
     public void draw(Graphics2D g2, GamePanel gp) {
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+        PositionScreen tmp = PositionScreen.takePos(gp);
+        int screenX = worldX + tmp._x;
+        int screenY = worldY + tmp._y;
 
         if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&

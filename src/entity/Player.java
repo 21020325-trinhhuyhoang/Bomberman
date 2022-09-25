@@ -2,6 +2,9 @@ package entity;
 
 import main.KeyHandler;
 import main.GamePanel;
+import main.Constants;
+
+import Bombs.Bombs;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,6 +17,10 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+
+    public int maxBombs;
+    public int totalBombs;
+    public Bombs[] arrBombs;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -33,6 +40,15 @@ public class Player extends Entity {
         worldY = 1 * gp.tileSize;
         speed = 3;
         direction = "down";
+
+        totalBombs = 0;
+        maxBombs = 4;
+
+        arrBombs = new Bombs[20];
+
+        for (int i = 0; i < maxBombs; ++i) {
+            arrBombs[i] = new Bombs(this.gp);
+        }
     }
 
     public void getPlayerImage() {
@@ -91,24 +107,6 @@ public class Player extends Entity {
             //Kiem tra va cham
             gp.cCheck.checkTile(this);
 
-            //If collision is false, player can move
-            //if (collisionOn == false) {
-                /*switch (direction) {
-                    case "up":
-                        if (collisionUp == false) worldY -= speed;
-                        break;
-                    case "down":
-                        if (collisionDown == false) worldY += speed;
-                        break;
-                    case "left":
-                        if (collisionLeft == false) worldX -= speed;
-                        break;
-                    case "right":
-                        if (collisionRight == false) worldX += speed;
-                        break;
-                }*/
-           // }
-
             //Di chuyen neu khong va cham
             if (goUp == true && collisionUp == false) {
                 worldY -= speed;
@@ -142,6 +140,43 @@ public class Player extends Entity {
         else {
             spriteNum = 3;
         }
+
+        if (keyH.spaceTyped== true) {
+            dropBomb();
+        }
+
+    }
+
+    public void dropBomb() {
+        if (totalBombs >= maxBombs) { return; }
+
+        int x = (worldX + solidArea.x + solidArea.width / 2) / gp.tileSize * gp.tileSize;
+        int y = (worldY + solidArea.y + solidArea.height / 2) / gp.tileSize * gp.tileSize;
+        int _x = x / gp.tileSize;
+        int _y = y / gp.tileSize;
+
+        if (gp.tileM.mapBombs[_x][_y] != 0) {
+            return;
+        }
+
+        for (int i = 0; i < maxBombs; ++i) {
+            if (arrBombs[i].time <= 0) {
+
+                //System.out.println(_x + " " + _y);
+                gp.tileM.mapBombs[_x][_y] = i + Constants.bombsCode;
+
+                arrBombs[i].worldX = x;
+                arrBombs[i].worldY = y;
+                arrBombs[i].time = 3000 / gp.fps * 2;
+                arrBombs[i].iP = 1;
+                arrBombs[i].ciP = 1;
+
+                totalBombs ++;
+
+                break;
+            }
+        }
+
     }
 
     public void draw(Graphics2D g2) {
@@ -195,14 +230,16 @@ public class Player extends Entity {
                 break;
         }
 
-        //check Tile
-        int tileX = (worldX + solidArea.x + solidArea.width / 2) / gp.tileSize;
-        int tileY = (worldY + solidArea.y + solidArea.height / 2)/ gp.tileSize;
+        /**
+         * kiem tra vi tri de dat bom.
+         */
+        /*int tileX = (worldX + solidArea.x + solidArea.width / 2) / gp.tileSize;
+        int tileY = (worldY + solidArea.y + solidArea.height / 2) / gp.tileSize;
 
         int renderX = tileX * gp.tileSize - worldX + screenX;
         int renderY = tileY * gp.tileSize - worldY + screenY;
         g2.setColor(Color.yellow);
-        g2.fillRect(renderX,renderY,gp.tileSize,gp.tileSize);
+        g2.fillRect(renderX,renderY,gp.tileSize,gp.tileSize);*/
 
         //draw bomberman
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);

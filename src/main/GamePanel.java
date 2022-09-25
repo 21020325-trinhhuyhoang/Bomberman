@@ -25,14 +25,14 @@ public class GamePanel extends JPanel implements Runnable {
     public int worldHeight = tileSize * maxWorldRow;
 
     //FPS
-    int fps = 60;
+    public int fps = 60;
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
     public ConllisionChecker cCheck = new ConllisionChecker(this);
 
     public Player player = new Player(this,keyH);
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public SuperObject[] obj = new SuperObject[15];
     public AssetSetter aSetter = new AssetSetter(this);
 
@@ -83,7 +83,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        //updatePlayer
         player.update();
+
+        keyH.spaceTyped = false;
+
+        //update Bombs
+        for (int i = 0; i < player.maxBombs; ++i) {
+            if (player.arrBombs[i].time > 0) {
+                player.arrBombs[i].update(this,player);
+            }
+        }
+
     }
 
     public void paintComponent(Graphics g) {
@@ -98,6 +109,13 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < obj.length; ++i) {
             if (obj[i] != null) {
                 obj[i].draw(g2, this);
+            }
+        }
+
+        //Bombs
+        for (int i = 0; i < player.maxBombs; ++i) {
+            if (player.arrBombs[i].time > 0) {
+                player.arrBombs[i].draw(g2,this);
             }
         }
 

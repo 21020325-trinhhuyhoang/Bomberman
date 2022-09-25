@@ -2,10 +2,17 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
+
+import main.GamePanel;
 
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed = false,downPressed = false,leftPressed = false,rightPressed = false;
+
+    public boolean spacePressed = false;
+
+    public boolean spaceTyped = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -28,6 +35,15 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_A) {
             leftPressed = true;
         }
+
+        if (code == KeyEvent.VK_SPACE) {
+
+            if (spacePressed == false) {
+                spaceTyped = true;
+            }
+            spacePressed = true;
+        }
+
     }
 
     @Override
@@ -45,6 +61,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_A) {
             leftPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
         }
     }
 }

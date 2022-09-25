@@ -2,6 +2,7 @@ package Tile;
 
 import main.GamePanel;
 import Convert.Convert;
+import Convert.PositionScreen;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,13 +18,14 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][];
+    public int mapTileNum[][] , mapBombs[][];
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[10];
 
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapBombs = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTitleImage();
         loadMap("/levels/lvl1.txt");
@@ -111,15 +113,16 @@ public class TileManager {
 
            int worldX = worldCol * gp.tileSize;
            int worldY = worldRow * gp.tileSize;
-           int screenX = worldX - gp.player.worldX + gp.player.screenX;
-           int screenY = worldY - gp.player.worldY + gp.player.screenY;
+           PositionScreen tmp = PositionScreen.takePos(gp);
+           int screenX = worldX + tmp._x;
+           int screenY = worldY + tmp._y;
 
            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-                 g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+               g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
            }
 
            worldCol++;
