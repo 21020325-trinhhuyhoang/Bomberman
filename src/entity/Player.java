@@ -195,6 +195,16 @@ public class Player extends Entity {
                 break;
         }
 
+        //check Tile
+        int tileX = (worldX + solidArea.x + solidArea.width / 2) / gp.tileSize;
+        int tileY = (worldY + solidArea.y + solidArea.height / 2)/ gp.tileSize;
+
+        int renderX = tileX * gp.tileSize - worldX + screenX;
+        int renderY = tileY * gp.tileSize - worldY + screenY;
+        g2.setColor(Color.yellow);
+        g2.fillRect(renderX,renderY,gp.tileSize,gp.tileSize);
+
+        //draw bomberman
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
         //check hitbox

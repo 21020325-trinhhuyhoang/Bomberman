@@ -56,6 +56,9 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
+            /**
+             * Doc dong dau tien cua file gom 2 thong tin la chieu cao va chie rong cua level.
+             */
             String firstLine = br.readLine();
 
             List <Integer> arr = Convert.takeNumberFromString(firstLine);
