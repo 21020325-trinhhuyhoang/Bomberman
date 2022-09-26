@@ -19,6 +19,7 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][] , mapBombs[][];
+    public int mapConllision[][];
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -26,6 +27,7 @@ public class TileManager {
 
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         mapBombs = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapConllision = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTitleImage();
         loadMap("/levels/lvl1.txt");
@@ -77,15 +79,19 @@ public class TileManager {
                 String line = br.readLine();
 
                 for (int i = 0; i < line.length(); ++i) {
+                    mapConllision[col][row] = 0;
 
                     if (line.charAt(i) == '1') {
                         mapTileNum[col][row] = 1;
+                        mapConllision[col][row] = 1;
                     }
                     else if (line.charAt(i) == '0') {
                         mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
                     }
                     else if (line.charAt(i) == '2') {
                         mapTileNum[col][row] = 2;
+                        mapConllision[col][row] = 1;
                     }
 
                     col++;

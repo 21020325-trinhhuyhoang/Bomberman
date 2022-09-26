@@ -167,7 +167,7 @@ public class Player extends Entity {
 
                 arrBombs[i].worldX = x;
                 arrBombs[i].worldY = y;
-                arrBombs[i].time = 3000 / gp.fps * 2;
+                arrBombs[i].time = 3500 / gp.fps * 2;
                 arrBombs[i].iP = 1;
                 arrBombs[i].ciP = 1;
 
