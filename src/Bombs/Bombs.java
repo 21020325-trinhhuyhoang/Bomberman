@@ -3,11 +3,13 @@ package Bombs;
 import Convert.PositionScreen;
 import main.GamePanel;
 import entity.Player;
+import main.Constants;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Bombs {
     public BufferedImage image, image1, image2;
@@ -38,7 +40,7 @@ public class Bombs {
         }
     }
 
-    public void update(GamePanel gp,Player player) {
+    public void update(GamePanel gp, Player player, ArrayList<Explosion> listExplosion) {
         this.time--;
 
         /**
@@ -78,15 +80,17 @@ public class Bombs {
         //bom no
         if (this.time <= 0) {
             player.totalBombs --;
-            BombExplove();
+            BombExplosion(listExplosion,player);
         }
     }
 
-    public void BombExplove() {
+    public void BombExplosion(ArrayList<Explosion> listExplosion,Player player ) {
 
         int _x = this.worldX / gp.tileSize;
         int _y = this.worldY / gp.tileSize;
         gp.tileM.mapBombs[_x][_y] = 0;
+
+        int fire = player.fire;
 
         /**
          * lam cho sau khi bom no co the di qua.
@@ -94,6 +98,165 @@ public class Bombs {
         if (this.Conllision > 0) {
             gp.tileM.mapConllision[_x][_y] --;
         }
+
+        //center
+        gp.tileM.mapExplosion[_x][_y] ++;
+        Explosion explosion = new Explosion(this.worldX,this.worldY,30,0);
+        addExplosion(explosion,listExplosion);
+
+        //left
+        for (int i = 1; i <= fire; ++i) {
+
+            if (_x - i <= 0) break;
+            if (gp.tileM.mapTileNum[_x - i][_y] == 1) {break;}
+
+            if (gp.tileM.mapTileNum[_x - i][_y] == 2) {
+                gp.tileM.mapTileNum[_x - i][_y] = 0;
+                gp.tileM.mapConllision[_x - i][_y] --;
+                break;
+            }
+
+            if (gp.tileM.mapBombs[_x - i][_y] != 0) {
+                int bomb = gp.tileM.mapBombs[_x - i][_y] - Constants.bombsCode;
+                player.arrBombs[bomb].time = 1;
+                break;
+            }
+
+            if (gp.tileM.mapExplosion[_x - i][_y] > 0) break;
+            gp.tileM.mapExplosion[_x - i][_y]++;
+
+            //last left
+            if (i == fire) {
+                explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,30,2);
+                addExplosion(explosion,listExplosion);
+                break;
+            }
+
+            explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,30,1);
+            addExplosion(explosion,listExplosion);
+        }
+
+        //right
+        for (int i = 1; i <= fire; ++i) {
+
+            if (_x + i >= gp.maxWorldCol ) break;
+            if (gp.tileM.mapTileNum[_x + i][_y] == 1) {break;}
+
+            if (gp.tileM.mapTileNum[_x + i][_y] == 2) {
+                gp.tileM.mapTileNum[_x + i][_y] = 0;
+                gp.tileM.mapConllision[_x + i][_y] --;
+                break;
+            }
+
+            if (gp.tileM.mapBombs[_x + i][_y] != 0) {
+                int bomb = gp.tileM.mapBombs[_x + i][_y] - Constants.bombsCode;
+                player.arrBombs[bomb].time = 1;
+                break;
+            }
+
+            if (gp.tileM.mapExplosion[_x + i][_y] > 0) break;
+            gp.tileM.mapExplosion[_x + i][_y]++;
+
+            //last right
+            if (i == fire) {
+                explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,30,3);
+                addExplosion(explosion,listExplosion);
+                break;
+            }
+
+            explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,30,1);
+            addExplosion(explosion,listExplosion);
+        }
+
+        //down
+        for (int i = 1; i <= fire; ++i) {
+
+            if (_y - i <= 0 ) break;
+            if (gp.tileM.mapTileNum[_x][_y - i] == 1) {break;}
+
+            if (gp.tileM.mapTileNum[_x][_y - i] == 2) {
+                gp.tileM.mapTileNum[_x][_y - i] = 0;
+                gp.tileM.mapConllision[_x][_y - i] --;
+                break;
+            }
+
+            if (gp.tileM.mapBombs[_x][_y - i] != 0) {
+                int bomb = gp.tileM.mapBombs[_x][_y - i] - Constants.bombsCode;
+                player.arrBombs[bomb].time = 1;
+                break;
+            }
+
+            if (gp.tileM.mapExplosion[_x][_y - i] > 0) break;
+            gp.tileM.mapExplosion[_x][_y - i]++;
+
+            //last down
+            if (i == fire) {
+                explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,30,6);
+                addExplosion(explosion,listExplosion);
+                break;
+            }
+
+            explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,30,4);
+            addExplosion(explosion,listExplosion);
+        }
+
+        //top
+        for (int i = 1; i <= fire; ++i) {
+
+            if (_y + i >= gp.maxWorldRow ) break;
+            if (gp.tileM.mapTileNum[_x][_y + i] == 1) {break;}
+
+            if (gp.tileM.mapTileNum[_x][_y + i] == 2) {
+                gp.tileM.mapTileNum[_x][_y + i] = 0;
+                gp.tileM.mapConllision[_x][_y + i] --;
+                break;
+            }
+
+            if (gp.tileM.mapBombs[_x][_y + i] != 0) {
+                int bomb = gp.tileM.mapBombs[_x][_y + i] - Constants.bombsCode;
+                player.arrBombs[bomb].time = 1;
+                break;
+            }
+
+            if (gp.tileM.mapExplosion[_x][_y + i] > 0) break;
+            gp.tileM.mapExplosion[_x][_y + i]++;
+
+            //last top
+            if (i == fire) {
+                explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,30,5);
+                addExplosion(explosion,listExplosion);
+                break;
+            }
+
+            explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,30,4);
+            addExplosion(explosion,listExplosion);
+        }
+
+    }
+
+    /**
+     * them Explosion vao list.
+     */
+    public void addExplosion(Explosion explosion, ArrayList<Explosion> listExplosion) {
+         int idx = -1;
+         Explosion tmp;
+
+         for (int i = 0; i < listExplosion.size(); ++i) {
+             tmp = listExplosion.get(i);
+
+             if (tmp.time <= 0) {
+                 idx = i;
+                 break;
+             }
+         }
+
+         if (idx == -1) {
+             listExplosion.add(explosion);
+             tmp = listExplosion.get(listExplosion.size() - 1);
+             return;
+         }
+
+         listExplosion.set(idx,explosion);
     }
 
     public void draw(Graphics2D g2, GamePanel gp) {

@@ -17,6 +17,7 @@ public class main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        //khoi tao loop choi game o day.
         gamePanel.setupGame();
         gamePanel.startGameThread();
     }

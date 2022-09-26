@@ -22,6 +22,8 @@ public class Player extends Entity {
     public int totalBombs;
     public Bombs[] arrBombs;
 
+    public int fire = 4;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;

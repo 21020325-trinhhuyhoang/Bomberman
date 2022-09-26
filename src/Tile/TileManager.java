@@ -18,7 +18,7 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][] , mapBombs[][];
+    public int mapTileNum[][] , mapBombs[][], mapExplosion[][];
     public int mapConllision[][];
 
     public TileManager(GamePanel gp) {
@@ -28,6 +28,7 @@ public class TileManager {
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         mapBombs = new int[gp.maxWorldCol][gp.maxWorldRow];
         mapConllision = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapExplosion = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTitleImage();
         loadMap("/levels/lvl1.txt");

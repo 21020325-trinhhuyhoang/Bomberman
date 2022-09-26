@@ -2,7 +2,10 @@ package main;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.util.ArrayList;
 
+import Bombs.Explosion;
+import Bombs.SuperExplosion;
 import Tile.TileManager;
 import entity.Player;
 import object.SuperObject;
@@ -36,6 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperObject[] obj = new SuperObject[15];
     public AssetSetter aSetter = new AssetSetter(this);
 
+    public SuperExplosion superExplosion = new SuperExplosion();
+    public ArrayList<Explosion> listExplosion = new ArrayList<>();
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.BLACK);
@@ -46,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSetter.setObject();
+        superExplosion.loadImage();
     }
 
     public void startGameThread() {
@@ -89,14 +96,47 @@ public class GamePanel extends JPanel implements Runnable {
         keyH.spaceTyped = false;
 
         //update Bombs
+        updateBombs();
+
+        //update Plosion
+        updateExplosion();
+
+    }
+
+    //update Bombs
+    public void updateBombs() {
         for (int i = 0; i < player.maxBombs; ++i) {
             if (player.arrBombs[i].time > 0) {
-                player.arrBombs[i].update(this,player);
+                player.arrBombs[i].update(this,player,listExplosion);
             }
+        }
+    }
+
+    /**
+     * xu ly vu no.
+     */
+    public void updateExplosion() {
+        Explosion tmp;
+        for (int i = 0; i < listExplosion.size(); ++i) {
+            tmp = listExplosion.get(i);
+
+            if (tmp.time > 0) {
+                tmp.time --;
+
+                //Huy gia tri vu no
+                if (tmp.time == 0) {
+                   int x = tmp.worldX / tileSize;
+                   int y = tmp.worldY / tileSize;
+
+                   tileM.mapExplosion[x][y] --;
+                }
+            }
+
         }
 
     }
 
+    //ve cac thu o day.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -106,21 +146,55 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2);
 
         //Object
-        for (int i = 0; i < obj.length; ++i) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this);
-            }
-        }
+        paintObject(g2);
 
         //Bombs
-        for (int i = 0; i < player.maxBombs; ++i) {
-            if (player.arrBombs[i].time > 0) {
-                player.arrBombs[i].draw(g2,this);
-            }
-        }
+        paintBombs(g2);
+
+        //Explosion
+        paintExplosion(g2);
 
         //Bomberman
         player.draw(g2);
         g2.dispose();
     }
+
+    /**
+     * render Object.
+     */
+    public void paintObject(Graphics2D g2) {
+        for (int i = 0; i < obj.length; ++i) {
+            if (obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
+    }
+
+    /**
+     * render bombs.
+     */
+    public void paintBombs(Graphics2D g2) {
+        for (int i = 0; i < player.maxBombs; ++i) {
+            if (player.arrBombs[i].time > 0) {
+                player.arrBombs[i].draw(g2,this);
+            }
+        }
+    }
+
+    /**
+     * render Explosion.
+     */
+    public void paintExplosion(Graphics2D g2) {
+        Explosion tmp;
+
+        for (int i = 0; i < listExplosion.size(); ++i) {
+            tmp = listExplosion.get(i);
+
+            if (tmp.time > 0) {
+                tmp.draw(g2,this,superExplosion);
+            }
+        }
+    }
+
+
 }
