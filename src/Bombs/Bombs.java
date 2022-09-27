@@ -1,11 +1,14 @@
 package Bombs;
 
+import BrickExplo.BrickExplo;
+import BrickExplo.SuperBrickExplo;
 import Convert.PositionScreen;
 import main.GamePanel;
 import entity.Player;
 import main.Constants;
 
 import javax.imageio.ImageIO;
+import javax.lang.model.type.ArrayType;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -84,8 +87,9 @@ public class Bombs {
         }
     }
 
-    public void BombExplosion(ArrayList<Explosion> listExplosion,Player player ) {
+    public void BombExplosion(ArrayList<Explosion> listExplosion,Player player) {
 
+        BrickExplo newBrickExplo;
         int _x = this.worldX / gp.tileSize;
         int _y = this.worldY / gp.tileSize;
         gp.tileM.mapBombs[_x][_y] = 0;
@@ -101,7 +105,7 @@ public class Bombs {
 
         //center
         gp.tileM.mapExplosion[_x][_y] ++;
-        Explosion explosion = new Explosion(this.worldX,this.worldY,30,0);
+        Explosion explosion = new Explosion(this.worldX,this.worldY,Constants.timeExplosion,0);
         addExplosion(explosion,listExplosion);
 
         //left
@@ -113,6 +117,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x - i][_y] == 2) {
                 gp.tileM.mapTileNum[_x - i][_y] = 0;
                 gp.tileM.mapConllision[_x - i][_y] --;
+                newBrickExplo = new BrickExplo((_x - i) * gp.tileSize,(_y) * gp.tileSize);
+                addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
 
@@ -127,12 +133,12 @@ public class Bombs {
 
             //last left
             if (i == fire) {
-                explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,30,2);
+                explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,Constants.timeExplosion,2);
                 addExplosion(explosion,listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,30,1);
+            explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,Constants.timeExplosion,1);
             addExplosion(explosion,listExplosion);
         }
 
@@ -145,6 +151,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x + i][_y] == 2) {
                 gp.tileM.mapTileNum[_x + i][_y] = 0;
                 gp.tileM.mapConllision[_x + i][_y] --;
+                newBrickExplo = new BrickExplo((_x + i) * gp.tileSize,(_y) * gp.tileSize);
+                addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
 
@@ -159,12 +167,12 @@ public class Bombs {
 
             //last right
             if (i == fire) {
-                explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,30,3);
+                explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,Constants.timeExplosion,3);
                 addExplosion(explosion,listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,30,1);
+            explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,Constants.timeExplosion,1);
             addExplosion(explosion,listExplosion);
         }
 
@@ -177,6 +185,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x][_y - i] == 2) {
                 gp.tileM.mapTileNum[_x][_y - i] = 0;
                 gp.tileM.mapConllision[_x][_y - i] --;
+                newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y - i) * gp.tileSize);
+                addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
 
@@ -191,12 +201,12 @@ public class Bombs {
 
             //last down
             if (i == fire) {
-                explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,30,6);
+                explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,Constants.timeExplosion,6);
                 addExplosion(explosion,listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,30,4);
+            explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,Constants.timeExplosion,4);
             addExplosion(explosion,listExplosion);
         }
 
@@ -209,6 +219,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x][_y + i] == 2) {
                 gp.tileM.mapTileNum[_x][_y + i] = 0;
                 gp.tileM.mapConllision[_x][_y + i] --;
+                newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y + i) * gp.tileSize);
+                addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
 
@@ -223,12 +235,12 @@ public class Bombs {
 
             //last top
             if (i == fire) {
-                explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,30,5);
+                explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,Constants.timeExplosion,5);
                 addExplosion(explosion,listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,30,4);
+            explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,Constants.timeExplosion,4);
             addExplosion(explosion,listExplosion);
         }
 
@@ -257,6 +269,30 @@ public class Bombs {
          }
 
          listExplosion.set(idx,explosion);
+    }
+
+    /**
+     * them 1 BrickExplo vao list.
+     */
+    public void addBrickExplo(ArrayList<BrickExplo> listBrickExplo, BrickExplo newBrickExplo ) {
+        int idx = -1;
+        BrickExplo tmp;
+
+        for (int i = 0; i < listBrickExplo.size(); ++i) {
+            tmp = listBrickExplo.get(i);
+
+            if (tmp.time <= 0) {
+                idx = i;
+                break;
+            }
+        }
+
+        if (idx != -1) {
+            listBrickExplo.set(idx, newBrickExplo);
+            return;
+        }
+
+        listBrickExplo.add(newBrickExplo);
     }
 
     public void draw(Graphics2D g2, GamePanel gp) {

@@ -27,7 +27,7 @@ public class Explosion {
      * ve vu no.
      */
     public void draw(Graphics2D g2, GamePanel gp, SuperExplosion sp) {
-        if (this.time % 6 == 0) {
+        if (this.time % Constants.timeExplosionMod == 0) {
             if (this.typeImage == 2 && this.cType == 1) this.cType = -1;
             this.typeImage += this.cType;
         }

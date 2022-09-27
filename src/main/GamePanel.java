@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import Bombs.Explosion;
 import Bombs.SuperExplosion;
+import BrickExplo.BrickExplo;
+import BrickExplo.SuperBrickExplo;
 import Tile.TileManager;
 import entity.Player;
 import object.SuperObject;
@@ -41,6 +43,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public SuperExplosion superExplosion = new SuperExplosion();
     public ArrayList<Explosion> listExplosion = new ArrayList<>();
+    public SuperBrickExplo superBrickExplo = new SuperBrickExplo();
+    public ArrayList<BrickExplo> listBrickExplo = new ArrayList<>();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -101,6 +105,9 @@ public class GamePanel extends JPanel implements Runnable {
         //update Plosion
         updateExplosion();
 
+        //update BrickExplo
+        updateBrickExplo();
+
     }
 
     //update Bombs
@@ -136,6 +143,21 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    /**
+     * update Brick explo.
+     */
+    public void updateBrickExplo() {
+        BrickExplo tmp;
+
+        for (int i = 0; i < listBrickExplo.size(); ++i) {
+            tmp = listBrickExplo.get(i);
+
+            if (tmp.time > 0) {
+                tmp.time --;
+            }
+        }
+    }
+
     //ve cac thu o day.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -154,8 +176,12 @@ public class GamePanel extends JPanel implements Runnable {
         //Explosion
         paintExplosion(g2);
 
+        //Brick Explo
+        paintBrickExplosion(g2);
+
         //Bomberman
         player.draw(g2);
+
         g2.dispose();
     }
 
@@ -192,6 +218,21 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (tmp.time > 0) {
                 tmp.draw(g2,this,superExplosion);
+            }
+        }
+    }
+
+    /**
+     * render Brick Explo.
+     */
+    public void paintBrickExplosion(Graphics2D g2) {
+        BrickExplo tmp;
+
+        for (int i = 0; i < listBrickExplo.size(); ++i) {
+            tmp = listBrickExplo.get(i);
+
+            if (tmp.time > 0) {
+                tmp.draw(g2,this,superBrickExplo);
             }
         }
     }

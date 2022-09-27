@@ -8,6 +8,10 @@ public class Constants {
 
     public static final int timeBomb = 3500;
 
-    public static final int timeExplosion = 120;
+    public static final int timeExplosion = 25;
+    public static final int timeExplosionMod = 5;
+
+    public static final int timeBrickExplo = 14;
+    public static final int timeBrickExploMod = 7;
 
 }

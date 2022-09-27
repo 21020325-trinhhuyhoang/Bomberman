@@ -18,11 +18,11 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
-    public int maxBombs;
+    public int maxBombs = 1;
     public int totalBombs;
     public Bombs[] arrBombs;
 
-    public int fire = 4;
+    public int fire = 1;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -44,7 +44,6 @@ public class Player extends Entity {
         direction = "down";
 
         totalBombs = 0;
-        maxBombs = 4;
 
         arrBombs = new Bombs[20];
 
