@@ -11,7 +11,15 @@ public class Constants {
     public static final int timeExplosion = 25;
     public static final int timeExplosionMod = 5;
 
-    public static final int timeBrickExplo = 14;
-    public static final int timeBrickExploMod = 7;
+    public static final int timeBrickExplo = 12;
+    public static final int timeBrickExploMod = 4;
+
+    public static final int timeChangeAnimationEnemy = 22;
+
+    public static final String nameFile = "/levels/lvl1.txt";
+
+    public static final int timeEDeadth = 130;
+    public static final int timeEDeadthUp = 60;
+    public static final int timeEDeadthMod = 15;
 
 }

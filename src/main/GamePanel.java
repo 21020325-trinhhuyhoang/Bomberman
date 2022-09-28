@@ -8,9 +8,14 @@ import Bombs.Explosion;
 import Bombs.SuperExplosion;
 import BrickExplo.BrickExplo;
 import BrickExplo.SuperBrickExplo;
+import Enemy.Enemy;
+import Enemy.SuperEnemy;
 import Tile.TileManager;
 import entity.Player;
 import object.SuperObject;
+import Enemy.SuperEDeadth;
+import Enemy.EDeadth;
+import Enemy.Balloom;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -45,6 +50,10 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Explosion> listExplosion = new ArrayList<>();
     public SuperBrickExplo superBrickExplo = new SuperBrickExplo();
     public ArrayList<BrickExplo> listBrickExplo = new ArrayList<>();
+    public ArrayList<Enemy> listEnemy = new ArrayList<>();
+    public SuperEnemy se = new SuperEnemy(this);
+    public SuperEDeadth sed = new SuperEDeadth(this);
+    public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -108,6 +117,9 @@ public class GamePanel extends JPanel implements Runnable {
         //update BrickExplo
         updateBrickExplo();
 
+        //update Enemy
+        updateEnemy();
+
     }
 
     //update Bombs
@@ -158,6 +170,34 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * update enemy.
+     */
+    public void updateEnemy() {
+        Enemy tmp;
+        EDeadth newED;
+        int type = 0;
+        boolean checkDeadth = false;
+
+        for (int i = 0; i < listEnemy.size(); ++i) {
+            tmp = listEnemy.get(i);
+
+            if (tmp.hitPoint > 0) {
+               checkDeadth = tmp.checkDeadth(this);
+
+               if (checkDeadth == true) {
+                   tmp.hitPoint --;
+
+                   if (tmp.hitPoint <= 0) {
+                       if (tmp instanceof Balloom) { type = 0; }
+                       newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
+                       listEDeadth.add(newED);
+                   }
+               }
+            }
+        }
+    }
+
     //ve cac thu o day.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -178,6 +218,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Brick Explo
         paintBrickExplosion(g2);
+
+        //Enemy Deadth
+        paintEDeadth(g2);
+
+        //Enemy
+        paintEnemy(g2);
 
         //Bomberman
         player.draw(g2);
@@ -237,5 +283,34 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * render enemy.
+     */
+    public void paintEnemy(Graphics2D g2) {
+        Enemy tmp;
+
+        for (int i = 0; i < listEnemy.size(); ++i) {
+            tmp = listEnemy.get(i);
+
+            if (tmp.hitPoint > 0) {
+                tmp.draw(g2,this,se);
+            }
+        }
+    }
+
+    /**
+     * render enemy deadth.
+     */
+    public void paintEDeadth(Graphics2D g2) {
+        EDeadth tmp;
+
+        for (int i = 0; i < listEDeadth.size(); ++i) {
+            tmp = listEDeadth.get(i);
+
+            if (tmp.time > 0) {
+                tmp.draw(g2,se,sed);
+            }
+        }
+    }
 
 }

@@ -14,7 +14,6 @@ public class SuperObject {
     public int worldX, worldY;
 
     public void draw(Graphics2D g2, GamePanel gp) {
-
         PositionScreen tmp = PositionScreen.takePos(gp);
         int screenX = worldX + tmp._x;
         int screenY = worldY + tmp._y;

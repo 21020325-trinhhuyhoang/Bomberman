@@ -1,5 +1,8 @@
 package Tile;
 
+import Enemy.Enemy;
+import Enemy.Balloom;
+import main.Constants;
 import main.GamePanel;
 import Convert.Convert;
 import Convert.PositionScreen;
@@ -31,7 +34,7 @@ public class TileManager {
         mapExplosion = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTitleImage();
-        loadMap("/levels/lvl1.txt");
+        loadMap(Constants.nameFile);
     }
 
     public void getTitleImage() {
@@ -93,6 +96,10 @@ public class TileManager {
                     else if (line.charAt(i) == '2') {
                         mapTileNum[col][row] = 2;
                         mapConllision[col][row] = 1;
+                    }
+                    else if (line.charAt(i) == 'q') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
                     }
 
                     col++;
