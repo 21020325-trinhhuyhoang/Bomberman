@@ -165,6 +165,7 @@ public class Player extends Entity {
 
                 //System.out.println(_x + " " + _y);
                 gp.tileM.mapBombs[_x][_y] = i + Constants.bombsCode;
+                gp.tileM.mapEConllision[_x][_y] ++;
 
                 arrBombs[i].worldX = x;
                 arrBombs[i].worldY = y;

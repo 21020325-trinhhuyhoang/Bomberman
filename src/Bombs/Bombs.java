@@ -73,7 +73,7 @@ public class Bombs {
         /**
          * doi image.
          */
-        if (this.time % (300 / gp.fps * 2) == 0) {
+        if (this.time % Constants.timeBombMod == 0) {
             if (ciP == 1 && iP == 3) { ciP = -1; }
             if (ciP == -1 && iP == 1) { ciP = 1; }
 
@@ -101,6 +101,7 @@ public class Bombs {
          */
         if (this.Conllision > 0) {
             gp.tileM.mapConllision[_x][_y] --;
+            gp.tileM.mapEConllision[_x][_y] --;
         }
 
         //center
@@ -117,6 +118,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x - i][_y] == 2) {
                 gp.tileM.mapTileNum[_x - i][_y] = 0;
                 gp.tileM.mapConllision[_x - i][_y] --;
+                gp.tileM.mapEConllision[_x - i][_y] --;
+
                 newBrickExplo = new BrickExplo((_x - i) * gp.tileSize,(_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
@@ -151,6 +154,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x + i][_y] == 2) {
                 gp.tileM.mapTileNum[_x + i][_y] = 0;
                 gp.tileM.mapConllision[_x + i][_y] --;
+                gp.tileM.mapEConllision[_x + i][_y] --;
+
                 newBrickExplo = new BrickExplo((_x + i) * gp.tileSize,(_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
@@ -185,6 +190,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x][_y - i] == 2) {
                 gp.tileM.mapTileNum[_x][_y - i] = 0;
                 gp.tileM.mapConllision[_x][_y - i] --;
+                gp.tileM.mapEConllision[_x][_y - i] --;
+
                 newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y - i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
@@ -219,6 +226,8 @@ public class Bombs {
             if (gp.tileM.mapTileNum[_x][_y + i] == 2) {
                 gp.tileM.mapTileNum[_x][_y + i] = 0;
                 gp.tileM.mapConllision[_x][_y + i] --;
+                gp.tileM.mapEConllision[_x][_y + i] --;
+
                 newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y + i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;

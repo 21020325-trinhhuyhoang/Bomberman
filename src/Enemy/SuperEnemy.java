@@ -89,7 +89,7 @@ public class SuperEnemy {
 
                     }
                     else if (line.charAt(i) == 'q') {
-                        newEnemy = new Balloom(col * gp.tileSize, row * gp.tileSize);
+                        newEnemy = new Balloom(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 

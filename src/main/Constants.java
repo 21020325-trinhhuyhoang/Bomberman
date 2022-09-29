@@ -7,6 +7,7 @@ public class Constants {
     public static final int bombsCode = 88;
 
     public static final int timeBomb = 3500;
+    public static final int timeBombMod = 19;
 
     public static final int timeExplosion = 25;
     public static final int timeExplosionMod = 5;
@@ -18,8 +19,10 @@ public class Constants {
 
     public static final String nameFile = "/levels/lvl1.txt";
 
-    public static final int timeEDeadth = 130;
+    public static final int timeEDeadth = 120;
     public static final int timeEDeadthUp = 60;
-    public static final int timeEDeadthMod = 15;
+    public static final int timeEDeadthMod = 17;
+
+    public static final int hitBoxE = 15;
 
 }

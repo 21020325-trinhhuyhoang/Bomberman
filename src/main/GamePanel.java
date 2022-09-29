@@ -82,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = 0;
         int drawCount = 0;
 
+        //vong lap game ket thuc o day
         while(gameThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
@@ -183,7 +184,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listEnemy.get(i);
 
             if (tmp.hitPoint > 0) {
-               checkDeadth = tmp.checkDeadth(this);
+               checkDeadth = tmp.checkDeadth();
 
                if (checkDeadth == true) {
                    tmp.hitPoint --;
@@ -193,6 +194,10 @@ public class GamePanel extends JPanel implements Runnable {
                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                        listEDeadth.add(newED);
                    }
+               }
+
+               if (tmp.hitPoint > 0) {
+                   tmp.move();
                }
             }
         }
