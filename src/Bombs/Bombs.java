@@ -8,6 +8,7 @@ import entity.Player;
 import main.Constants;
 import object.PowerUp_Bombs;
 import object.PowerUp_Flames;
+import object.PowerUp_Speed;
 
 import javax.imageio.ImageIO;
 import javax.lang.model.type.ArrayType;
@@ -278,6 +279,14 @@ public class Bombs {
         //flame
         if (gp.tileM.mapPowerUp[x][y] == 1) {
             PowerUp_Flames tmp = new PowerUp_Flames(x * gp.tileSize, y * gp.tileSize);
+
+            gp.tileM.mapPowerUp[x][y] = -1;
+            gp.listPowerUp.add(tmp);
+        }
+
+        //speed
+        if (gp.tileM.mapPowerUp[x][y] == 2) {
+            PowerUp_Speed tmp = new PowerUp_Speed(x * gp.tileSize, y * gp.tileSize);
 
             gp.tileM.mapPowerUp[x][y] = -1;
             gp.listPowerUp.add(tmp);

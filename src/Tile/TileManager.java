@@ -118,12 +118,20 @@ public class TileManager {
                         mapConllision[col][row] = 1;
                         mapEConllision[col][row] = 1;
                         mapPowerUp[col][row] = 0;
-                    }//power up flame
+                    }
+                    //power up flame
                     else if (line.charAt(i) == 'x') {
                         mapTileNum[col][row] = 2;
                         mapConllision[col][row] = 1;
                         mapEConllision[col][row] = 1;
                         mapPowerUp[col][row] = 1;
+                    }
+                    //power up speed
+                    else if (line.charAt(i) == 'c') {
+                        mapTileNum[col][row] = 2;
+                        mapConllision[col][row] = 1;
+                        mapEConllision[col][row] = 1;
+                        mapPowerUp[col][row] = 2;
                     }
 
                     col++;

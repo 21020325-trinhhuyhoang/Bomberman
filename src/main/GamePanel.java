@@ -15,6 +15,7 @@ import Tile.TileManager;
 import entity.Player;
 import object.PowerUp_Bombs;
 import object.PowerUp_Flames;
+import object.PowerUp_Speed;
 import object.SuperObject;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
@@ -231,6 +232,11 @@ public class GamePanel extends JPanel implements Runnable {
                     //PW Flames
                     if (tmp instanceof PowerUp_Flames) {
                         player.fire++;
+                    }
+
+                    //PW Speed
+                    if (tmp instanceof PowerUp_Speed) {
+                        player.speed++;
                     }
 
                     tmp = new SuperObject(-1, -1);
