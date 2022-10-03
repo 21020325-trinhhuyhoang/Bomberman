@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 
 public class main {
 
+    public static int maxFire = 1;
+
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,5 +22,6 @@ public class main {
         //khoi tao loop choi game o day.
         gamePanel.setupGame();
         gamePanel.startGameThread();
+        maxFire = gamePanel.player.fire;
     }
 }

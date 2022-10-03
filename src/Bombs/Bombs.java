@@ -6,6 +6,8 @@ import Convert.PositionScreen;
 import main.GamePanel;
 import entity.Player;
 import main.Constants;
+import object.PowerUp_Bombs;
+import object.PowerUp_Flames;
 
 import javax.imageio.ImageIO;
 import javax.lang.model.type.ArrayType;
@@ -119,6 +121,7 @@ public class Bombs {
                 gp.tileM.mapTileNum[_x - i][_y] = 0;
                 gp.tileM.mapConllision[_x - i][_y] --;
                 gp.tileM.mapEConllision[_x - i][_y] --;
+                createObject(_x - i, _y);
 
                 newBrickExplo = new BrickExplo((_x - i) * gp.tileSize,(_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
@@ -155,6 +158,7 @@ public class Bombs {
                 gp.tileM.mapTileNum[_x + i][_y] = 0;
                 gp.tileM.mapConllision[_x + i][_y] --;
                 gp.tileM.mapEConllision[_x + i][_y] --;
+                createObject(_x + i, _y);
 
                 newBrickExplo = new BrickExplo((_x + i) * gp.tileSize,(_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
@@ -191,6 +195,7 @@ public class Bombs {
                 gp.tileM.mapTileNum[_x][_y - i] = 0;
                 gp.tileM.mapConllision[_x][_y - i] --;
                 gp.tileM.mapEConllision[_x][_y - i] --;
+                createObject(_x, _y - i);
 
                 newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y - i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
@@ -227,6 +232,7 @@ public class Bombs {
                 gp.tileM.mapTileNum[_x][_y + i] = 0;
                 gp.tileM.mapConllision[_x][_y + i] --;
                 gp.tileM.mapEConllision[_x][_y + i] --;
+                createObject(_x, _y + i);
 
                 newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y + i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
@@ -253,6 +259,29 @@ public class Bombs {
             addExplosion(explosion,listExplosion);
         }
 
+    }
+
+    /**
+     * tao them 1 power_up.
+     */
+    public void createObject(int x, int y) {
+        if (gp.tileM.mapPowerUp[x][y] == -1) { return; }
+
+        //bomb
+        if (gp.tileM.mapPowerUp[x][y] == 0) {
+            PowerUp_Bombs tmp = new PowerUp_Bombs(x * gp.tileSize, y * gp.tileSize);
+
+            gp.tileM.mapPowerUp[x][y] = -1;
+            gp.listPowerUp.add(tmp);
+        }
+
+        //flame
+        if (gp.tileM.mapPowerUp[x][y] == 1) {
+            PowerUp_Flames tmp = new PowerUp_Flames(x * gp.tileSize, y * gp.tileSize);
+
+            gp.tileM.mapPowerUp[x][y] = -1;
+            gp.listPowerUp.add(tmp);
+        }
     }
 
     /**

@@ -12,6 +12,11 @@ public class SuperObject {
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    
+    public SuperObject(int worldX,int worldY) {
+        this.worldX = worldX;
+        this.worldY = worldY;
+    }
 
     public void draw(Graphics2D g2, GamePanel gp) {
         PositionScreen tmp = PositionScreen.takePos(gp);
@@ -25,6 +30,35 @@ public class SuperObject {
 
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
+    }
+
+    /**
+     * check if player take this power_up.
+     */
+    public boolean check(GamePanel gp) {
+        int x,y,_x,_y, tileSize = gp.tileSize;
+        x = gp.player.worldX;
+        y = gp.player.worldY;
+        _x = this.worldX;
+        _y = this.worldY;
+
+        if (x >= _x && x <= _x + tileSize - 1 && y >= _y && y <= _y + tileSize - 1) {
+            return true;
+        }
+
+        if (x + tileSize - 1 >= _x && x + tileSize - 1 <= _x + tileSize - 1 && y >= _y && y <= _y + tileSize - 1) {
+            return true;
+        }
+
+        if (x >= _x && x <= _x + tileSize - 1 && y + tileSize - 1 >= _y && y + tileSize - 1 <= _y + tileSize - 1) {
+            return true;
+        }
+
+        if (x + tileSize - 1 >= _x && x + tileSize - 1 <= _x + tileSize - 1 && y + tileSize - 1 >= _y && y + tileSize - 1 <= _y + tileSize - 1) {
+            return true;
+        }
+
+        return false;
     }
 
 }

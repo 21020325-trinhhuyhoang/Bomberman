@@ -5,7 +5,8 @@ import javax.imageio.ImageIO;
 
 public class PowerUp_Bombs extends SuperObject {
 
-    public PowerUp_Bombs() {
+    public PowerUp_Bombs(int worldX, int worldY) {
+        super(worldX, worldY);
         name = "PowerUp_Bombs";
 
         try {

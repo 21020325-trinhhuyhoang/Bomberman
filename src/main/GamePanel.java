@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 import Bombs.Explosion;
 import Bombs.SuperExplosion;
+import Bombs.Bombs;
 import BrickExplo.BrickExplo;
 import BrickExplo.SuperBrickExplo;
 import Enemy.Enemy;
 import Enemy.SuperEnemy;
 import Tile.TileManager;
 import entity.Player;
+import object.PowerUp_Bombs;
+import object.PowerUp_Flames;
 import object.SuperObject;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
@@ -54,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperEnemy se = new SuperEnemy(this);
     public SuperEDeadth sed = new SuperEDeadth(this);
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
+    public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -112,7 +116,10 @@ public class GamePanel extends JPanel implements Runnable {
         //update Bombs
         updateBombs();
 
-        //update Plosion
+        //update Object
+        updateObject();
+
+        //update Explosion
         updateExplosion();
 
         //update BrickExplo
@@ -203,6 +210,36 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * update Object.
+     */
+    public void updateObject() {
+        for (int i = 0; i < listPowerUp.size(); ++i) {
+            SuperObject tmp = listPowerUp.get(i);
+
+            if (tmp.worldX > 0) {
+
+                boolean collision = tmp.check(this);
+
+                if (collision == true) {
+
+                    //PW Bombs
+                    if (tmp instanceof PowerUp_Bombs) {
+                        player.maxBombs++;
+                    }
+
+                    //PW Flames
+                    if (tmp instanceof PowerUp_Flames) {
+                        player.fire++;
+                    }
+
+                    tmp = new SuperObject(-1, -1);
+                    listPowerUp.set(i, tmp);
+                }
+            }
+        }
+    }
+
     //ve cac thu o day.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -240,9 +277,11 @@ public class GamePanel extends JPanel implements Runnable {
      * render Object.
      */
     public void paintObject(Graphics2D g2) {
-        for (int i = 0; i < obj.length; ++i) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this);
+        for (int i = 0; i < listPowerUp.size(); ++i) {
+            SuperObject tmp = listPowerUp.get(i);
+
+            if (tmp.worldX > 0) {
+                tmp.draw(g2,this);
             }
         }
     }

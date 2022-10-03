@@ -18,7 +18,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
-    public int maxBombs = 1;
+    public int maxBombs;
     public int totalBombs;
     public Bombs[] arrBombs;
 
@@ -42,12 +42,13 @@ public class Player extends Entity {
         worldY = 1 * gp.tileSize;
         speed = 3;
         direction = "down";
+        maxBombs = 1;
 
         totalBombs = 0;
 
         arrBombs = new Bombs[20];
 
-        for (int i = 0; i < maxBombs; ++i) {
+        for (int i = 0; i < 20; ++i) {
             arrBombs[i] = new Bombs(this.gp);
         }
     }
