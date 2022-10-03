@@ -26,14 +26,7 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10];
-
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-        mapBombs = new int[gp.maxWorldCol][gp.maxWorldRow];
-        mapConllision = new int[gp.maxWorldCol][gp.maxWorldRow];
-        mapExplosion = new int[gp.maxWorldCol][gp.maxWorldRow];
-        mapEConllision = new int[gp.maxWorldCol][gp.maxWorldRow];
-        mapPowerUp = new int[gp.maxWorldCol][gp.maxWorldRow];
+        tile = new Tile[30];
 
         getTitleImage();
         loadMap(Constants.nameFile);
@@ -76,6 +69,15 @@ public class TileManager {
             Integer worldHeight = arr.get(1);
             gp.maxWorldCol = worldWidth.intValue();
             gp.maxWorldRow = worldHeight.intValue();
+
+            System.out.println(gp.maxWorldCol + " " + gp.maxWorldRow);
+
+            mapTileNum = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapBombs = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapConllision = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapExplosion = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapEConllision = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapPowerUp = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
 
             int col = 0;
             int row = 0;
@@ -145,7 +147,7 @@ public class TileManager {
        int worldCol = 0;
        int worldRow = 0;
 
-       while (worldCol < gp.maxScreenCol && worldRow < gp.maxScreenRow) {
+       while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
            int tileNum = mapTileNum[worldCol][worldRow];
 

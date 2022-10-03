@@ -15,14 +15,15 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
-    public final int screenX;
-    public final int screenY;
+    public int screenX;
+    public int screenY;
 
     public int maxBombs;
     public int totalBombs;
     public Bombs[] arrBombs;
 
     public int fire = 1;
+    public int hitPoint;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -43,6 +44,7 @@ public class Player extends Entity {
         speed = 3;
         direction = "down";
         maxBombs = 1;
+        hitPoint = 1;
 
         totalBombs = 0;
 
@@ -139,9 +141,9 @@ public class Player extends Entity {
             }
 
         }
-        else {
+        /*else {
             spriteNum = 3;
-        }
+        }*/
 
         if (keyH.spaceTyped== true) {
             dropBomb();

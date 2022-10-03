@@ -32,8 +32,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     //World setting (hang va cot cua level)
-    public int maxWorldCol = 17;
-    public int maxWorldRow = 13;
+    public int maxWorldCol = 15;
+    public int maxWorldRow = 17;
     public int worldWidth = tileSize * maxWorldCol;
     public int worldHeight = tileSize * maxWorldRow;
 
@@ -46,7 +46,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player = new Player(this,keyH);
     public TileManager tileM = new TileManager(this);
-    public SuperObject[] obj = new SuperObject[15];
     public AssetSetter aSetter = new AssetSetter(this);
 
     public SuperExplosion superExplosion = new SuperExplosion();
@@ -105,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable {
                 timer = 0;
             }
         }
+
     }
 
     public void update() {

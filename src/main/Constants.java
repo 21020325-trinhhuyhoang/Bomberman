@@ -1,9 +1,6 @@
 package main;
 
 public class Constants {
-
-    //transparent color
-    public static final int t_red = 255, t_green = 0, t_blue =255;
     public static final int bombsCode = 88;
 
     public static final int timeBomb = 3500;
@@ -17,7 +14,7 @@ public class Constants {
 
     public static final int timeChangeAnimationEnemy = 22;
 
-    public static final String nameFile = "/levels/lvl1.txt";
+    public static final String nameFile = "/levels/lvl2.txt";
 
     public static final int timeEDeadth = 120;
     public static final int timeEDeadthUp = 60;
