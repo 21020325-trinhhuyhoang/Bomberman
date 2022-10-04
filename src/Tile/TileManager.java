@@ -70,7 +70,7 @@ public class TileManager {
             gp.maxWorldCol = worldWidth.intValue();
             gp.maxWorldRow = worldHeight.intValue();
 
-            System.out.println(gp.maxWorldCol + " " + gp.maxWorldRow);
+            //System.out.println(gp.maxWorldCol + " " + gp.maxWorldRow);
 
             mapTileNum = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
             mapBombs = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
