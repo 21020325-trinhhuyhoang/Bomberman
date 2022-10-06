@@ -20,6 +20,8 @@ import object.SuperObject;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
 import Enemy.Balloom;
+import Enemy.AStar;
+import Enemy.Oneal;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -85,6 +87,8 @@ public class GamePanel extends JPanel implements Runnable {
         long currentTime;
         long timer = 0;
         int drawCount = 0;
+
+        //AStar.FindPath(this);
 
         //vong lap game ket thuc o day
         while(gameThread != null) {
@@ -198,6 +202,7 @@ public class GamePanel extends JPanel implements Runnable {
                    tmp.hitPoint --;
 
                    if (tmp.hitPoint <= 0) {
+                       if (tmp instanceof Oneal) { type = 1; }
                        if (tmp instanceof Balloom) { type = 0; }
                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                        listEDeadth.add(newED);

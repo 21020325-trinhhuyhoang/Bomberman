@@ -19,6 +19,7 @@ public class EDeadth {
         this.time = Constants.timeEDeadth;
         this.imgNum = -1;
         this.gp = gp;
+        this.type = type;
     }
 
     public void draw(Graphics2D g2, SuperEnemy se, SuperEDeadth sed) {
@@ -38,8 +39,13 @@ public class EDeadth {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
             if (this.imgNum == -1) {
+                //balloom
                 if (this.type == 0) {
                     g2.drawImage(se.image[0][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
+                //oneal
+                if (this.type == 1) {
+                    g2.drawImage(se.image[1][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
                 }
                 return;
             }

@@ -49,6 +49,27 @@ public class SuperEnemy {
           image[0][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/balloom_right3.png"));
 
           //oneal
+          //deadth
+          image[1][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_dead.png"));
+
+          //left1
+          image[1][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_left1.png"));
+
+          //left2
+          image[1][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_left2.png"));
+
+          //left3
+          image[1][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_left3.png"));
+
+          //right1
+          image[1][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_right1.png"));
+
+          //right2
+          image[1][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_right2.png"));
+
+          //right3
+          image[1][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_right3.png"));
+
       } catch (IOException e) {
           System.out.println("Khong load dc anh enemy!");
           e.printStackTrace();
@@ -90,6 +111,10 @@ public class SuperEnemy {
                     }
                     else if (line.charAt(i) == 'q') {
                         newEnemy = new Balloom(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    }
+                    else if (line.charAt(i) == 'w') {
+                        newEnemy = new Oneal(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 
