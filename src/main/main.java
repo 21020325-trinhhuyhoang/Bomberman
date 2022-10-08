@@ -23,5 +23,6 @@ public class main {
         gamePanel.setupGame();
         gamePanel.startGameThread();
         maxFire = gamePanel.player.fire;
+        Sound.loop("soundtrack1");
     }
 }

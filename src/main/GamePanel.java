@@ -206,6 +206,8 @@ public class GamePanel extends JPanel implements Runnable {
                        if (tmp instanceof Balloom) { type = 0; }
                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                        listEDeadth.add(newED);
+
+                       Sound.play("enemydeadth");
                    }
                }
 
@@ -228,7 +230,7 @@ public class GamePanel extends JPanel implements Runnable {
                 boolean collision = tmp.check(this);
 
                 if (collision == true) {
-
+                    Sound.play("item");
                     //PW Bombs
                     if (tmp instanceof PowerUp_Bombs) {
                         player.maxBombs++;

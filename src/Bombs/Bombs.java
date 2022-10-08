@@ -6,6 +6,7 @@ import Convert.PositionScreen;
 import main.GamePanel;
 import entity.Player;
 import main.Constants;
+import main.Sound;
 import object.PowerUp_Bombs;
 import object.PowerUp_Flames;
 import object.PowerUp_Speed;
@@ -86,6 +87,7 @@ public class Bombs {
         //bom no
         if (this.time <= 0) {
             player.totalBombs --;
+            Sound.play("explosion1");
             BombExplosion(listExplosion,player);
         }
     }

@@ -5,6 +5,7 @@ import main.GamePanel;
 import main.Constants;
 
 import Bombs.Bombs;
+import main.Sound;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -146,14 +147,15 @@ public class Player extends Entity {
         }*/
 
         if (keyH.spaceTyped== true) {
-            dropBomb();
+            if (totalBombs < maxBombs) {
+                Sound.play("dropbomb");
+                dropBomb();
+            }
         }
 
     }
 
     public void dropBomb() {
-        if (totalBombs >= maxBombs) { return; }
-
         int x = (worldX + solidArea.x + solidArea.width / 2) / gp.tileSize * gp.tileSize;
         int y = (worldY + solidArea.y + solidArea.height / 2) / gp.tileSize * gp.tileSize;
         int _x = x / gp.tileSize;
