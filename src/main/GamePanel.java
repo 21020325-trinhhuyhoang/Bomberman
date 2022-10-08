@@ -22,6 +22,7 @@ import Enemy.EDeadth;
 import Enemy.Balloom;
 import Enemy.AStar;
 import Enemy.Oneal;
+import Enemy.Kondoria;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -204,6 +205,7 @@ public class GamePanel extends JPanel implements Runnable {
                    if (tmp.hitPoint <= 0) {
                        if (tmp instanceof Oneal) { type = 1; }
                        if (tmp instanceof Balloom) { type = 0; }
+                       if (tmp instanceof Kondoria) { type = 2; }
                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                        listEDeadth.add(newED);
 

@@ -70,6 +70,28 @@ public class SuperEnemy {
           //right3
           image[1][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/oneal_right3.png"));
 
+          //kondoria
+          //deadth
+          image[2][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_dead.png"));
+
+          //left1
+          image[2][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_left1.png"));
+
+          //left2
+          image[2][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_left2.png"));
+
+          //left3
+          image[2][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_left3.png"));
+
+          //right1
+          image[2][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_right1.png"));
+
+          //right2
+          image[2][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_right2.png"));
+
+          //right3
+          image[2][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_right3.png"));
+
       } catch (IOException e) {
           System.out.println("Khong load dc anh enemy!");
           e.printStackTrace();
@@ -115,6 +137,10 @@ public class SuperEnemy {
                     }
                     else if (line.charAt(i) == 'w') {
                         newEnemy = new Oneal(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    }
+                    else if (line.charAt(i) == 'e') {
+                        newEnemy = new Kondoria(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 

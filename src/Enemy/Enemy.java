@@ -17,6 +17,7 @@ public abstract class Enemy {
     public GamePanel gp;
 
     public boolean collisionUp,collisionDown,collisionLeft,collisionRight;
+    public boolean collisionWallUp,collisionWallDown,collisionWallLeft,collisionWallRight;
 
     public Enemy(int worldX, int worldY, GamePanel gp) {
         this.worldX = worldX;
@@ -132,4 +133,59 @@ public abstract class Enemy {
 
     }
 
+    /**
+     * check collision wall.
+     */
+    public void checkCollisionWall() {
+        int x = worldX;
+        int y = worldY;
+        int _x1 , _x2;
+        int _y1 , _y2;
+
+        this.collisionWallUp = false;
+        this.collisionWallDown = false;
+        this.collisionWallLeft = false;
+        this.collisionWallRight = false;
+
+        //Up
+        _x1 = (x) / gp.tileSize;
+        _y1 = (y - this.speed) / gp.tileSize;
+
+        _x2 = (x + gp.tileSize - 1) / gp.tileSize;
+        _y2 = (y - this.speed) / gp.tileSize;
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+            this.collisionWallUp = true;
+        }
+
+        //Down
+        _x1 = (x) / gp.tileSize;
+        _y1 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
+
+        _x2 = (x + gp.tileSize - 1) / gp.tileSize;
+        _y2 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+            this.collisionWallDown = true;
+        }
+
+        //Left
+        _x1 = (x - this.speed) / gp.tileSize;
+        _y1 = (y) / gp.tileSize;
+
+        _x2 = (x - this.speed) / gp.tileSize;
+        _y2 = (y + gp.tileSize - 1) / gp.tileSize;
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+            this.collisionWallLeft = true;
+        }
+
+        //Right
+        _x1 = (x + gp.tileSize - 1 + this.speed) / gp.tileSize;
+        _y1 = (y) / gp.tileSize;
+
+        _x2 = (x + gp.tileSize - 1 + this.speed) / gp.tileSize;
+        _y2 = (y + gp.tileSize - 1) / gp.tileSize;
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+            this.collisionWallRight = true;
+        }
+
+    }
 }
