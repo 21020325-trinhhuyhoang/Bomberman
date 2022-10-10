@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class SuperExplosion {
-    public BufferedImage [][] image;
+    public BufferedImage[][] image;
 
     public SuperExplosion() {
         image = new BufferedImage[4][10];
@@ -83,7 +83,7 @@ public class SuperExplosion {
             //__________________________________________________
 
 
-        } catch ( IOException e) {
+        } catch (IOException e) {
             System.out.print("Khong load dc file anh bomb no!");
             e.printStackTrace();
         }

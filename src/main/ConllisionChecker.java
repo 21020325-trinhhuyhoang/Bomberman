@@ -23,74 +23,74 @@ public class ConllisionChecker {
         int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
         int _entityLeftCol = entityLeftCol;
-        int _entityRightCol = entityRightCol ;
+        int _entityRightCol = entityRightCol;
         int _entityTopRow = entityTopRow;
         int _entityBottomRow = entityBottomRow;
 
         //int tileNum1, tileNum2;
 
         //switch (entity.direction) {
-            //case "up":
+        //case "up":
         /**
          * check all direct.
          */
         //________________________________________________________________________________
-                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-                //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-                //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-                if (gp.tileM.mapConllision[entityLeftCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityTopRow] > 0) {
-                    //entity.collisionOn = true;
-                    entity.collisionUp = true;
-                }
+        entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+        //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+        //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+        if (gp.tileM.mapConllision[entityLeftCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityTopRow] > 0) {
+            //entity.collisionOn = true;
+            entity.collisionUp = true;
+        }
 
-                entityLeftCol = _entityLeftCol;
-                entityRightCol = _entityRightCol ;
-                entityTopRow = _entityTopRow;
-                entityBottomRow = _entityBottomRow;
+        entityLeftCol = _entityLeftCol;
+        entityRightCol = _entityRightCol;
+        entityTopRow = _entityTopRow;
+        entityBottomRow = _entityBottomRow;
 
-                //break;
-            //case "down":
-                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
-                //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-                //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-                if (gp.tileM.mapConllision[entityLeftCol][entityBottomRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityBottomRow] > 0) {
-                    //entity.collisionOn = true;
-                    entity.collisionDown = true;
-                }
+        //break;
+        //case "down":
+        entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+        //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+        //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+        if (gp.tileM.mapConllision[entityLeftCol][entityBottomRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityBottomRow] > 0) {
+            //entity.collisionOn = true;
+            entity.collisionDown = true;
+        }
 
-                entityLeftCol = _entityLeftCol;
-                entityRightCol = _entityRightCol ;
-                entityTopRow = _entityTopRow;
-                entityBottomRow = _entityBottomRow;
-               // break;
-            //case "left":
-                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-                //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-                //tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-                if (gp.tileM.mapConllision[entityLeftCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityLeftCol][entityBottomRow] > 0) {
-                    //entity.collisionOn = true;
-                    entity.collisionLeft = true;
-                }
+        entityLeftCol = _entityLeftCol;
+        entityRightCol = _entityRightCol;
+        entityTopRow = _entityTopRow;
+        entityBottomRow = _entityBottomRow;
+        // break;
+        //case "left":
+        entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+        //tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+        //tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+        if (gp.tileM.mapConllision[entityLeftCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityLeftCol][entityBottomRow] > 0) {
+            //entity.collisionOn = true;
+            entity.collisionLeft = true;
+        }
 
-                entityLeftCol = _entityLeftCol;
-                entityRightCol = _entityRightCol ;
-                entityTopRow = _entityTopRow;
-                entityBottomRow = _entityBottomRow;
-                //break;
-            //case "right":
-                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-                //tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-                //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-                if (gp.tileM.mapConllision[entityRightCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityBottomRow] > 0) {
-                    //entity.collisionOn = true;
-                    entity.collisionRight = true;
-                }
-                entityLeftCol = _entityLeftCol;
-                entityRightCol = _entityRightCol ;
-                entityTopRow = _entityTopRow;
-                entityBottomRow = _entityBottomRow;
-               // break;
-       // }
-       //___________________________________________________________________________________________________________
+        entityLeftCol = _entityLeftCol;
+        entityRightCol = _entityRightCol;
+        entityTopRow = _entityTopRow;
+        entityBottomRow = _entityBottomRow;
+        //break;
+        //case "right":
+        entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+        //tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+        //tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+        if (gp.tileM.mapConllision[entityRightCol][entityTopRow] > 0 || gp.tileM.mapConllision[entityRightCol][entityBottomRow] > 0) {
+            //entity.collisionOn = true;
+            entity.collisionRight = true;
+        }
+        entityLeftCol = _entityLeftCol;
+        entityRightCol = _entityRightCol;
+        entityTopRow = _entityTopRow;
+        entityBottomRow = _entityBottomRow;
+        // break;
+        // }
+        //___________________________________________________________________________________________________________
     }
 }

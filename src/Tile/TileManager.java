@@ -21,7 +21,7 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][] , mapBombs[][], mapExplosion[][];
+    public int mapTileNum[][], mapBombs[][], mapExplosion[][];
     public int mapConllision[][], mapEConllision[][], mapPowerUp[][];
 
     public TileManager(GamePanel gp) {
@@ -49,7 +49,7 @@ public class TileManager {
             tile[2].collision = true;
 
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -64,7 +64,7 @@ public class TileManager {
              */
             String firstLine = br.readLine();
 
-            List <Integer> arr = Convert.takeNumberFromString(firstLine);
+            List<Integer> arr = Convert.takeNumberFromString(firstLine);
             Integer worldWidth = arr.get(0);
             Integer worldHeight = arr.get(1);
             gp.maxWorldCol = worldWidth.intValue();
@@ -94,14 +94,12 @@ public class TileManager {
                         mapConllision[col][row] = 1;
                         mapEConllision[col][row] = 1;
                         mapPowerUp[col][row] = -1;
-                    }
-                    else if (line.charAt(i) == '0') {
+                    } else if (line.charAt(i) == '0') {
                         mapTileNum[col][row] = 0;
                         mapConllision[col][row] = 0;
                         mapEConllision[col][row] = 0;
                         mapPowerUp[col][row] = -1;
-                    }
-                    else if (line.charAt(i) == '2') {
+                    } else if (line.charAt(i) == '2') {
                         mapTileNum[col][row] = 2;
                         mapConllision[col][row] = 1;
                         mapEConllision[col][row] = 1;
@@ -173,34 +171,34 @@ public class TileManager {
 
     public void draw(Graphics2D g2) {
 
-       int worldCol = 0;
-       int worldRow = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-       while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
-           int tileNum = mapTileNum[worldCol][worldRow];
+            int tileNum = mapTileNum[worldCol][worldRow];
 
-           int worldX = worldCol * gp.tileSize;
-           int worldY = worldRow * gp.tileSize;
-           PositionScreen tmp = PositionScreen.takePos(gp);
-           int screenX = worldX + tmp._x;
-           int screenY = worldY + tmp._y;
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
+            PositionScreen tmp = PositionScreen.takePos(gp);
+            int screenX = worldX + tmp._x;
+            int screenY = worldY + tmp._y;
 
-           if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-               worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-               worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-               worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-               g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-           }
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            }
 
-           worldCol++;
+            worldCol++;
 
-           if (worldCol == gp.maxWorldCol) {
-               worldCol = 0;
-               worldRow++;
-           }
-       }
+            if (worldCol == gp.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
+            }
+        }
 
     }
 

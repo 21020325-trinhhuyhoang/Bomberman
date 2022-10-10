@@ -32,7 +32,7 @@ public class Kondoria extends Enemy {
         this.time++;
         if (this.time == Constants.timeChangeAnimationEnemy) {
             this.time = 0;
-            this.imgNum ++;
+            this.imgNum++;
             if (this.imgNum > 2) {
                 this.imgNum = 0;
             }
@@ -89,7 +89,7 @@ public class Kondoria extends Enemy {
 
         int findPath2 = -1;
 
-        if (Math.abs(X - tileX) <= Constants.radiusKon && Math.abs(Y - tileY) <= Constants.radiusKon ) {
+        if (Math.abs(X - tileX) <= Constants.radiusKon && Math.abs(Y - tileY) <= Constants.radiusKon) {
             findPath2 = AStar.FindPath2(gp, X, Y, tileX, tileY);
         }
 
@@ -115,10 +115,18 @@ public class Kondoria extends Enemy {
 
             this.direction = findPath2;
 
-            if (Up == true && findPath2 == 1) { this.direction = direct2; }
-            if (Down == true && findPath2 == 3) { this.direction = direct2; }
-            if (Left == true && findPath2 == 2) { this.direction = direct2; }
-            if (Right == true && findPath2 == 4) { this.direction = direct2; }
+            if (Up == true && findPath2 == 1) {
+                this.direction = direct2;
+            }
+            if (Down == true && findPath2 == 3) {
+                this.direction = direct2;
+            }
+            if (Left == true && findPath2 == 2) {
+                this.direction = direct2;
+            }
+            if (Right == true && findPath2 == 4) {
+                this.direction = direct2;
+            }
         } else {
             int x = this.worldX;
             int y = this.worldY;

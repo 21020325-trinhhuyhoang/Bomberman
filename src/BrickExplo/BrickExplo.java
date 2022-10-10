@@ -20,7 +20,7 @@ public class BrickExplo {
 
     public void draw(Graphics2D g2, GamePanel gp, SuperBrickExplo sl) {
         if (this.time % Constants.timeBrickExploMod == 0) {
-            this.type ++;
+            this.type++;
         }
 
         PositionScreen tmp = PositionScreen.takePos(gp);

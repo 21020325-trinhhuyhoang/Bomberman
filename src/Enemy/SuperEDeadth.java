@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class SuperEDeadth {
-    public BufferedImage [] image;
+    public BufferedImage[] image;
     public GamePanel gp;
 
     public SuperEDeadth(GamePanel gp) {
@@ -24,8 +24,8 @@ public class SuperEDeadth {
             image[0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/mob_dead1.png"));
             image[1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/mob_dead2.png"));
             image[2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/mob_dead3.png"));
-            
-        } catch(IOException e) {
+
+        } catch (IOException e) {
             System.out.println("Khong load duoc file enemy deadth!");
             e.printStackTrace();
         }

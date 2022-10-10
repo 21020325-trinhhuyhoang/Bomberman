@@ -23,10 +23,10 @@ public class EDeadth {
     }
 
     public void draw(Graphics2D g2, SuperEnemy se, SuperEDeadth sed) {
-        this.time --;
+        this.time--;
 
         if (this.time <= Constants.timeEDeadthUp && this.time % Constants.timeEDeadthMod == 0) {
-            this.imgNum ++;
+            this.imgNum++;
         }
 
         PositionScreen tmp = PositionScreen.takePos(gp);

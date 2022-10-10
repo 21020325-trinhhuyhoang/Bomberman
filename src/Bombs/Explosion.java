@@ -11,10 +11,10 @@ public class Explosion {
     public int time;
     public int typeImage;
     public int type;
-    public int worldX,worldY;
+    public int worldX, worldY;
     public int cType;
 
-    public Explosion(int worldX,int worldY, int time, int type) {
+    public Explosion(int worldX, int worldY, int time, int type) {
         this.worldX = worldX;
         this.worldY = worldY;
         this.time = time;

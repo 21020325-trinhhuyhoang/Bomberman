@@ -12,12 +12,12 @@ public abstract class Enemy {
     public String LR;
 
     //thu tu cua image duoc render
-    public int time,imgNum;
+    public int time, imgNum;
     public int hitPoint;
     public GamePanel gp;
 
-    public boolean collisionUp,collisionDown,collisionLeft,collisionRight;
-    public boolean collisionWallUp,collisionWallDown,collisionWallLeft,collisionWallRight;
+    public boolean collisionUp, collisionDown, collisionLeft, collisionRight;
+    public boolean collisionWallUp, collisionWallDown, collisionWallLeft, collisionWallRight;
 
     public Enemy(int worldX, int worldY, GamePanel gp) {
         this.worldX = worldX;
@@ -81,37 +81,37 @@ public abstract class Enemy {
      * check collision.
      */
     public void checkCollision() {
-         int x = worldX;
-         int y = worldY;
-         int _x1 , _x2;
-         int _y1 , _y2;
+        int x = worldX;
+        int y = worldY;
+        int _x1, _x2;
+        int _y1, _y2;
 
-         this.collisionUp = false;
-         this.collisionDown = false;
-         this.collisionLeft = false;
-         this.collisionRight = false;
+        this.collisionUp = false;
+        this.collisionDown = false;
+        this.collisionLeft = false;
+        this.collisionRight = false;
 
-         //Up
-         _x1 = (x) / gp.tileSize;
-         _y1 = (y - this.speed) / gp.tileSize;
+        //Up
+        _x1 = (x) / gp.tileSize;
+        _y1 = (y - this.speed) / gp.tileSize;
 
-         _x2 = (x + gp.tileSize - 1) / gp.tileSize;
-         _y2 = (y - this.speed) / gp.tileSize;
-         if (gp.tileM.mapEConllision[_x1][_y1] > 0 || gp.tileM.mapEConllision[_x2][_y2] > 0) {
-             this.collisionUp = true;
-         }
+        _x2 = (x + gp.tileSize - 1) / gp.tileSize;
+        _y2 = (y - this.speed) / gp.tileSize;
+        if (gp.tileM.mapEConllision[_x1][_y1] > 0 || gp.tileM.mapEConllision[_x2][_y2] > 0) {
+            this.collisionUp = true;
+        }
 
-         //Down
-         _x1 = (x) / gp.tileSize;
-         _y1 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
+        //Down
+        _x1 = (x) / gp.tileSize;
+        _y1 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
 
-         _x2 = (x + gp.tileSize - 1) / gp.tileSize;
-         _y2 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
-         if (gp.tileM.mapEConllision[_x1][_y1] > 0 || gp.tileM.mapEConllision[_x2][_y2] > 0) {
-             this.collisionDown = true;
-         }
+        _x2 = (x + gp.tileSize - 1) / gp.tileSize;
+        _y2 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
+        if (gp.tileM.mapEConllision[_x1][_y1] > 0 || gp.tileM.mapEConllision[_x2][_y2] > 0) {
+            this.collisionDown = true;
+        }
 
-         //Left
+        //Left
         _x1 = (x - this.speed) / gp.tileSize;
         _y1 = (y) / gp.tileSize;
 
@@ -139,8 +139,8 @@ public abstract class Enemy {
     public void checkCollisionWall() {
         int x = worldX;
         int y = worldY;
-        int _x1 , _x2;
-        int _y1 , _y2;
+        int _x1, _x2;
+        int _y1, _y2;
 
         this.collisionWallUp = false;
         this.collisionWallDown = false;

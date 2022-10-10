@@ -10,23 +10,23 @@ public class Convert {
      * chuyen mot xau ky tu sang kieu int.
      */
     public static int stringtoInt(String s) {
-         int res = 0;
-         char c = ' ';
+        int res = 0;
+        char c = ' ';
 
-         for (int i = 0; i < s.length(); ++i) {
-             c = s.charAt(i);
+        for (int i = 0; i < s.length(); ++i) {
+            c = s.charAt(i);
 
-             res = res * 10 + (c - '0');
-         }
+            res = res * 10 + (c - '0');
+        }
 
-         return res;
+        return res;
     }
 
     /**
      * Lay cac so nguyen tu mot xau va tra ve mot mang la Integer.
      */
     public static List<Integer> takeNumberFromString(String s) {
-        List <Integer> arr = new ArrayList<>();
+        List<Integer> arr = new ArrayList<>();
         s = s + " ";
 
         String tmp = "";
@@ -39,8 +39,7 @@ public class Convert {
                 Int = new Integer(Num);
                 arr.add(Int);
                 tmp = "";
-            }
-            else {
+            } else {
                 tmp = tmp + s.charAt(i);
             }
         }

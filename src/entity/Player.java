@@ -33,7 +33,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
-        solidArea = new Rectangle (12, 15, 24, 25);
+        solidArea = new Rectangle(12, 15, 24, 25);
 
         setDefaultValues();
         getPlayerImage();
@@ -131,11 +131,9 @@ public class Player extends Entity {
 
                 if (spriteNum == 3) {
                     spriteNum = 2;
-                }
-                else if (spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     spriteNum = 1;
-                }
-                else if (spriteNum == 1) {
+                } else if (spriteNum == 1) {
                     spriteNum = 3;
                 }
                 spriteCounter = 0;
@@ -146,7 +144,7 @@ public class Player extends Entity {
             spriteNum = 3;
         }*/
 
-        if (keyH.spaceTyped== true) {
+        if (keyH.spaceTyped == true) {
             if (totalBombs < maxBombs) {
                 Sound.play("dropbomb");
                 dropBomb();
@@ -170,7 +168,7 @@ public class Player extends Entity {
 
                 //System.out.println(_x + " " + _y);
                 gp.tileM.mapBombs[_x][_y] = i + Constants.bombsCode;
-                gp.tileM.mapEConllision[_x][_y] ++;
+                gp.tileM.mapEConllision[_x][_y]++;
 
                 arrBombs[i].worldX = x;
                 arrBombs[i].worldY = y;
@@ -178,7 +176,7 @@ public class Player extends Entity {
                 arrBombs[i].iP = 1;
                 arrBombs[i].ciP = 1;
 
-                totalBombs ++;
+                totalBombs++;
 
                 break;
             }
@@ -194,44 +192,36 @@ public class Player extends Entity {
             case "up":
                 if (spriteNum == 1) {
                     image = up1;
-                }
-                else if (spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = up2;
-                }
-                else if (spriteNum == 3) {
+                } else if (spriteNum == 3) {
                     image = up;
                 }
                 break;
             case "down":
                 if (spriteNum == 1) {
                     image = down1;
-                }
-                else if (spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = down2;
-                }
-                else if (spriteNum == 3) {
+                } else if (spriteNum == 3) {
                     image = down;
                 }
                 break;
             case "left":
                 if (spriteNum == 1) {
                     image = left1;
-                }
-                else if (spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = left2;
-                }
-                else if (spriteNum == 3) {
+                } else if (spriteNum == 3) {
                     image = left;
                 }
                 break;
             case "right":
                 if (spriteNum == 1) {
                     image = right1;
-                }
-                else if (spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = right2;
-                }
-                else if (spriteNum == 3) {
+                } else if (spriteNum == 3) {
                     image = right;
                 }
                 break;

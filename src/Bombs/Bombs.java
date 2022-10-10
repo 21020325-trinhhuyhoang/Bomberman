@@ -69,7 +69,7 @@ public class Bombs {
             int _y = this.worldY;
 
             if ((x + width < _x) || (x > _x + gp.tileSize) || (y + height < _y) || (y > _y + gp.tileSize)) {
-                gp.tileM.mapConllision[tmp_x][tmp_y] ++;
+                gp.tileM.mapConllision[tmp_x][tmp_y]++;
                 this.Conllision = 1;
             }
         }
@@ -78,21 +78,25 @@ public class Bombs {
          * doi image.
          */
         if (this.time % Constants.timeBombMod == 0) {
-            if (ciP == 1 && iP == 3) { ciP = -1; }
-            if (ciP == -1 && iP == 1) { ciP = 1; }
+            if (ciP == 1 && iP == 3) {
+                ciP = -1;
+            }
+            if (ciP == -1 && iP == 1) {
+                ciP = 1;
+            }
 
             iP += ciP;
         }
 
         //bom no
         if (this.time <= 0) {
-            player.totalBombs --;
+            player.totalBombs--;
             Sound.play("explosion1");
-            BombExplosion(listExplosion,player);
+            BombExplosion(listExplosion, player);
         }
     }
 
-    public void BombExplosion(ArrayList<Explosion> listExplosion,Player player) {
+    public void BombExplosion(ArrayList<Explosion> listExplosion, Player player) {
 
         BrickExplo newBrickExplo;
         int _x = this.worldX / gp.tileSize;
@@ -105,28 +109,30 @@ public class Bombs {
          * lam cho sau khi bom no co the di qua.
          */
         if (this.Conllision > 0) {
-            gp.tileM.mapConllision[_x][_y] --;
-            gp.tileM.mapEConllision[_x][_y] --;
+            gp.tileM.mapConllision[_x][_y]--;
+            gp.tileM.mapEConllision[_x][_y]--;
         }
 
         //center
-        gp.tileM.mapExplosion[_x][_y] ++;
-        Explosion explosion = new Explosion(this.worldX,this.worldY,Constants.timeExplosion,0);
-        addExplosion(explosion,listExplosion);
+        gp.tileM.mapExplosion[_x][_y]++;
+        Explosion explosion = new Explosion(this.worldX, this.worldY, Constants.timeExplosion, 0);
+        addExplosion(explosion, listExplosion);
 
         //left
         for (int i = 1; i <= fire; ++i) {
 
             if (_x - i <= 0) break;
-            if (gp.tileM.mapTileNum[_x - i][_y] == 1) {break;}
+            if (gp.tileM.mapTileNum[_x - i][_y] == 1) {
+                break;
+            }
 
             if (gp.tileM.mapTileNum[_x - i][_y] == 2) {
                 gp.tileM.mapTileNum[_x - i][_y] = 0;
-                gp.tileM.mapConllision[_x - i][_y] --;
-                gp.tileM.mapEConllision[_x - i][_y] --;
+                gp.tileM.mapConllision[_x - i][_y]--;
+                gp.tileM.mapEConllision[_x - i][_y]--;
                 createObject(_x - i, _y);
 
-                newBrickExplo = new BrickExplo((_x - i) * gp.tileSize,(_y) * gp.tileSize);
+                newBrickExplo = new BrickExplo((_x - i) * gp.tileSize, (_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
@@ -142,28 +148,30 @@ public class Bombs {
 
             //last left
             if (i == fire) {
-                explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,Constants.timeExplosion,2);
-                addExplosion(explosion,listExplosion);
+                explosion = new Explosion(this.worldX - i * gp.tileSize, this.worldY, Constants.timeExplosion, 2);
+                addExplosion(explosion, listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX - i * gp.tileSize,this.worldY,Constants.timeExplosion,1);
-            addExplosion(explosion,listExplosion);
+            explosion = new Explosion(this.worldX - i * gp.tileSize, this.worldY, Constants.timeExplosion, 1);
+            addExplosion(explosion, listExplosion);
         }
 
         //right
         for (int i = 1; i <= fire; ++i) {
 
-            if (_x + i >= gp.maxWorldCol ) break;
-            if (gp.tileM.mapTileNum[_x + i][_y] == 1) {break;}
+            if (_x + i >= gp.maxWorldCol) break;
+            if (gp.tileM.mapTileNum[_x + i][_y] == 1) {
+                break;
+            }
 
             if (gp.tileM.mapTileNum[_x + i][_y] == 2) {
                 gp.tileM.mapTileNum[_x + i][_y] = 0;
-                gp.tileM.mapConllision[_x + i][_y] --;
-                gp.tileM.mapEConllision[_x + i][_y] --;
+                gp.tileM.mapConllision[_x + i][_y]--;
+                gp.tileM.mapEConllision[_x + i][_y]--;
                 createObject(_x + i, _y);
 
-                newBrickExplo = new BrickExplo((_x + i) * gp.tileSize,(_y) * gp.tileSize);
+                newBrickExplo = new BrickExplo((_x + i) * gp.tileSize, (_y) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
@@ -179,28 +187,30 @@ public class Bombs {
 
             //last right
             if (i == fire) {
-                explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,Constants.timeExplosion,3);
-                addExplosion(explosion,listExplosion);
+                explosion = new Explosion(this.worldX + i * gp.tileSize, this.worldY, Constants.timeExplosion, 3);
+                addExplosion(explosion, listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX + i * gp.tileSize,this.worldY,Constants.timeExplosion,1);
-            addExplosion(explosion,listExplosion);
+            explosion = new Explosion(this.worldX + i * gp.tileSize, this.worldY, Constants.timeExplosion, 1);
+            addExplosion(explosion, listExplosion);
         }
 
         //down
         for (int i = 1; i <= fire; ++i) {
 
-            if (_y - i <= 0 ) break;
-            if (gp.tileM.mapTileNum[_x][_y - i] == 1) {break;}
+            if (_y - i <= 0) break;
+            if (gp.tileM.mapTileNum[_x][_y - i] == 1) {
+                break;
+            }
 
             if (gp.tileM.mapTileNum[_x][_y - i] == 2) {
                 gp.tileM.mapTileNum[_x][_y - i] = 0;
-                gp.tileM.mapConllision[_x][_y - i] --;
-                gp.tileM.mapEConllision[_x][_y - i] --;
+                gp.tileM.mapConllision[_x][_y - i]--;
+                gp.tileM.mapEConllision[_x][_y - i]--;
                 createObject(_x, _y - i);
 
-                newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y - i) * gp.tileSize);
+                newBrickExplo = new BrickExplo((_x) * gp.tileSize, (_y - i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
@@ -216,28 +226,30 @@ public class Bombs {
 
             //last down
             if (i == fire) {
-                explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,Constants.timeExplosion,6);
-                addExplosion(explosion,listExplosion);
+                explosion = new Explosion(this.worldX, this.worldY - i * gp.tileSize, Constants.timeExplosion, 6);
+                addExplosion(explosion, listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX,this.worldY -  i * gp.tileSize,Constants.timeExplosion,4);
-            addExplosion(explosion,listExplosion);
+            explosion = new Explosion(this.worldX, this.worldY - i * gp.tileSize, Constants.timeExplosion, 4);
+            addExplosion(explosion, listExplosion);
         }
 
         //top
         for (int i = 1; i <= fire; ++i) {
 
-            if (_y + i >= gp.maxWorldRow ) break;
-            if (gp.tileM.mapTileNum[_x][_y + i] == 1) {break;}
+            if (_y + i >= gp.maxWorldRow) break;
+            if (gp.tileM.mapTileNum[_x][_y + i] == 1) {
+                break;
+            }
 
             if (gp.tileM.mapTileNum[_x][_y + i] == 2) {
                 gp.tileM.mapTileNum[_x][_y + i] = 0;
-                gp.tileM.mapConllision[_x][_y + i] --;
-                gp.tileM.mapEConllision[_x][_y + i] --;
+                gp.tileM.mapConllision[_x][_y + i]--;
+                gp.tileM.mapEConllision[_x][_y + i]--;
                 createObject(_x, _y + i);
 
-                newBrickExplo = new BrickExplo((_x) * gp.tileSize,(_y + i) * gp.tileSize);
+                newBrickExplo = new BrickExplo((_x) * gp.tileSize, (_y + i) * gp.tileSize);
                 addBrickExplo(this.gp.listBrickExplo, newBrickExplo);
                 break;
             }
@@ -253,13 +265,13 @@ public class Bombs {
 
             //last top
             if (i == fire) {
-                explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,Constants.timeExplosion,5);
-                addExplosion(explosion,listExplosion);
+                explosion = new Explosion(this.worldX, this.worldY + i * gp.tileSize, Constants.timeExplosion, 5);
+                addExplosion(explosion, listExplosion);
                 break;
             }
 
-            explosion = new Explosion(this.worldX,this.worldY +  i * gp.tileSize,Constants.timeExplosion,4);
-            addExplosion(explosion,listExplosion);
+            explosion = new Explosion(this.worldX, this.worldY + i * gp.tileSize, Constants.timeExplosion, 4);
+            addExplosion(explosion, listExplosion);
         }
 
     }
@@ -268,7 +280,9 @@ public class Bombs {
      * tao them 1 power_up.
      */
     public void createObject(int x, int y) {
-        if (gp.tileM.mapPowerUp[x][y] == -1) { return; }
+        if (gp.tileM.mapPowerUp[x][y] == -1) {
+            return;
+        }
 
         //bomb
         if (gp.tileM.mapPowerUp[x][y] == 0) {
@@ -299,31 +313,31 @@ public class Bombs {
      * them Explosion vao list.
      */
     public void addExplosion(Explosion explosion, ArrayList<Explosion> listExplosion) {
-         int idx = -1;
-         Explosion tmp;
+        int idx = -1;
+        Explosion tmp;
 
-         for (int i = 0; i < listExplosion.size(); ++i) {
-             tmp = listExplosion.get(i);
+        for (int i = 0; i < listExplosion.size(); ++i) {
+            tmp = listExplosion.get(i);
 
-             if (tmp.time <= 0) {
-                 idx = i;
-                 break;
-             }
-         }
+            if (tmp.time <= 0) {
+                idx = i;
+                break;
+            }
+        }
 
-         if (idx == -1) {
-             listExplosion.add(explosion);
-             tmp = listExplosion.get(listExplosion.size() - 1);
-             return;
-         }
+        if (idx == -1) {
+            listExplosion.add(explosion);
+            tmp = listExplosion.get(listExplosion.size() - 1);
+            return;
+        }
 
-         listExplosion.set(idx,explosion);
+        listExplosion.set(idx, explosion);
     }
 
     /**
      * them 1 BrickExplo vao list.
      */
-    public void addBrickExplo(ArrayList<BrickExplo> listBrickExplo, BrickExplo newBrickExplo ) {
+    public void addBrickExplo(ArrayList<BrickExplo> listBrickExplo, BrickExplo newBrickExplo) {
         int idx = -1;
         BrickExplo tmp;
 
@@ -366,11 +380,9 @@ public class Bombs {
     public void drawbomb(int i, int x, int y, Graphics2D g2, GamePanel gp) {
         if (i == 1) {
             g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-        }
-        else if (i == 2) {
+        } else if (i == 2) {
             g2.drawImage(image1, x, y, gp.tileSize, gp.tileSize, null);
-        }
-        else if (i == 3) {
+        } else if (i == 3) {
             g2.drawImage(image2, x, y, gp.tileSize, gp.tileSize, null);
         }
     }

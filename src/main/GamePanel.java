@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     public ConllisionChecker cCheck = new ConllisionChecker(this);
 
-    public Player player = new Player(this,keyH);
+    public Player player = new Player(this, keyH);
     public TileManager tileM = new TileManager(this);
     public AssetSetter aSetter = new AssetSetter(this);
 
@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
         //AStar.FindPath(this);
 
         //vong lap game ket thuc o day
-        while(gameThread != null) {
+        while (gameThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
@@ -141,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void updateBombs() {
         for (int i = 0; i < player.maxBombs; ++i) {
             if (player.arrBombs[i].time > 0) {
-                player.arrBombs[i].update(this,player,listExplosion);
+                player.arrBombs[i].update(this, player, listExplosion);
             }
         }
     }
@@ -155,14 +155,14 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listExplosion.get(i);
 
             if (tmp.time > 0) {
-                tmp.time --;
+                tmp.time--;
 
                 //Huy gia tri vu no
                 if (tmp.time == 0) {
-                   int x = tmp.worldX / tileSize;
-                   int y = tmp.worldY / tileSize;
+                    int x = tmp.worldX / tileSize;
+                    int y = tmp.worldY / tileSize;
 
-                   tileM.mapExplosion[x][y] --;
+                    tileM.mapExplosion[x][y]--;
                 }
             }
 
@@ -180,7 +180,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listBrickExplo.get(i);
 
             if (tmp.time > 0) {
-                tmp.time --;
+                tmp.time--;
             }
         }
     }
@@ -198,32 +198,38 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listEnemy.get(i);
 
             if (tmp.hitPoint > 0) {
-               checkDeadth = tmp.checkDeadth();
+                checkDeadth = tmp.checkDeadth();
 
-               if (checkDeadth == true) {
-                   tmp.hitPoint --;
+                if (checkDeadth == true) {
+                    tmp.hitPoint--;
 
-                   if (tmp.hitPoint <= 0) {
-                       if (tmp instanceof Oneal) { type = 1; }
-                       if (tmp instanceof Balloom) { type = 0; }
-                       if (tmp instanceof Kondoria) { type = 2; }
-                       if (tmp instanceof Pontan) {
-                           type = 3;
-                           Pontan tmp2 = (Pontan) tmp;
-                           if (tmp2.color == 2) {
-                               type = Constants.Pontan2Code;
-                           }
-                       }
-                       newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
-                       listEDeadth.add(newED);
+                    if (tmp.hitPoint <= 0) {
+                        if (tmp instanceof Oneal) {
+                            type = 1;
+                        }
+                        if (tmp instanceof Balloom) {
+                            type = 0;
+                        }
+                        if (tmp instanceof Kondoria) {
+                            type = 2;
+                        }
+                        if (tmp instanceof Pontan) {
+                            type = 3;
+                            Pontan tmp2 = (Pontan) tmp;
+                            if (tmp2.color == 2) {
+                                type = Constants.Pontan2Code;
+                            }
+                        }
+                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
+                        listEDeadth.add(newED);
 
-                       Sound.play("enemydeadth");
-                   }
-               }
+                        Sound.play("enemydeadth");
+                    }
+                }
 
-               if (tmp.hitPoint > 0) {
-                   tmp.move();
-               }
+                if (tmp.hitPoint > 0) {
+                    tmp.move();
+                }
             }
         }
     }
@@ -304,7 +310,7 @@ public class GamePanel extends JPanel implements Runnable {
             SuperObject tmp = listPowerUp.get(i);
 
             if (tmp.worldX > 0) {
-                tmp.draw(g2,this);
+                tmp.draw(g2, this);
             }
         }
     }
@@ -315,7 +321,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintBombs(Graphics2D g2) {
         for (int i = 0; i < player.maxBombs; ++i) {
             if (player.arrBombs[i].time > 0) {
-                player.arrBombs[i].draw(g2,this);
+                player.arrBombs[i].draw(g2, this);
             }
         }
     }
@@ -330,7 +336,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listExplosion.get(i);
 
             if (tmp.time > 0) {
-                tmp.draw(g2,this,superExplosion);
+                tmp.draw(g2, this, superExplosion);
             }
         }
     }
@@ -345,7 +351,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listBrickExplo.get(i);
 
             if (tmp.time > 0) {
-                tmp.draw(g2,this,superBrickExplo);
+                tmp.draw(g2, this, superBrickExplo);
             }
         }
     }
@@ -360,7 +366,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listEnemy.get(i);
 
             if (tmp.hitPoint > 0) {
-                tmp.draw(g2,this,se);
+                tmp.draw(g2, this, se);
             }
         }
     }
@@ -375,7 +381,7 @@ public class GamePanel extends JPanel implements Runnable {
             tmp = listEDeadth.get(i);
 
             if (tmp.time > 0) {
-                tmp.draw(g2,se,sed);
+                tmp.draw(g2, se, sed);
             }
         }
     }

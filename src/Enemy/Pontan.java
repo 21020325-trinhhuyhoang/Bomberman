@@ -10,8 +10,9 @@ import java.util.Random;
 
 /*
  Potan:
- Tốc độ: 4
- Hành vi: Di chuyển ngẫu nhiên qua các khối gạch và sẽ đuổi theo người chơi trong phạm vi 5 ô.
+ Tốc độ: 2
+ Hành vi: Di chuyển ngẫu nhiên qua các khối gạch và thỉnh thoảng sẽ đuổi theo người chơi. Là kẻ thù nguy hiểm
+          nhất do có thể đi xuyên tường với tốc độ cao.
  */
 
 public class Pontan extends Enemy {
@@ -34,7 +35,7 @@ public class Pontan extends Enemy {
         this.time++;
         if (this.time == Constants.timePontanChange) {
             this.time = 0;
-            this.imgNum ++;
+            this.imgNum++;
             if (this.imgNum > 3) {
                 this.imgNum = 0;
                 //change color
@@ -83,11 +84,10 @@ public class Pontan extends Enemy {
         int X = (this.worldX + gp.tileSize / 2) / gp.tileSize;
         int Y = (this.worldY + gp.tileSize / 2) / gp.tileSize;
 
-        this.timeChange --;
+        this.timeChange--;
         if (this.timeChange <= 0) {
             Random rand = new Random();
             this.status = rand.nextInt(10000) % 2 + 1;
-            System.out.println(this.status);
             rand = new Random();
             this.timeChange = rand.nextInt(10000) % 1000 + 1000;
         }
@@ -119,10 +119,18 @@ public class Pontan extends Enemy {
 
             this.direction = findPath2;
 
-            if (Up == true && findPath2 == 1) { this.direction = direct2; }
-            if (Down == true && findPath2 == 3) { this.direction = direct2; }
-            if (Left == true && findPath2 == 2) { this.direction = direct2; }
-            if (Right == true && findPath2 == 4) { this.direction = direct2; }
+            if (Up == true && findPath2 == 1) {
+                this.direction = direct2;
+            }
+            if (Down == true && findPath2 == 3) {
+                this.direction = direct2;
+            }
+            if (Left == true && findPath2 == 2) {
+                this.direction = direct2;
+            }
+            if (Right == true && findPath2 == 4) {
+                this.direction = direct2;
+            }
         } else {
             int x = this.worldX;
             int y = this.worldY;

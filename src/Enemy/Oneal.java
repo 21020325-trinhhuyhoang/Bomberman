@@ -27,7 +27,7 @@ public class Oneal extends Enemy {
         this.time++;
         if (this.time == Constants.timeChangeAnimationEnemy) {
             this.time = 0;
-            this.imgNum ++;
+            this.imgNum++;
             if (this.imgNum > 2) {
                 this.imgNum = 0;
             }
@@ -99,30 +99,42 @@ public class Oneal extends Enemy {
             int y_sc2 = Y * gp.tileSize;
             int direct2 = 0;
 
-                //System.out.println(x_sc + " " + y_sc + " | " + x_sc2 + " " + y_sc2);
-                //System.out.println("}} " + X + " " + Y + " | " + tile.x + " " + tile.y);
+            //System.out.println(x_sc + " " + y_sc + " | " + x_sc2 + " " + y_sc2);
+            //System.out.println("}} " + X + " " + Y + " | " + tile.x + " " + tile.y);
 
-                if (y_sc > y_sc2) {
-                    direct2 = 1;
-                }
-                if (y_sc < y_sc2) {
-                    direct2 = 3;
-                }
-                if (x_sc > x_sc2) {
-                    direct2 = 2;
-                }
-                if (x_sc < x_sc2) {
-                    direct2 = 4;
-                }
+            if (y_sc > y_sc2) {
+                direct2 = 1;
+            }
+            if (y_sc < y_sc2) {
+                direct2 = 3;
+            }
+            if (x_sc > x_sc2) {
+                direct2 = 2;
+            }
+            if (x_sc < x_sc2) {
+                direct2 = 4;
+            }
 
             this.direction = findPath;
 
             //System.out.println(this.direction);
 
-            if (Up == true && findPath == 1) { this.direction = direct2; this.speed = 1; }
-            if (Down == true && findPath == 3) { this.direction = direct2; this.speed = 1; }
-            if (Left == true && findPath == 2) { this.direction = direct2; this.speed = 1; }
-            if (Right == true && findPath == 4) { this.direction = direct2; this.speed = 1; }
+            if (Up == true && findPath == 1) {
+                this.direction = direct2;
+                this.speed = 1;
+            }
+            if (Down == true && findPath == 3) {
+                this.direction = direct2;
+                this.speed = 1;
+            }
+            if (Left == true && findPath == 2) {
+                this.direction = direct2;
+                this.speed = 1;
+            }
+            if (Right == true && findPath == 4) {
+                this.direction = direct2;
+                this.speed = 1;
+            }
         } else {
 
             int x = this.worldX;
