@@ -166,7 +166,7 @@ public class AStar {
                         _y2 = _y + j;
                         //System.out.println(" ||   " + _x2 + " " + _y2 + " " + gp.tileM.mapEConllision[_x2][_y2]);
 
-                        if (gp.tileM.mapTileNum[_x2][_y2] != 1) {
+                        if (gp.tileM.mapTileNum[_x2][_y2] != 1 && gp.tileM.mapBombs[_x2][_y2] == 0) {
 
                             if (f[_x2][_y2] == -1 || f[_x2][_y2] > _val2) {
                                 f[_x2][_y2] = _val2;

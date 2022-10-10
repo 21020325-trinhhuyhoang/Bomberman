@@ -25,4 +25,7 @@ public class Constants {
     //pham vi Kondoria se duoi theo player.
     public static final int radiusKon = 5;
 
+    public static final int timePontanChange = 6;
+    public static final int Pontan2Code = 12092003;
+
 }

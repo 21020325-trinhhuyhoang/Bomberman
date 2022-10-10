@@ -153,7 +153,7 @@ public abstract class Enemy {
 
         _x2 = (x + gp.tileSize - 1) / gp.tileSize;
         _y2 = (y - this.speed) / gp.tileSize;
-        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1 || gp.tileM.mapBombs[_x1][_y1] > 0 || gp.tileM.mapBombs[_x2][_y2] > 0) {
             this.collisionWallUp = true;
         }
 
@@ -163,7 +163,7 @@ public abstract class Enemy {
 
         _x2 = (x + gp.tileSize - 1) / gp.tileSize;
         _y2 = (y + gp.tileSize - 1 + this.speed) / gp.tileSize;
-        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1 || gp.tileM.mapBombs[_x1][_y1] > 0 || gp.tileM.mapBombs[_x2][_y2] > 0) {
             this.collisionWallDown = true;
         }
 
@@ -173,7 +173,7 @@ public abstract class Enemy {
 
         _x2 = (x - this.speed) / gp.tileSize;
         _y2 = (y + gp.tileSize - 1) / gp.tileSize;
-        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1 || gp.tileM.mapBombs[_x1][_y1] > 0 || gp.tileM.mapBombs[_x2][_y2] > 0) {
             this.collisionWallLeft = true;
         }
 
@@ -183,7 +183,7 @@ public abstract class Enemy {
 
         _x2 = (x + gp.tileSize - 1 + this.speed) / gp.tileSize;
         _y2 = (y + gp.tileSize - 1) / gp.tileSize;
-        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1) {
+        if (gp.tileM.mapTileNum[_x1][_y1] == 1 || gp.tileM.mapTileNum[_x2][_y2] == 1 || gp.tileM.mapBombs[_x1][_y1] > 0 || gp.tileM.mapBombs[_x2][_y2] > 0) {
             this.collisionWallRight = true;
         }
 

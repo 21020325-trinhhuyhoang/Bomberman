@@ -17,7 +17,7 @@ public class SuperEnemy {
     public GamePanel gp;
 
     public SuperEnemy(GamePanel gp) {
-        image = new BufferedImage[10][20];
+        image = new BufferedImage[20][30];
         this.gp = gp;
 
         loadImage();
@@ -92,6 +92,38 @@ public class SuperEnemy {
           //right3
           image[2][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/kondoria_right3.png"));
 
+          //pontan
+          //deadth1
+          image[3][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan1_dead.png"));
+
+          //1
+          image[3][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan1.png"));
+
+          //2
+          image[3][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan1_1.png"));
+
+          //3
+          image[3][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan1_2.png"));
+
+          //4
+          image[3][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan1_3.png"));
+
+          //deadth2
+          image[3][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2_dead.png"));
+
+          //1
+          image[3][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2.png"));
+
+          //2
+          image[3][7] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2_1.png"));
+
+          //3
+          image[3][8] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2_2.png"));
+
+          //4
+          image[3][9] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2_3.png"));
+
+
       } catch (IOException e) {
           System.out.println("Khong load dc anh enemy!");
           e.printStackTrace();
@@ -141,6 +173,10 @@ public class SuperEnemy {
                     }
                     else if (line.charAt(i) == 'e') {
                         newEnemy = new Kondoria(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    }
+                    else if (line.charAt(i) == 'r') {
+                        newEnemy = new Pontan(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 

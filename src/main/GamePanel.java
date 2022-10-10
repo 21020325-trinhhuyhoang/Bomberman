@@ -23,6 +23,7 @@ import Enemy.Balloom;
 import Enemy.AStar;
 import Enemy.Oneal;
 import Enemy.Kondoria;
+import Enemy.Pontan;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -206,6 +207,13 @@ public class GamePanel extends JPanel implements Runnable {
                        if (tmp instanceof Oneal) { type = 1; }
                        if (tmp instanceof Balloom) { type = 0; }
                        if (tmp instanceof Kondoria) { type = 2; }
+                       if (tmp instanceof Pontan) {
+                           type = 3;
+                           Pontan tmp2 = (Pontan) tmp;
+                           if (tmp2.color == 2) {
+                               type = Constants.Pontan2Code;
+                           }
+                       }
                        newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                        listEDeadth.add(newED);
 

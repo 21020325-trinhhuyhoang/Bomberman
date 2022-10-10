@@ -9,32 +9,36 @@ import java.awt.*;
 import java.util.Random;
 
 /*
- Kondoria:
- Tốc độ: 2/3
+ Potan:
+ Tốc độ: 4
  Hành vi: Di chuyển ngẫu nhiên qua các khối gạch và sẽ đuổi theo người chơi trong phạm vi 5 ô.
  */
 
-public class Kondoria extends Enemy {
+public class Pontan extends Enemy {
 
-    public int timeMove;
+    public int timeChange;
+    public int color;
+    public int status; //Trang thai = 1 la di chuyen tu do = 2 la duoi theo bomberman.
 
-    public Kondoria(int worldX, int worldY, GamePanel gp) {
+    public Pontan(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 2;
-        this.timeMove = 0; //max = 2
-        //speed cua Kondoria se la 2/3.
+        this.timeChange = 1000;
+        this.color = 1;
     }
 
     @Override
     public void draw(Graphics2D g2, GamePanel gp, SuperEnemy se) {
 
-        //change animation for balloom
+        //change animation for potan
         this.time++;
-        if (this.time == Constants.timeChangeAnimationEnemy) {
+        if (this.time == Constants.timePontanChange) {
             this.time = 0;
             this.imgNum ++;
-            if (this.imgNum > 2) {
+            if (this.imgNum > 3) {
                 this.imgNum = 0;
+                //change color
+                this.color = 3 - this.color;
             }
         }
 
@@ -47,18 +51,18 @@ public class Kondoria extends Enemy {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-            drawKondoria(screenX, screenY, g2, gp, se);
+            drawPontan(screenX, screenY, g2, gp, se);
         }
     }
 
     /**
-     * render kondoria.
+     * render Pontan.
      */
-    public void drawKondoria(int x, int y, Graphics2D g2, GamePanel gp, SuperEnemy se) {
-        if (this.LR == "left") {
-            g2.drawImage(se.image[2][1 + this.imgNum], x, y, gp.tileSize, gp.tileSize, null);
+    public void drawPontan(int x, int y, Graphics2D g2, GamePanel gp, SuperEnemy se) {
+        if (this.color == 1) {
+            g2.drawImage(se.image[3][1 + this.imgNum], x, y, gp.tileSize, gp.tileSize, null);
         } else {
-            g2.drawImage(se.image[2][4 + this.imgNum], x, y, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(se.image[3][6 + this.imgNum], x, y, gp.tileSize, gp.tileSize, null);
         }
     }
 
@@ -66,14 +70,6 @@ public class Kondoria extends Enemy {
      * move.
      */
     public void move() {
-
-        this.timeMove++;
-
-        if (this.timeMove < 2) {
-            return;
-        } else if (this.timeMove == 2) {
-            this.timeMove = 0;
-        }
 
         checkCollisionWall();
         boolean Up = this.collisionWallUp;
@@ -87,9 +83,17 @@ public class Kondoria extends Enemy {
         int X = (this.worldX + gp.tileSize / 2) / gp.tileSize;
         int Y = (this.worldY + gp.tileSize / 2) / gp.tileSize;
 
-        int findPath2 = -1;
+        this.timeChange --;
+        if (this.timeChange <= 0) {
+            Random rand = new Random();
+            this.status = rand.nextInt(10000) % 2 + 1;
+            System.out.println(this.status);
+            rand = new Random();
+            this.timeChange = rand.nextInt(10000) % 1000 + 1000;
+        }
 
-        if (Math.abs(X - tileX) <= Constants.radiusKon && Math.abs(Y - tileY) <= Constants.radiusKon ) {
+        int findPath2 = -1;
+        if (this.status == 2) {
             findPath2 = AStar.FindPath2(gp, X, Y, tileX, tileY);
         }
 

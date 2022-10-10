@@ -114,6 +114,27 @@ public class TileManager {
                         mapEConllision[col][row] = 0;
                         mapPowerUp[col][row] = -1;
                     }
+                    //oneal
+                    else if (line.charAt(i) == 'w') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
+                        mapEConllision[col][row] = 0;
+                        mapPowerUp[col][row] = -1;
+                    }
+                    //kondoria
+                    else if (line.charAt(i) == 'e') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
+                        mapEConllision[col][row] = 0;
+                        mapPowerUp[col][row] = -1;
+                    }
+                    //pontan
+                    else if (line.charAt(i) == 'r') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
+                        mapEConllision[col][row] = 0;
+                        mapPowerUp[col][row] = -1;
+                    }
                     //power up bomb
                     else if (line.charAt(i) == 'z') {
                         mapTileNum[col][row] = 2;

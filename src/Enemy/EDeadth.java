@@ -51,6 +51,14 @@ public class EDeadth {
                 if (this.type == 2) {
                     g2.drawImage(se.image[2][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
                 }
+                //Pontan1
+                if (this.type == 3) {
+                    g2.drawImage(se.image[3][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
+                //Pontan2
+                if (this.type == Constants.Pontan2Code) {
+                    g2.drawImage(se.image[3][5], screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
                 return;
             }
 
