@@ -8,6 +8,12 @@ import Enemy.SuperEnemy;
 import java.awt.*;
 import java.util.Random;
 
+/*
+ Balloom
+ Tốc độ: 1
+ Hành vi: DI chuyển ngẫu nhiên
+ */
+
 public class Balloom extends Enemy {
     public Balloom(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);

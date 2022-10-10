@@ -12,7 +12,7 @@ public class Constants {
     public static final int timeBrickExplo = 12;
     public static final int timeBrickExploMod = 4;
 
-    public static final int timeChangeAnimationEnemy = 22;
+    public static final int timeChangeAnimationEnemy = 20;
 
     public static final String nameFile = "/levels/lvl2.txt";
 
@@ -21,5 +21,8 @@ public class Constants {
     public static final int timeEDeadthMod = 17;
 
     public static final int hitBoxE = 15;
+
+    //pham vi Kondoria se duoi theo player.
+    public static final int radiusKon = 5;
 
 }

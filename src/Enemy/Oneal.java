@@ -8,6 +8,12 @@ import Enemy.SuperEnemy;
 import java.awt.*;
 import java.util.Random;
 
+/*
+ Oneal (Onion??)
+ Tốc độ: Ngẫu nhiên (1/2)
+ Hành vi: DI chuyển ngẫu nhiên nhưng khí có đường đi đến được vị trí bomberman, Oneal sẽ cố gắng đuổi theo.
+ */
+
 public class Oneal extends Enemy {
     public Oneal(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
