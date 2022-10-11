@@ -123,6 +123,27 @@ public class SuperEnemy {
             //4
             image[3][9] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/pontan2_3.png"));
 
+            //minvo
+            //deadth
+            image[4][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_dead.png"));
+
+            //left1
+            image[4][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_left1.png"));
+
+            //left2
+            image[4][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_left2.png"));
+
+            //left3
+            image[4][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_left3.png"));
+
+            //right1
+            image[4][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_right1.png"));
+
+            //right2
+            image[4][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_right2.png"));
+
+            //right3
+            image[4][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/minvo_right3.png"));
 
         } catch (IOException e) {
             System.out.println("Khong load dc anh enemy!");
@@ -171,6 +192,9 @@ public class SuperEnemy {
                         gp.listEnemy.add(newEnemy);
                     } else if (line.charAt(i) == 'r') {
                         newEnemy = new Pontan(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    } else if (line.charAt(i) == 't') {
+                        newEnemy = new Minvo(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 

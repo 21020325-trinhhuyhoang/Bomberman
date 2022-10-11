@@ -24,6 +24,7 @@ import Enemy.AStar;
 import Enemy.Oneal;
 import Enemy.Kondoria;
 import Enemy.Pontan;
+import Enemy.Minvo;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -219,6 +220,9 @@ public class GamePanel extends JPanel implements Runnable {
                             if (tmp2.color == 2) {
                                 type = Constants.Pontan2Code;
                             }
+                        }
+                        if (tmp instanceof Minvo) {
+                            type = 4;
                         }
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
