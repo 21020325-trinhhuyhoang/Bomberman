@@ -91,6 +91,7 @@ public class Pontan extends Enemy {
             this.status = rand.nextInt(10000) % 2 + 1;
             rand = new Random();
             this.timeChange = rand.nextInt(10000) % 1000 + 1000;
+            if (this.status == 2) { this.timeChange = this.timeChange / 2; }
         }
 
         int findPath2 = -1;

@@ -11,13 +11,13 @@ import java.util.Random;
 /*
  Minvo
  Tốc độ: 2
- Hành vi: DI chuyển ngẫu nhiên nhưng khí có đường đi đến được vị trí bomberman, Oneal sẽ cố gắng đuổi theo.
+ Hành vi: DI chuyển ngẫu nhiên, đuổi theo bomberman trong phạm vi 7 ô.
  */
 
 public class Minvo extends Enemy {
     public Minvo(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
-        this.speed = 1;
+        this.speed = 2;
     }
 
     @Override
@@ -90,7 +90,11 @@ public class Minvo extends Enemy {
         int X = (this.worldX + gp.tileSize / 2) / gp.tileSize;
         int Y = (this.worldY + gp.tileSize / 2) / gp.tileSize;
 
-        int findPath = AStar.FindPath(gp, X, Y, tileX, tileY);
+        int findPath = -1;
+
+        if (Math.abs(X - tileX) <= Constants.radiusMinvo && Math.abs(Y - tileY) <= Constants.radiusMinvo) {
+            findPath = AStar.FindPath(gp, X, Y, tileX, tileY);
+        }
 
         if (findPath != -1) {
             int x_sc = this.worldX;
@@ -119,10 +123,10 @@ public class Minvo extends Enemy {
 
             //System.out.println(this.direction);
 
-            if (Up == true && findPath == 1) { this.direction = direct2; this.speed = 1; }
-            if (Down == true && findPath == 3) { this.direction = direct2; this.speed = 1; }
-            if (Left == true && findPath == 2) { this.direction = direct2; this.speed = 1; }
-            if (Right == true && findPath == 4) { this.direction = direct2; this.speed = 1; }
+            if (Up == true && findPath == 1) { this.direction = direct2; }
+            if (Down == true && findPath == 3) { this.direction = direct2; }
+            if (Left == true && findPath == 2) { this.direction = direct2; }
+            if (Right == true && findPath == 4) { this.direction = direct2; }
         } else {
 
             int x = this.worldX;

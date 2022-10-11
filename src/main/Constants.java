@@ -14,7 +14,7 @@ public class Constants {
 
     public static final int timeChangeAnimationEnemy = 20;
 
-    public static final String nameFile = "/levels/lvl2.txt";
+    public static final String nameFile = "/levels/lvl1.txt";
 
     public static final int timeEDeadth = 120;
     public static final int timeEDeadthUp = 60;
@@ -24,6 +24,8 @@ public class Constants {
 
     //pham vi Kondoria se duoi theo player.
     public static final int radiusKon = 5;
+
+    public static final int radiusMinvo = 7;
 
     public static final int timePontanChange = 6;
     public static final int Pontan2Code = 12092003;

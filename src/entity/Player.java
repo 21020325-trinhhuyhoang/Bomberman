@@ -71,6 +71,11 @@ public class Player extends Entity {
             right1 = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_right_1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_right_2.png"));
             right = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_right.png"));
+
+            //deadth
+            this.deadth = new BufferedImage[10];
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
