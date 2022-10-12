@@ -47,10 +47,10 @@ public class GamePanel extends JPanel implements Runnable {
     public int fps = 60;
 
     Thread gameThread;
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH;
     public ConllisionChecker cCheck = new ConllisionChecker(this);
 
-    public Player player = new Player(this, keyH);
+    public Player player;
     public TileManager tileM = new TileManager(this);
     public AssetSetter aSetter = new AssetSetter(this);
 
@@ -63,18 +63,22 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperEDeadth sed = new SuperEDeadth(this);
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
+    public int GameState = Constants.playing;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
+        keyH = new KeyHandler();
         this.addKeyListener(keyH);
+        this.player = new Player(this, keyH);
+
         this.setFocusable(true);
     }
 
     public void setupGame() {
-        aSetter.setObject();
         superExplosion.loadImage();
+
     }
 
     public void startGameThread() {
@@ -91,8 +95,6 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = 0;
         int drawCount = 0;
 
-        //AStar.FindPath(this);
-
         //vong lap game ket thuc o day
         while (gameThread != null) {
             currentTime = System.nanoTime();
@@ -100,9 +102,13 @@ public class GamePanel extends JPanel implements Runnable {
             timer += (currentTime - lastTime);
             lastTime = currentTime;
 
+            //update va ve lai trang thai cua game
             if (delta >= 1) {
-                update();
-                repaint();
+                //dang choi
+                if (GameState == Constants.playing || GameState == Constants.retry) {
+                    Playing();
+                }
+
                 delta--;
                 drawCount++;
             }
@@ -111,8 +117,19 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount = 0;
                 timer = 0;
             }
+
+            //dung khi player chet
+            if (player.alive == false && player.timeDeadth <= 0) {
+                //this.gameThread = null;
+                GameState = Constants.retry;
+            }
         }
 
+    }
+
+    public void Playing() {
+        update();
+        repaint();
     }
 
     public void update() {

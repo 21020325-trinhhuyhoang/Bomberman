@@ -30,4 +30,9 @@ public class Constants {
     public static final int timePontanChange = 6;
     public static final int Pontan2Code = 12092003;
 
+    public static final int timeDeadth = 36;
+
+    //cac trang thai cua game
+    public static final int playing = 0;
+    public static final int retry = 1;
 }

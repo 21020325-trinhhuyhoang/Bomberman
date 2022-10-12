@@ -8,7 +8,7 @@ import main.GamePanel;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed = false, downPressed = false, leftPressed = false, rightPressed = false;
+    public boolean upPressed = false, downPressed = false, leftPressed = false, rightPressed = false, deadth;
 
     public boolean spacePressed = false;
 
@@ -43,7 +43,6 @@ public class KeyHandler implements KeyListener {
             }
             spacePressed = true;
         }
-
     }
 
     @Override

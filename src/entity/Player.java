@@ -18,6 +18,7 @@ public class Player extends Entity {
 
     public int screenX;
     public int screenY;
+    public int timeDeadth;
 
     public int maxBombs;
     public int totalBombs;
@@ -25,6 +26,7 @@ public class Player extends Entity {
 
     public int fire = 1;
     public int hitPoint;
+    public boolean alive;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -46,6 +48,7 @@ public class Player extends Entity {
         direction = "down";
         maxBombs = 1;
         hitPoint = 1;
+        alive = true;
 
         totalBombs = 0;
 
@@ -73,8 +76,15 @@ public class Player extends Entity {
             right = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_right.png"));
 
             //deadth
-            this.deadth = new BufferedImage[10];
+            this.deadth = new BufferedImage[7];
 
+            deadth[0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead.png"));
+            deadth[1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead1.png"));
+            deadth[2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead2.png"));
+            deadth[3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead3.png"));
+            deadth[4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead4.png"));
+            deadth[5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead5.png"));
+            deadth[6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/player_dead6.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -88,6 +98,14 @@ public class Player extends Entity {
         goDown = false;
         goRight = false;
         goLeft = false;
+
+        if (checkDeadth() == true && alive == true) {
+            alive = false;
+            timeDeadth = Constants.timeDeadth;
+            Sound.play("enemydeadth");
+        }
+
+        if (alive == false) return;
 
         if (keyH.leftPressed == true || keyH.rightPressed == true || keyH.upPressed == true || keyH.downPressed == true) {
             if (keyH.leftPressed == true) {
@@ -244,11 +262,60 @@ public class Player extends Entity {
         g2.fillRect(renderX,renderY,gp.tileSize,gp.tileSize);*/
 
         //draw bomberman
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        if (this.alive == true) {
+            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        } else {
+            this.timeDeadth--;
+            if (this.timeDeadth > 1) {
+                int tmp = (Constants.timeDeadth - this.timeDeadth) / 5;
+                g2.drawImage(deadth[tmp], screenX, screenY, gp.tileSize, gp.tileSize, null);
+            }
+        }
 
         //check hitbox
         /*g2.setColor(Color.red);
         g2.fillRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);*/
+    }
+
+
+    public boolean checkDeadth() {
+
+        int x = worldX;
+        int y = worldY;
+
+        //trai tren
+        int _x = (x + solidArea.x) / gp.tileSize;
+        int _y = (y + solidArea.y) / gp.tileSize;
+
+        if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        //phai tren
+        _x = (x + solidArea.x + solidArea.width - 1) / gp.tileSize;
+        _y = (y + solidArea.y) / gp.tileSize;
+
+        if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        //trai duoi
+        _x = (x + solidArea.x) / gp.tileSize;
+        _y = (y + solidArea.y + solidArea.height - 1) / gp.tileSize;
+
+        if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        //phai duoi
+        _x = (x + solidArea.x + solidArea.width - 1) / gp.tileSize;
+        _y = (y + solidArea.y + solidArea.height - 1) / gp.tileSize;
+
+        if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }
