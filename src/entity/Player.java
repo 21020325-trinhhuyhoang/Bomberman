@@ -105,6 +105,12 @@ public class Player extends Entity {
             Sound.play("enemydeadth");
         }
 
+        if (checkToxic() == true && alive == true) {
+            alive = false;
+            timeDeadth = Constants.timeDeadth;
+            Sound.play("enemydeadth");
+        }
+
         if (alive == false) return;
 
         if (keyH.leftPressed == true || keyH.rightPressed == true || keyH.upPressed == true || keyH.downPressed == true) {
@@ -312,6 +318,46 @@ public class Player extends Entity {
         _y = (y + solidArea.y + solidArea.height - 1) / gp.tileSize;
 
         if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkToxic() {
+
+        int x = worldX;
+        int y = worldY;
+
+        //trai tren
+        int _x = (x + solidArea.x) / gp.tileSize;
+        int _y = (y + solidArea.y) / gp.tileSize;
+
+        if (gp.tileM.mapToxic[_x][_y] > 0) {
+            return true;
+        }
+
+        //phai tren
+        _x = (x + solidArea.x + solidArea.width - 1) / gp.tileSize;
+        _y = (y + solidArea.y) / gp.tileSize;
+
+        if (gp.tileM.mapToxic[_x][_y] > 0) {
+            return true;
+        }
+
+        //trai duoi
+        _x = (x + solidArea.x) / gp.tileSize;
+        _y = (y + solidArea.y + solidArea.height - 1) / gp.tileSize;
+
+        if (gp.tileM.mapToxic[_x][_y] > 0) {
+            return true;
+        }
+
+        //phai duoi
+        _x = (x + solidArea.x + solidArea.width - 1) / gp.tileSize;
+        _y = (y + solidArea.y + solidArea.height - 1) / gp.tileSize;
+
+        if (gp.tileM.mapToxic[_x][_y] > 0) {
             return true;
         }
 

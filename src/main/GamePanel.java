@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import Bombs.Explosion;
 import Bombs.SuperExplosion;
 import Bombs.Bombs;
+import Bombs.SuperToxic;
+import Bombs.ExToxic;
 import BrickExplo.BrickExplo;
 import BrickExplo.SuperBrickExplo;
 import Enemy.Enemy;
@@ -25,12 +27,14 @@ import Enemy.Oneal;
 import Enemy.Kondoria;
 import Enemy.Pontan;
 import Enemy.Minvo;
+import Enemy.Toxic;
 
 public class GamePanel extends JPanel implements Runnable {
 
     //THONG SO GAME
     public int level = 1;
     public int TotalEnemy;
+    public int live = 3;
 
     //SCREEN SETTING
     public final int originalTileSize = 16; // 16x16 tile
@@ -59,7 +63,9 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
 
     public SuperExplosion superExplosion;
+    public SuperToxic superToxic;
     public ArrayList<Explosion> listExplosion = new ArrayList<>();
+    public ArrayList<ExToxic> listToxic = new ArrayList<>();
     public SuperBrickExplo superBrickExplo = new SuperBrickExplo();
     public ArrayList<BrickExplo> listBrickExplo = new ArrayList<>();
     public ArrayList<Enemy> listEnemy = new ArrayList<>();
@@ -83,6 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
         tileM = new TileManager(this, Constants.nameFile);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
+        listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
@@ -95,12 +102,17 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
+        superToxic = new SuperToxic();
+        superToxic.loadImage();
+
+
         cCheck = new ConllisionChecker(this);
 
         TotalEnemy = 0;
         tileM = new TileManager(this, Constants.nameFile);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
+        listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
@@ -121,6 +133,7 @@ public class GamePanel extends JPanel implements Runnable {
         tileM = new TileManager(this, Constants.nameFile);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
+        listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
@@ -200,6 +213,9 @@ public class GamePanel extends JPanel implements Runnable {
         //update Explosion
         updateExplosion();
 
+        //update Toxic
+        updateToxic();
+
         //update BrickExplo
         updateBrickExplo();
 
@@ -234,6 +250,30 @@ public class GamePanel extends JPanel implements Runnable {
                     int y = tmp.worldY / tileSize;
 
                     tileM.mapExplosion[x][y]--;
+                }
+            }
+
+        }
+
+    }
+
+    /**
+     * xu ly toxic.
+     */
+    public void updateToxic() {
+        ExToxic tmp;
+        for (int i = 0; i < listToxic.size(); ++i) {
+            tmp = listToxic.get(i);
+
+            if (tmp.time > 0) {
+                tmp.time--;
+
+                //Huy gia tri vu no
+                if (tmp.time == 0) {
+                    int x = tmp.worldX / tileSize;
+                    int y = tmp.worldY / tileSize;
+
+                    tileM.mapToxic[x][y]--;
                 }
             }
 
@@ -295,6 +335,11 @@ public class GamePanel extends JPanel implements Runnable {
                         }
                         if (tmp instanceof Minvo) {
                             type = 4;
+                        }
+                        if (tmp instanceof Toxic) {
+                            type = 5;
+                            Toxic newToxic = (Toxic) tmp;
+                            newToxic.ToxicExplosion(listToxic);
                         }
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
@@ -368,6 +413,9 @@ public class GamePanel extends JPanel implements Runnable {
         //Explosion
         paintExplosion(g2);
 
+        //Toxic
+        paintToxic(g2);
+
         //Brick Explo
         paintBrickExplosion(g2);
 
@@ -418,6 +466,21 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (tmp.time > 0) {
                 tmp.draw(g2, this, superExplosion);
+            }
+        }
+    }
+
+    /**
+     * render Toxic.
+     */
+    public void paintToxic(Graphics2D g2) {
+        ExToxic tmp;
+
+        for (int i = 0; i < listToxic.size(); ++i) {
+            tmp = listToxic.get(i);
+
+            if (tmp.time > 0) {
+                tmp.draw(g2, this, superToxic);
             }
         }
     }

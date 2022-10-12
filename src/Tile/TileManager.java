@@ -21,7 +21,7 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][], mapBombs[][], mapExplosion[][];
+    public int mapTileNum[][], mapBombs[][], mapExplosion[][], mapToxic[][];
     public int mapConllision[][], mapEConllision[][], mapPowerUp[][];
 
     public TileManager(GamePanel gp, String mapName) {
@@ -74,6 +74,7 @@ public class TileManager {
 
             mapTileNum = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
             mapBombs = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
+            mapToxic= new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
             mapConllision = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
             mapExplosion = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
             mapEConllision = new int[gp.maxWorldCol + 1][gp.maxWorldRow + 1];
@@ -129,6 +130,20 @@ public class TileManager {
                     }
                     //pontan
                     else if (line.charAt(i) == 'r') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
+                        mapEConllision[col][row] = 0;
+                        mapPowerUp[col][row] = -1;
+                    }
+                    //minvo
+                    else if (line.charAt(i) == 't') {
+                        mapTileNum[col][row] = 0;
+                        mapConllision[col][row] = 0;
+                        mapEConllision[col][row] = 0;
+                        mapPowerUp[col][row] = -1;
+                    }
+                    //toxic
+                    else if (line.charAt(i) == 'Q') {
                         mapTileNum[col][row] = 0;
                         mapConllision[col][row] = 0;
                         mapEConllision[col][row] = 0;
