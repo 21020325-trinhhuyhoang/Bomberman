@@ -227,8 +227,8 @@ public class Toxic extends Enemy {
      */
     public void ToxicExplosion(ArrayList<ExToxic> listToxic) {
         int fire = Constants.toxicLength;
-        int _x = (this.worldX + gp.tileSize / 2 - 1) / gp.tileSize;
-        int _y = (this.worldY + gp.tileSize / 2 - 1) / gp.tileSize;
+        int _x = (this.worldX) / gp.tileSize;
+        int _y = (this.worldY) / gp.tileSize;
 
         //center
         gp.tileM.mapToxic[_x][_y]++;
