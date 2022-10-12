@@ -28,6 +28,10 @@ import Enemy.Minvo;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    //THONG SO GAME
+    public int level = 1;
+    public int TotalEnemy;
+
     //SCREEN SETTING
     public final int originalTileSize = 16; // 16x16 tile
     public final int scale = 3;
@@ -48,18 +52,18 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
     KeyHandler keyH;
-    public ConllisionChecker cCheck = new ConllisionChecker(this);
+    public ConllisionChecker cCheck;
 
     public Player player;
-    public TileManager tileM = new TileManager(this);
+    public TileManager tileM;
     public AssetSetter aSetter = new AssetSetter(this);
 
-    public SuperExplosion superExplosion = new SuperExplosion();
+    public SuperExplosion superExplosion;
     public ArrayList<Explosion> listExplosion = new ArrayList<>();
     public SuperBrickExplo superBrickExplo = new SuperBrickExplo();
     public ArrayList<BrickExplo> listBrickExplo = new ArrayList<>();
     public ArrayList<Enemy> listEnemy = new ArrayList<>();
-    public SuperEnemy se = new SuperEnemy(this);
+    public SuperEnemy se = new SuperEnemy(this, Constants.nameFile);
     public SuperEDeadth sed = new SuperEDeadth(this);
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
@@ -69,16 +73,61 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
+        this.setFocusable(true);
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
         this.player = new Player(this, keyH);
 
-        this.setFocusable(true);
+        //de phong truong hop bi loi
+        TotalEnemy = 0;
+        tileM = new TileManager(this, Constants.nameFile);
+        aSetter = new AssetSetter(this);
+        listExplosion = new ArrayList<>();
+        superBrickExplo = new SuperBrickExplo();
+        listBrickExplo = new ArrayList<>();
+        listEnemy = new ArrayList<>();
+        se = new SuperEnemy(this, Constants.nameFile);
+        sed = new SuperEDeadth(this);
+        listEDeadth = new ArrayList<>();
+        listPowerUp = new ArrayList<>();
     }
 
     public void setupGame() {
+        superExplosion = new SuperExplosion();
         superExplosion.loadImage();
+        cCheck = new ConllisionChecker(this);
 
+        TotalEnemy = 0;
+        tileM = new TileManager(this, Constants.nameFile);
+        aSetter = new AssetSetter(this);
+        listExplosion = new ArrayList<>();
+        superBrickExplo = new SuperBrickExplo();
+        listBrickExplo = new ArrayList<>();
+        listEnemy = new ArrayList<>();
+        se = new SuperEnemy(this, Constants.nameFile);
+        sed = new SuperEDeadth(this);
+        listEDeadth = new ArrayList<>();
+        listPowerUp = new ArrayList<>();
+    }
+
+    /**
+     * bat dau 1 man choi moi.
+     */
+    public void reset() {
+        GameState = Constants.playing;
+        this.player = new Player(this, keyH);
+
+        TotalEnemy = 0;
+        tileM = new TileManager(this, Constants.nameFile);
+        aSetter = new AssetSetter(this);
+        listExplosion = new ArrayList<>();
+        superBrickExplo = new SuperBrickExplo();
+        listBrickExplo = new ArrayList<>();
+        listEnemy = new ArrayList<>();
+        se = new SuperEnemy(this, Constants.nameFile);
+        sed = new SuperEDeadth(this);
+        listEDeadth = new ArrayList<>();
+        listPowerUp = new ArrayList<>();
     }
 
     public void startGameThread() {
@@ -107,6 +156,10 @@ public class GamePanel extends JPanel implements Runnable {
                 //dang choi
                 if (GameState == Constants.playing || GameState == Constants.retry) {
                     Playing();
+                }
+
+                if (GameState == Constants.retry) {
+                    reset();
                 }
 
                 delta--;
@@ -211,12 +264,14 @@ public class GamePanel extends JPanel implements Runnable {
         EDeadth newED;
         int type = 0;
         boolean checkDeadth = false;
+        boolean checkColPlayer = false;
 
         for (int i = 0; i < listEnemy.size(); ++i) {
             tmp = listEnemy.get(i);
 
             if (tmp.hitPoint > 0) {
                 checkDeadth = tmp.checkDeadth();
+                checkColPlayer = tmp.checkColPlayer();
 
                 if (checkDeadth == true) {
                     tmp.hitPoint--;
@@ -246,6 +301,11 @@ public class GamePanel extends JPanel implements Runnable {
 
                         Sound.play("enemydeadth");
                     }
+                }
+                else if (checkColPlayer == true && player.alive == true) {
+                    player.alive = false;
+                    player.timeDeadth = Constants.timeDeadth;
+                    Sound.play("enemydeadth");
                 }
 
                 if (tmp.hitPoint > 0) {

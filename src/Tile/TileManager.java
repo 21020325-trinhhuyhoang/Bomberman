@@ -24,12 +24,12 @@ public class TileManager {
     public int mapTileNum[][], mapBombs[][], mapExplosion[][];
     public int mapConllision[][], mapEConllision[][], mapPowerUp[][];
 
-    public TileManager(GamePanel gp) {
+    public TileManager(GamePanel gp, String mapName) {
         this.gp = gp;
         tile = new Tile[30];
 
         getTitleImage();
-        loadMap(Constants.nameFile);
+        loadMap(mapName);
     }
 
     public void getTitleImage() {
@@ -88,6 +88,7 @@ public class TileManager {
 
                 for (int i = 0; i < line.length(); ++i) {
                     mapConllision[col][row] = 0;
+                    //System.out.println(line.charAt(i));
 
                     if (line.charAt(i) == '1') {
                         mapTileNum[col][row] = 1;

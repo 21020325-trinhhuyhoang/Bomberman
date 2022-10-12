@@ -16,12 +16,12 @@ public class SuperEnemy {
     public BufferedImage[][] image;
     public GamePanel gp;
 
-    public SuperEnemy(GamePanel gp) {
+    public SuperEnemy(GamePanel gp, String mapName) {
         image = new BufferedImage[20][30];
         this.gp = gp;
 
         loadImage();
-        loadMap(Constants.nameFile);
+        loadMap(mapName);
     }
 
     public void loadImage() {

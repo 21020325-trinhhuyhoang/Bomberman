@@ -21,7 +21,6 @@ public class main {
         Sound.loop("soundtrack1");
         gamePanel.setupGame();
         gamePanel.startGameThread();
-
     }
 
 
