@@ -18,7 +18,8 @@ public class main {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        Sound.loop("soundtrack1");
+        //Sound.loop("soundtrack1");
+        Sound.loop("huan");
         gamePanel.setupGame();
         gamePanel.startGameThread();
     }
