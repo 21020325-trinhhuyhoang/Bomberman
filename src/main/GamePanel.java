@@ -369,6 +369,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (tmp.worldX > 0) {
 
+                //taken by player
                 boolean collision = tmp.check(this);
 
                 if (collision == true) {
@@ -388,6 +389,14 @@ public class GamePanel extends JPanel implements Runnable {
                         player.speed++;
                     }
 
+                    tmp = new SuperObject(-1, -1);
+                    listPowerUp.set(i, tmp);
+                }
+
+                //destroy
+                boolean explo = tmp.checkExplo(this);
+
+                if (explo == true) {
                     tmp = new SuperObject(-1, -1);
                     listPowerUp.set(i, tmp);
                 }

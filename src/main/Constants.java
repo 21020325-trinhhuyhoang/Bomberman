@@ -21,7 +21,7 @@ public class Constants {
     public static final int timeEDeadthMod = 17;
 
     public static final int hitBoxE = 15;
-    public static final int hitBoxERadius = 15;
+    public static final int hitBoxERadius = 25;
 
     //pham vi Kondoria se duoi theo player.
     public static final int radiusKon = 5;

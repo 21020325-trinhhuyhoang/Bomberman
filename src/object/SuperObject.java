@@ -61,4 +61,14 @@ public class SuperObject {
         return false;
     }
 
+    public boolean checkExplo(GamePanel gp) {
+        int _x = this.worldX / gp.tileSize;
+        int _y = this.worldY / gp.tileSize;
+        if (gp.tileM.mapExplosion[_x][_y] > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

@@ -232,6 +232,10 @@ public class Toxic extends Enemy {
 
         //center
         gp.tileM.mapToxic[_x][_y]++;
+        if (gp.tileM.mapBombs[_x][_y] != 0) {
+            int bomb = gp.tileM.mapBombs[_x][_y] - Constants.bombsCode;
+            gp.player.arrBombs[bomb].time = 1;
+        }
         ExToxic newToxic = new ExToxic(this.worldX, this.worldY, Constants.timeExplosion, 0);
         addToxic(newToxic, listToxic);
 
@@ -245,6 +249,11 @@ public class Toxic extends Enemy {
 
             if (gp.tileM.mapTileNum[_x - i][_y] == 2) {
                 break;
+            }
+
+            if (gp.tileM.mapBombs[_x - i][_y] != 0) {
+                int bomb = gp.tileM.mapBombs[_x - i][_y] - Constants.bombsCode;
+                gp.player.arrBombs[bomb].time = 1;
             }
 
             if (gp.tileM.mapToxic[_x - i][_y] > 0) break;
@@ -273,6 +282,11 @@ public class Toxic extends Enemy {
                 break;
             }
 
+            if (gp.tileM.mapBombs[_x + i][_y] != 0) {
+                int bomb = gp.tileM.mapBombs[_x + i][_y] - Constants.bombsCode;
+                gp.player.arrBombs[bomb].time = 1;
+            }
+
             if (gp.tileM.mapToxic[_x + i][_y] > 0) break;
             gp.tileM.mapToxic[_x + i][_y]++;
 
@@ -298,6 +312,11 @@ public class Toxic extends Enemy {
                 break;
             }
 
+            if (gp.tileM.mapBombs[_x][_y - i] != 0) {
+                int bomb = gp.tileM.mapBombs[_x][_y - i] - Constants.bombsCode;
+                gp.player.arrBombs[bomb].time = 1;
+            }
+
             if (gp.tileM.mapToxic[_x][_y - i] > 0) break;
             gp.tileM.mapToxic[_x][_y - i]++;
 
@@ -321,6 +340,11 @@ public class Toxic extends Enemy {
             }
             if (gp.tileM.mapTileNum[_x][_y + i] == 2) {
                 break;
+            }
+
+            if (gp.tileM.mapBombs[_x][_y + i] != 0) {
+                int bomb = gp.tileM.mapBombs[_x][_y + i] - Constants.bombsCode;
+                gp.player.arrBombs[bomb].time = 1;
             }
 
             if (gp.tileM.mapToxic[_x][_y + i] > 0) break;
