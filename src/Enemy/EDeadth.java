@@ -67,6 +67,10 @@ public class EDeadth {
                 if (this.type == 5) {
                     g2.drawImage(se.image[5][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
                 }
+                //doll
+                if (this.type == 6) {
+                    g2.drawImage(se.image[6][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
                 return;
             }
 

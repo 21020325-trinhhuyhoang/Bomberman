@@ -167,6 +167,28 @@ public class SuperEnemy {
             //right3
             image[5][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/toxic_right3.png"));
 
+            //doll
+            //deadth
+            image[6][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_dead.png"));
+
+            //left1
+            image[6][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_left1.png"));
+
+            //left2
+            image[6][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_left2.png"));
+
+            //left3
+            image[6][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_left3.png"));
+
+            //right1
+            image[6][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_right1.png"));
+
+            //right2
+            image[6][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_right2.png"));
+
+            //right3
+            image[6][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_right3.png"));
+
         } catch (IOException e) {
             System.out.println("Khong load dc anh enemy!");
             e.printStackTrace();
@@ -220,6 +242,9 @@ public class SuperEnemy {
                         gp.listEnemy.add(newEnemy);
                     } else if (line.charAt(i) == 'Q') {
                         newEnemy = new Toxic(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    } else if (line.charAt(i) == 'y') {
+                        newEnemy = new Doll(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 

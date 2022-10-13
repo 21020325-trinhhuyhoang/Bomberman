@@ -26,6 +26,7 @@ import Enemy.Kondoria;
 import Enemy.Pontan;
 import Enemy.Minvo;
 import Enemy.Toxic;
+import Enemy.Doll;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -73,6 +74,9 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
     public int GameState = Constants.playing;
 
+    //thong so player
+    public int maxFire = 1, maxBomb = 1;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -80,7 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
-        this.player = new Player(this, keyH);
+        this.player = new Player(this, keyH, maxFire, maxBomb);
 
         //de phong truong hop bi loi
         TotalEnemy = 0;
@@ -104,8 +108,8 @@ public class GamePanel extends JPanel implements Runnable {
         superToxic = new SuperToxic();
         superToxic.loadImage();
 
-
         cCheck = new ConllisionChecker(this);
+        this.player = new Player(this, keyH, maxFire, maxBomb);
 
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
@@ -127,7 +131,8 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void reset() {
         GameState = Constants.playing;
-        this.player = new Player(this, keyH);
+
+        this.player = new Player(this, keyH, maxFire, maxBomb);
 
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
@@ -176,8 +181,9 @@ public class GamePanel extends JPanel implements Runnable {
                     reset();
                 }
 
+                //man tiep theo
                 if (GameState == Constants.nextLevel) {
-                    level ++;
+                    makeToNextLevel();
                     reset();
                 }
 
@@ -197,6 +203,12 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+    }
+
+    public void makeToNextLevel() {
+        level ++;
+        maxFire = player.fire;
+        maxBomb = player.maxBombs;
     }
 
     public void Playing() {
@@ -347,6 +359,9 @@ public class GamePanel extends JPanel implements Runnable {
                             type = 5;
                             Toxic newToxic = (Toxic) tmp;
                             newToxic.ToxicExplosion(listToxic);
+                        }
+                        if (tmp instanceof Doll) {
+                            type = 6;
                         }
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
