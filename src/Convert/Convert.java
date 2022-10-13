@@ -46,4 +46,12 @@ public class Convert {
 
         return arr;
     }
+
+    /**
+     * chuyen 1 so sang ten file.
+     */
+    public static String nameLevel(int lvl) {
+        String res = "/levels/lvl" + lvl + ".txt";
+        return res;
+    }
 }

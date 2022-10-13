@@ -102,13 +102,13 @@ public class Player extends Entity {
         if (checkDeadth() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("enemydeadth");
+            Sound.play("it-me-cuoc-oi-bomman");
         }
 
         if (checkToxic() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("enemydeadth");
+            Sound.play("it-me-cuoc-oi-bomman");
         }
 
         if (alive == false) return;

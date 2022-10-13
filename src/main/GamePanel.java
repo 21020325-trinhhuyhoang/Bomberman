@@ -11,14 +11,12 @@ import Bombs.SuperToxic;
 import Bombs.ExToxic;
 import BrickExplo.BrickExplo;
 import BrickExplo.SuperBrickExplo;
+import Convert.Convert;
 import Enemy.Enemy;
 import Enemy.SuperEnemy;
 import Tile.TileManager;
 import entity.Player;
-import object.PowerUp_Bombs;
-import object.PowerUp_Flames;
-import object.PowerUp_Speed;
-import object.SuperObject;
+import object.*;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
 import Enemy.Balloom;
@@ -86,14 +84,15 @@ public class GamePanel extends JPanel implements Runnable {
 
         //de phong truong hop bi loi
         TotalEnemy = 0;
-        tileM = new TileManager(this, Constants.nameFile);
+        String name = Convert.nameLevel(level);
+        tileM = new TileManager(this, name);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
-        se = new SuperEnemy(this, Constants.nameFile);
+        se = new SuperEnemy(this, name);
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
@@ -109,14 +108,15 @@ public class GamePanel extends JPanel implements Runnable {
         cCheck = new ConllisionChecker(this);
 
         TotalEnemy = 0;
-        tileM = new TileManager(this, Constants.nameFile);
+        String name = Convert.nameLevel(level);
+        tileM = new TileManager(this, name);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
-        se = new SuperEnemy(this, Constants.nameFile);
+        se = new SuperEnemy(this, name);
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
@@ -130,14 +130,15 @@ public class GamePanel extends JPanel implements Runnable {
         this.player = new Player(this, keyH);
 
         TotalEnemy = 0;
-        tileM = new TileManager(this, Constants.nameFile);
+        String name = Convert.nameLevel(level);
+        tileM = new TileManager(this, name);
         aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
         listBrickExplo = new ArrayList<>();
         listEnemy = new ArrayList<>();
-        se = new SuperEnemy(this, Constants.nameFile);
+        se = new SuperEnemy(this, name);
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
@@ -172,6 +173,11 @@ public class GamePanel extends JPanel implements Runnable {
                 }
 
                 if (GameState == Constants.retry) {
+                    reset();
+                }
+
+                if (GameState == Constants.nextLevel) {
+                    level ++;
                     reset();
                 }
 
@@ -317,6 +323,7 @@ public class GamePanel extends JPanel implements Runnable {
                     tmp.hitPoint--;
 
                     if (tmp.hitPoint <= 0) {
+                        TotalEnemy --;
                         if (tmp instanceof Oneal) {
                             type = 1;
                         }
@@ -366,6 +373,16 @@ public class GamePanel extends JPanel implements Runnable {
     public void updateObject() {
         for (int i = 0; i < listPowerUp.size(); ++i) {
             SuperObject tmp = listPowerUp.get(i);
+
+            if (tmp instanceof Door) {
+                boolean collision = tmp.check(this);
+
+                if (collision == true && TotalEnemy == 0) {
+                    GameState = Constants.nextLevel;
+                    System.out.println("Qua man");
+                }
+                continue;
+            }
 
             if (tmp.worldX > 0) {
 

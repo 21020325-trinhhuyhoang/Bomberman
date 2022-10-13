@@ -170,6 +170,13 @@ public class TileManager {
                         mapEConllision[col][row] = 1;
                         mapPowerUp[col][row] = 2;
                     }
+                    //door
+                    else if (line.charAt(i) == 'A') {
+                        mapTileNum[col][row] = 2;
+                        mapConllision[col][row] = 1;
+                        mapEConllision[col][row] = 1;
+                        mapPowerUp[col][row] = 3;
+                    }
 
                     col++;
                 }

@@ -7,6 +7,7 @@ import main.GamePanel;
 import entity.Player;
 import main.Constants;
 import main.Sound;
+import object.Door;
 import object.PowerUp_Bombs;
 import object.PowerUp_Flames;
 import object.PowerUp_Speed;
@@ -303,6 +304,14 @@ public class Bombs {
         //speed
         if (gp.tileM.mapPowerUp[x][y] == 2) {
             PowerUp_Speed tmp = new PowerUp_Speed(x * gp.tileSize, y * gp.tileSize);
+
+            gp.tileM.mapPowerUp[x][y] = -1;
+            gp.listPowerUp.add(tmp);
+        }
+
+        //door
+        if (gp.tileM.mapPowerUp[x][y] == 3) {
+            Door tmp = new Door(x * gp.tileSize, y * gp.tileSize);
 
             gp.tileM.mapPowerUp[x][y] = -1;
             gp.listPowerUp.add(tmp);
