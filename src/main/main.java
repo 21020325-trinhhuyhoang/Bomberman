@@ -19,7 +19,7 @@ public class main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         //Sound.loop("soundtrack1");
-        Sound.loop("huan");
+        Sound.loop("mono (1) (online-audio-converter.com)");
         gamePanel.setupGame();
         gamePanel.startGameThread();
     }
