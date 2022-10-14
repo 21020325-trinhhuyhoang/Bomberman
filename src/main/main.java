@@ -18,8 +18,8 @@ public class main {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        //Sound.loop("soundtrack1");
-        Sound.loop("mono (1) (online-audio-converter.com)");
+        Sound.loop("soundtrack1");
+        //Sound.loop("mono (1) (online-audio-converter.com)");
         gamePanel.setupGame();
         gamePanel.startGameThread();
     }

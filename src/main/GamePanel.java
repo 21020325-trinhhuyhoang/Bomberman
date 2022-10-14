@@ -31,7 +31,7 @@ import Enemy.Doll;
 public class GamePanel extends JPanel implements Runnable {
 
     //THONG SO GAME
-    public int level = 1;
+    public int level = 7;
     public int TotalEnemy;
     public int live = 3;
 
