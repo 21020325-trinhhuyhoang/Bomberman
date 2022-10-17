@@ -103,13 +103,13 @@ public class Player extends Entity {
         if (checkDeadth() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("Am-thanh-ai-oi-si-ma-tiktok-www_tiengdong_com");
+            Sound.play("EnemyDeadth");
         }
 
         if (checkToxic() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("Am-thanh-ai-oi-si-ma-tiktok-www_tiengdong_com");
+            Sound.play("EnemyDeadth");
         }
 
         if (alive == false) return;

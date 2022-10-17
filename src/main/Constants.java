@@ -39,4 +39,5 @@ public class Constants {
     public static final int playing = 0;
     public static final int retry = 1;
     public static final int nextLevel = 2;
+    public static final int pause = 3;
 }

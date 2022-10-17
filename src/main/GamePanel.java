@@ -17,6 +17,7 @@ import Enemy.SuperEnemy;
 import Tile.TileManager;
 import entity.Player;
 import object.*;
+import main.UI;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
 import Enemy.Balloom;
@@ -27,6 +28,7 @@ import Enemy.Pontan;
 import Enemy.Minvo;
 import Enemy.Toxic;
 import Enemy.Doll;
+
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -54,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int fps = 60;
 
     Thread gameThread;
-    KeyHandler keyH;
+    KeyHandler keyH = new KeyHandler(this);
     public ConllisionChecker cCheck;
 
     public Player player;
@@ -77,12 +79,15 @@ public class GamePanel extends JPanel implements Runnable {
     //thong so player
     public int maxFire = 1, maxBomb = 1;
 
+    //HIEN THI TREN MAN HINH
+    public UI myUI = new UI(this);
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        keyH = new KeyHandler();
+        keyH = new KeyHandler(this);
         this.addKeyListener(keyH);
         this.player = new Player(this, keyH, maxFire, maxBomb);
 
@@ -172,20 +177,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             //update va ve lai trang thai cua game
             if (delta >= 1) {
-                //dang choi
-                if (GameState == Constants.playing || GameState == Constants.retry) {
-                    Playing();
-                }
-
-                if (GameState == Constants.retry) {
-                    reset();
-                }
-
-                //man tiep theo
-                if (GameState == Constants.nextLevel) {
-                    makeToNextLevel();
-                    reset();
-                }
+                myUI.Render();
 
                 delta--;
                 drawCount++;
@@ -213,6 +205,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void Playing() {
         update();
+        repaint();
+    }
+
+    public void Pause() {
         repaint();
     }
 
@@ -468,6 +464,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Bomberman
         player.draw(g2);
+
+        if (GameState == Constants.pause) {
+            myUI.drawPauseScreen(g2);
+        }
 
         g2.dispose();
     }

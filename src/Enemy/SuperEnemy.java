@@ -3,8 +3,10 @@ package Enemy;
 import Convert.Convert;
 import main.Constants;
 import main.GamePanel;
+import sun.plugin2.util.ColorUtil;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +31,27 @@ public class SuperEnemy {
             //balloom
             //deadth
             image[0][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/balloom_dead.png"));
+
+            /*for (int i = 0; i < image[0][0].getWidth(); ++i) {
+                for (int j = 0; j < image[0][0].getHeight(); ++j) {
+                    int pixel = image[0][0].getRGB(i,j);
+                    int alpha = (pixel >> 24) & 0xff;
+                    int red = (pixel >> 16) & 0xff;
+                    int green = (pixel >> 8) & 0xff;
+                    int blue = (pixel >> 0) & 0xff;
+
+
+                    if (alpha != 0) {
+                        int r = red;
+                        int g = green;
+                        int b = blue;
+                        int a = 100;
+                        int col = (a << 24) | (r << 16) | (g << 8) | b;
+
+                        image[0][0].setRGB(i, j, col);
+                    }
+                }
+            }*/
 
             //left1
             image[0][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/balloom_left1.png"));
