@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int GameState = Constants.playing;
 
     //thong so player
-    public int maxFire = 1, maxBomb = 1;
+    public int maxFire = 1, maxBomb = 1, speed = 3;
 
     //HIEN THI TREN MAN HINH
     public UI myUI = new UI(this);
@@ -89,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         keyH = new KeyHandler(this);
         this.addKeyListener(keyH);
-        this.player = new Player(this, keyH, maxFire, maxBomb);
+        this.player = new Player(this, keyH, maxFire, maxBomb, speed);
 
         //de phong truong hop bi loi
         TotalEnemy = 0;
@@ -114,7 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
         superToxic.loadImage();
 
         cCheck = new ConllisionChecker(this);
-        this.player = new Player(this, keyH, maxFire, maxBomb);
+        this.player = new Player(this, keyH, maxFire, maxBomb, speed);
 
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
@@ -137,7 +137,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void reset() {
         GameState = Constants.playing;
 
-        this.player = new Player(this, keyH, maxFire, maxBomb);
+        this.player = new Player(this, keyH, maxFire, maxBomb, speed);
 
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
@@ -201,6 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
         level ++;
         maxFire = player.fire;
         maxBomb = player.maxBombs;
+        speed = player.speed;
     }
 
     public void Playing() {

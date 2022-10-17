@@ -28,7 +28,7 @@ public class Player extends Entity {
     public int hitPoint;
     public boolean alive;
 
-    public Player(GamePanel gp, KeyHandler keyH, int fire, int maxBombs) {
+    public Player(GamePanel gp, KeyHandler keyH, int fire, int maxBombs, int speed) {
         this.gp = gp;
         this.keyH = keyH;
 
@@ -37,14 +37,14 @@ public class Player extends Entity {
 
         solidArea = new Rectangle(12, 15, 24, 25);
 
-        setDefaultValues(fire, maxBombs);
+        setDefaultValues(fire, maxBombs, speed);
         getPlayerImage();
     }
 
-    public void setDefaultValues(int fire, int maxBombs) {
+    public void setDefaultValues(int fire, int maxBombs, int speed) {
         worldX = 1 * gp.tileSize;
         worldY = 1 * gp.tileSize;
-        speed = 3;
+        this.speed = speed;
         direction = "down";
         this.maxBombs = maxBombs;
         this.fire = fire;
