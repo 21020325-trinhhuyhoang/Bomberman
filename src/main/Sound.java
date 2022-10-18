@@ -3,50 +3,40 @@ package main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.net.URL;
 
 public class Sound {
-    public static void play(String sound) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
-                    clip.open(inputStream);
-                    clip.start();
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        }).start();
+    Clip clip;
+    URL soundURL[] = new URL[50];
+
+    public Sound() {
+        soundURL[0] = getClass().getResource("/resouces/sound/dropbomb.wav");
+        soundURL[1] = getClass().getResource("/resouces/sound/enemydeadth.wav");
+        soundURL[2] = getClass().getResource("/resouces/sound/explosion1.wav");
+        soundURL[3] = getClass().getResource("/resouces/sound/item.wav");
+        soundURL[4] = getClass().getResource("/resouces/sound/soundtrack1.wav");
     }
 
-    public static void loop(String sound) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
-                    clip.open(inputStream);
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        }).start();
+    public void setFile(int i) {
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+        } catch(Exception e) {
+
+        }
     }
 
-    public static void stop(String sound) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
-                    clip.open(inputStream);
-                    clip.stop();
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        }).start();
+    public void play() {
+        clip.start();
     }
+
+    public void loop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void stop() {
+        clip.stop();
+    }
+
 }

@@ -17,6 +17,7 @@ import java.util.List;
 public class SuperEnemy {
     public BufferedImage[][] image;
     public GamePanel gp;
+    public BufferedImage imgMenu;
 
     public SuperEnemy(GamePanel gp, String mapName) {
         image = new BufferedImage[20][30];
@@ -28,6 +29,9 @@ public class SuperEnemy {
 
     public void loadImage() {
         try {
+            //menu
+            imgMenu = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/menu.png"));
+
             //balloom
             //deadth
             image[0][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/balloom_dead.png"));

@@ -32,10 +32,14 @@ import Enemy.Doll;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    //LENH DIEU CHINH MENU
+    public int command = 1;
+
     //THONG SO GAME
     public int level = 1;
     public int TotalEnemy;
     public int live = 3;
+    public boolean music = true;
 
     //SCREEN SETTING
     public final int originalTileSize = 16; // 16x16 tile
@@ -45,6 +49,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenRow = 13; //12
     public int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public int screenHeight = tileSize * maxScreenRow; // 576 pixels
+
+    Sound sound = new Sound();
 
     //World setting (hang va cot cua level)
     public int maxWorldCol = 15;
@@ -74,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperEDeadth sed = new SuperEDeadth(this);
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
-    public int GameState = Constants.playing;
+    public int GameState = Constants.menu;
 
     //thong so player
     public int maxFire = 1, maxBomb = 1, speed = 3;
@@ -108,6 +114,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        playMusic(4);
+
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
         superToxic = new SuperToxic();
@@ -210,6 +218,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void Pause() {
+        repaint();
+    }
+
+    public void Menu() {
         repaint();
     }
 
@@ -363,13 +375,14 @@ public class GamePanel extends JPanel implements Runnable {
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
 
-                        Sound.play("enemydeadth");
+                        if (music == true) playSE(1);
                     }
                 }
                 else if (checkColPlayer == true && player.alive == true) {
                     player.alive = false;
                     player.timeDeadth = Constants.timeDeadth;
-                    Sound.play("enemydeadth");
+                    //if (music == true) Sound.play("enemydeadth");
+                    if (music == true) playSE(1);
                 }
 
                 if (tmp.hitPoint > 0) {
@@ -391,7 +404,6 @@ public class GamePanel extends JPanel implements Runnable {
 
                 if (collision == true && TotalEnemy == 0) {
                     GameState = Constants.nextLevel;
-                    System.out.println("Qua man");
                 }
                 continue;
             }
@@ -402,7 +414,8 @@ public class GamePanel extends JPanel implements Runnable {
                 boolean collision = tmp.check(this);
 
                 if (collision == true) {
-                    Sound.play("item");
+                    //if (music == true) Sound.play("item");
+                    if (music == true) playSE(3);
                     //PW Bombs
                     if (tmp instanceof PowerUp_Bombs) {
                         player.maxBombs++;
@@ -468,6 +481,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (GameState == Constants.pause) {
             myUI.drawPauseScreen(g2);
+        }
+
+        if (GameState == Constants.menu) {
+            myUI.drawMenu(g2, se);
         }
 
         g2.dispose();
@@ -572,4 +589,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public void playMusic(int i) {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public void playSE(int i) {
+        sound.setFile(i);
+        sound.play();
+    }
 }

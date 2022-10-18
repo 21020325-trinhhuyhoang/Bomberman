@@ -103,13 +103,15 @@ public class Player extends Entity {
         if (checkDeadth() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("EnemyDeadth");
+            //if (gp.music == true) Sound.play("EnemyDeadth");
+            if (gp.music == true) gp.playSE(1);
         }
 
         if (checkToxic() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            Sound.play("EnemyDeadth");
+            //if (gp.music == true) Sound.play("EnemyDeadth");
+            if (gp.music == true) gp.playSE(1);
         }
 
         if (alive == false) return;
@@ -176,7 +178,7 @@ public class Player extends Entity {
 
         if (keyH.spaceTyped == true) {
             if (totalBombs < maxBombs) {
-                Sound.play("dropbomb");
+                //if (gp.music == true) Sound.play("dropbomb");
                 dropBomb();
             }
         }
