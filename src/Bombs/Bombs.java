@@ -92,8 +92,8 @@ public class Bombs {
         //bom no
         if (this.time <= 0) {
             player.totalBombs--;
-            //if (gp.music == true) Sound.play("explosion1");
-            if (gp.music == true) gp.playSE(2);
+            if (gp.music == true) gp.sound.play("explosion1");
+            //if (gp.music == true) gp.playSE(2);
             BombExplosion(listExplosion, player);
         }
     }

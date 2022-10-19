@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-    Sound sound = new Sound();
+    public Sound sound = new Sound(this);
 
     //World setting (hang va cot cua level)
     public int maxWorldCol = 15;
@@ -114,7 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        playMusic(4);
+        sound.loop("soundtrack1");
 
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
@@ -374,15 +374,15 @@ public class GamePanel extends JPanel implements Runnable {
                         }
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
-
-                        if (music == true) playSE(1);
+                        if (music == true) sound.play("enemydeadth");
+                        //if (music == true) playSE(1);
                     }
                 }
                 else if (checkColPlayer == true && player.alive == true) {
                     player.alive = false;
                     player.timeDeadth = Constants.timeDeadth;
-                    //if (music == true) Sound.play("enemydeadth");
-                    if (music == true) playSE(1);
+                    if (music == true) sound.play("enemydeadth");
+                    //if (music == true) playSE(1);
                 }
 
                 if (tmp.hitPoint > 0) {
@@ -414,8 +414,8 @@ public class GamePanel extends JPanel implements Runnable {
                 boolean collision = tmp.check(this);
 
                 if (collision == true) {
-                    //if (music == true) Sound.play("item");
-                    if (music == true) playSE(3);
+                    if (music == true) sound.play("item");
+                    //if (music == true) playSE(3);
                     //PW Bombs
                     if (tmp instanceof PowerUp_Bombs) {
                         player.maxBombs++;
@@ -587,20 +587,5 @@ public class GamePanel extends JPanel implements Runnable {
                 tmp.draw(g2, se, sed);
             }
         }
-    }
-
-    public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
-    }
-
-    public void stopMusic() {
-        sound.stop();
-    }
-
-    public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
     }
 }

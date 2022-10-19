@@ -104,13 +104,7 @@ public class KeyHandler implements KeyListener {
                 }
                 //tat/bat am thanh (Music)
                 else if (gp.command == 3) {
-                    if (gp.music == true) {
-                        gp.stopMusic();
-                        gp.music = false;
-                    } else {
-                        gp.playMusic(4);
-                        gp.music = true;
-                    }
+                    gp.music = !(gp.music);
                 }
                 //thoat game (EXIT)
                 else {
@@ -165,6 +159,4 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
-
-
 }

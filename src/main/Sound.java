@@ -3,40 +3,53 @@ package main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.net.URL;
+import main.GamePanel;
 
 public class Sound {
-    Clip clip;
-    URL soundURL[] = new URL[50];
+    public GamePanel gp;
 
-    public Sound() {
-        soundURL[0] = getClass().getResource("/resouces/sound/dropbomb.wav");
-        soundURL[1] = getClass().getResource("/resouces/sound/enemydeadth.wav");
-        soundURL[2] = getClass().getResource("/resouces/sound/explosion1.wav");
-        soundURL[3] = getClass().getResource("/resouces/sound/item.wav");
-        soundURL[4] = getClass().getResource("/resouces/sound/soundtrack1.wav");
+    public Sound(GamePanel gp) {
+        this.gp = gp;
     }
 
-    public void setFile(int i) {
-        try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-        } catch(Exception e) {
-
-        }
+    public void play(String sound) {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
     }
 
-    public void play() {
-        clip.start();
-    }
+    public void loop(String sound) {
 
-    public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
+        new Thread(new Runnable() {
 
-    public void stop() {
-        clip.stop();
+            public void run() {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
+                    clip.open(inputStream);
+                    while (true) {
+                        Thread.sleep(500);
+                        if (gp.music == false) {
+                            clip.stop();
+                            Thread.interrupted();
+                        } else {
+                            clip.loop(Clip.LOOP_CONTINUOUSLY);
+                            Thread.interrupted();
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
     }
-
 }
