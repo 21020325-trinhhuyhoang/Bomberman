@@ -34,11 +34,13 @@ public class KeyHandler implements KeyListener {
 
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.command --;
-                if (gp.command == 0) gp.command = 2;
+                if (gp.command == 0) gp.command = 3;
+                if (gp.music == true) gp.sound.play("button");
             }
             if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
                 gp.command ++;
                 if (gp.command == 4) gp.command = 1;
+                if (gp.music == true) gp.sound.play("button");
             }
 
             if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER) {
@@ -81,11 +83,13 @@ public class KeyHandler implements KeyListener {
 
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.command --;
-                if (gp.command == 0) gp.command = 3;
+                if (gp.command == 0) gp.command = 4;
+                if (gp.music == true) gp.sound.play("button");
             }
             if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
                 gp.command ++;
                 if (gp.command == 5) gp.command = 1;
+                if (gp.music == true) gp.sound.play("button");
             }
 
             if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER) {
