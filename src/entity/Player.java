@@ -100,10 +100,17 @@ public class Player extends Entity {
         goRight = false;
         goLeft = false;
 
+        gp.timeCount--;
+        if (gp.timeCount <= 0) {
+            gp.time--;
+            gp.timeCount = 60;
+        }
+
         if (checkDeadth() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
             if (gp.music == true) gp.sound.play("enemydeadth");
+            gp.live --;
             //if (gp.music == true) gp.playSE(1);
         }
 
@@ -111,6 +118,7 @@ public class Player extends Entity {
             alive = false;
             timeDeadth = Constants.timeDeadth;
             if (gp.music == true) gp.sound.play("enemydeadth");
+            gp.live --;
             //if (gp.music == true) gp.playSE(1);
         }
 

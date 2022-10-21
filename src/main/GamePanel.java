@@ -40,6 +40,10 @@ public class GamePanel extends JPanel implements Runnable {
     public int TotalEnemy;
     public int live = 3;
     public boolean music = true;
+    public int time;
+    public int timeCount;
+    public int score;
+    public int newscore = 0;
 
     //SCREEN SETTING
     public final int originalTileSize = 16; // 16x16 tile
@@ -115,6 +119,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         sound.loop("soundtrack1");
+        time = Constants.maxTime;
+        timeCount = 0;
+        score = newscore;
 
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
@@ -144,6 +151,9 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void reset() {
         GameState = Constants.playing;
+        time = Constants.maxTime;
+        timeCount = 0;
+        score = newscore;
 
         this.player = new Player(this, keyH, maxFire, maxBomb, speed);
 
@@ -210,6 +220,7 @@ public class GamePanel extends JPanel implements Runnable {
         maxFire = player.fire;
         maxBomb = player.maxBombs;
         speed = player.speed;
+        newscore = score;
     }
 
     public void Playing() {
@@ -345,6 +356,7 @@ public class GamePanel extends JPanel implements Runnable {
 
                     if (tmp.hitPoint <= 0) {
                         TotalEnemy --;
+                        score += 100;
                         if (tmp instanceof Oneal) {
                             type = 1;
                         }
@@ -479,6 +491,10 @@ public class GamePanel extends JPanel implements Runnable {
         //Bomberman
         player.draw(g2);
 
+        //Draw live
+        drawBox(g2);
+
+
         if (GameState == Constants.pause) {
             myUI.drawPauseScreen(g2);
         }
@@ -488,6 +504,31 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         g2.dispose();
+    }
+
+    /**
+     * ve hop live.
+     */
+    void drawBox(Graphics2D g2) {
+        g2.setColor(new Color(161, 146, 146, 171));
+        g2.drawRoundRect(0,1,tileSize * 11,tileSize + tileSize * 1 / 2,15,15);
+        g2.setColor(new Color(0,0,0,100));
+        g2.drawImage(player.down,2,13,tileSize,tileSize,null);
+
+        g2.setFont(myUI.maruMonica);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 55F));
+        g2.setColor(Color.WHITE);
+        String text = " x " + live;
+        g2.drawString(text, 2 + tileSize - tileSize / 4, 55);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+        text = "TIME: " + time;
+        g2.drawString(text, 2 + tileSize * 3, 55 );
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+        text = "SCORE: " + score;
+        g2.drawString(text, 2 + tileSize * 3 * 2 + 20, 55 );
     }
 
     /**
