@@ -27,6 +27,7 @@ public class Constants {
     public static final int radiusKon = 5;
 
     public static final int radiusMinvo = 7;
+    public static final int radiusFBrick = 2;
 
     public static final int timePontanChange = 6;
     public static final int Pontan2Code = 12092003;

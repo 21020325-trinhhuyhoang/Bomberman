@@ -43,7 +43,7 @@ public class KeyHandler implements KeyListener {
                 if (gp.music == true) gp.sound.play("button");
             }
 
-            if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER) {
+            if (code == KeyEvent.VK_ENTER) {
                 //tiep tuc game (Continue)
                 if (gp.command == 1) {
                     gp.GameState = Constants.playing;
@@ -92,7 +92,7 @@ public class KeyHandler implements KeyListener {
                 if (gp.music == true) gp.sound.play("button");
             }
 
-            if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_ENTER) {
+            if (code == KeyEvent.VK_ENTER) {
                 //tiep tuc game (BACK)
                 if (gp.command == 1) {
                     gp.GameState = Constants.playing;

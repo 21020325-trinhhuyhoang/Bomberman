@@ -71,6 +71,10 @@ public class EDeadth {
                 if (this.type == 6) {
                     g2.drawImage(se.image[6][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
                 }
+                //fbrick
+                if (this.type == 7) {
+                    g2.drawImage(se.image[7][0], screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
                 return;
             }
 

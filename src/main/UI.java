@@ -117,7 +117,7 @@ public class UI {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
         g2.setColor(Color.WHITE);
-        text = "Continue";
+        text = "Start";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
         int y = gp.screenHeight / 2 + 3 * gp.tileSize + gp.tileSize / 4;
         g2.drawString(text, x, y);
@@ -126,7 +126,7 @@ public class UI {
             g2.drawString(">", x - gp.tileSize, y);
         }
 
-        text = "New Game";
+        text = "Test Monster";
         y = y + gp.tileSize * 4 / 3;
         g2.drawString(text, x, y);
 

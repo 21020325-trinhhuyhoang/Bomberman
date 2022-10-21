@@ -28,6 +28,7 @@ import Enemy.Pontan;
 import Enemy.Minvo;
 import Enemy.Toxic;
 import Enemy.Doll;
+import Enemy.FBrick;
 
 
 public class GamePanel extends JPanel implements Runnable {
@@ -384,6 +385,9 @@ public class GamePanel extends JPanel implements Runnable {
                         if (tmp instanceof Doll) {
                             type = 6;
                         }
+                        if (tmp instanceof FBrick) {
+                            type = 7;
+                        }
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
                         if (music == true) sound.play("enemydeadth");
@@ -394,6 +398,7 @@ public class GamePanel extends JPanel implements Runnable {
                     player.alive = false;
                     player.timeDeadth = Constants.timeDeadth;
                     if (music == true) sound.play("enemydeadth");
+                    live --;
                     //if (music == true) playSE(1);
                 }
 

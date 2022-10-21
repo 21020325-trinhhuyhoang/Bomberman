@@ -216,6 +216,25 @@ public class SuperEnemy {
             //right3
             image[6][6] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/doll_right3.png"));
 
+            //FakeBrick
+            //deadth
+            image[7][0] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick_deadth.png"));
+
+            //left1
+            image[7][1] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick_left1.png"));
+
+            //left2
+            image[7][2] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick_left2.png"));
+
+            //right1
+            image[7][3] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick_right1.png"));
+
+            //right2
+            image[7][4] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick_right2.png"));
+
+            //faking
+            image[7][5] = ImageIO.read(getClass().getResourceAsStream("/resouces/sprites/brick.png"));
+
         } catch (IOException e) {
             System.out.println("Khong load dc anh enemy!");
             e.printStackTrace();
@@ -272,6 +291,9 @@ public class SuperEnemy {
                         gp.listEnemy.add(newEnemy);
                     } else if (line.charAt(i) == 'y') {
                         newEnemy = new Doll(col * gp.tileSize, row * gp.tileSize, gp);
+                        gp.listEnemy.add(newEnemy);
+                    } else if (line.charAt(i) == 'u') {
+                        newEnemy = new FBrick(col * gp.tileSize, row * gp.tileSize, gp);
                         gp.listEnemy.add(newEnemy);
                     }
 
