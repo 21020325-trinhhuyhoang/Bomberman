@@ -103,10 +103,13 @@ public class UI {
     public void drawMenu(Graphics2D g2, SuperEnemy se) {
         g2.drawImage(se.imgMenu, 0, 0, gp.screenWidth, gp.screenHeight, null);
         g2.setFont(maruMonica);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
+        String text = "v1.0.0";
+        g2.drawString(text,4,gp.screenHeight-10);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
         g2.setColor(Color.WHITE);
-        String text = "Continue";
+        text = "Continue";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
         int y = gp.screenHeight / 2 + 3 * gp.tileSize + gp.tileSize / 4;
         g2.drawString(text, x, y);
