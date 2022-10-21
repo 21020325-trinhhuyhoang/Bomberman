@@ -510,8 +510,14 @@ public class GamePanel extends JPanel implements Runnable {
      * ve hop live.
      */
     void drawBox(Graphics2D g2) {
-        g2.setColor(new Color(161, 146, 146, 171));
+        g2.setColor(new Color(250, 250, 250, 150));
         g2.drawRoundRect(0,1,tileSize * 11,tileSize + tileSize * 1 / 2,15,15);
+        g2.drawRoundRect(3,4,tileSize * 11 - 6,tileSize + tileSize * 1 / 2 - 6,15,15);
+        g2.fillRoundRect(0,1,tileSize * 11,tileSize + tileSize * 1 / 2,15,15);
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRoundRect(3,4,tileSize * 11 - 6,tileSize + tileSize * 1 / 2 - 6,15,15);
+
         g2.setColor(new Color(0,0,0,100));
         g2.drawImage(player.down,2,13,tileSize,tileSize,null);
 
