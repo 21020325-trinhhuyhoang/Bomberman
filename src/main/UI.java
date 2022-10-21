@@ -52,11 +52,19 @@ public class UI {
     }
 
     public void drawPauseScreen(Graphics2D g2) {
-        g2.setFont(maruMonica);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
 
         g2.setColor(new Color(9, 9, 9, 150));
         g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        g2.setColor(new Color(250,250,250,120));
+        g2.drawRoundRect(gp.tileSize * 4, gp.tileSize * 2,gp.tileSize * 9, gp.tileSize * 10,15,15);
+        g2.drawRoundRect(gp.tileSize * 4 + 3, gp.tileSize * 2 + 3,gp.tileSize * 9 - 6, gp.tileSize * 10 - 6,15,15);
+        g2.fillRoundRect(gp.tileSize * 4, gp.tileSize * 2,gp.tileSize * 9, gp.tileSize * 10,15,15);
+        g2.setColor(new Color(0, 0, 0, 160));
+        g2.fillRoundRect(gp.tileSize * 4 + 3, gp.tileSize * 2 + 3,gp.tileSize * 9 - 6, gp.tileSize * 10 - 6,15,15);
+
+        g2.setFont(maruMonica);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
 
         g2.setColor(Color.WHITE);
         //g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
@@ -104,7 +112,7 @@ public class UI {
         g2.drawImage(se.imgMenu, 0, 0, gp.screenWidth, gp.screenHeight, null);
         g2.setFont(maruMonica);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
-        String text = "v1.0.0";
+        String text = "v1.0.1";
         g2.drawString(text,4,gp.screenHeight-10);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
