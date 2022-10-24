@@ -30,6 +30,13 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
+        if (gp.GameState == Constants.stage) {
+            upPressed = false;
+            downPressed = false;
+            leftPressed = false;
+            rightPressed = false;
+        }
+
         if (gp.GameState == Constants.menu) {
 
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
@@ -46,11 +53,13 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 //tiep tuc game (Continue)
                 if (gp.command == 1) {
-                    gp.GameState = Constants.playing;
+                    //gp.GameState = Constants.playing;
                     upPressed = false;
                     downPressed = false;
                     leftPressed = false;
                     rightPressed = false;
+                    gp.GameState = Constants.stage;
+                    gp.timeStage = 2 * 60;
                 }
                 //Game moi (New game)
                 else if (gp.command == 2) {

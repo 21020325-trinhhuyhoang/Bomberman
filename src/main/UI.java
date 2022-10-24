@@ -26,6 +26,16 @@ public class UI {
 
     public void Render() {
 
+        //game over
+        if (gp.GameState == Constants.gameOver) {
+            gp.gameOver();
+        }
+
+        //stage
+        if (gp.GameState == Constants.stage) {
+            gp.Stage();
+        }
+
         //menu
         if (gp.GameState == Constants.menu) {
             gp.Menu();
@@ -48,6 +58,8 @@ public class UI {
         if (gp.GameState == Constants.nextLevel) {
             gp.makeToNextLevel();
             gp.reset();
+            gp.GameState = Constants.stage;
+            gp.timeStage = 2 * 60;
         }
     }
 
@@ -108,11 +120,35 @@ public class UI {
         }
     }
 
+    public void drawStage(Graphics2D g2) {
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+        g2.setFont(maruMonica);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
+        String text = "Stage " + gp.level + ": " + Constants.nameStage[gp.level];
+        int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
+        int y = gp.screenHeight / 2;
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x,y);
+    }
+
+    public void drawGameOver(Graphics2D g2) {
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+        g2.setFont(maruMonica);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
+        String text = "GAME OVER!";
+        int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
+        int y = gp.screenHeight / 2;
+        g2.setColor(Color.RED);
+        g2.drawString(text,x,y);
+    }
+
     public void drawMenu(Graphics2D g2, SuperEnemy se) {
         g2.drawImage(se.imgMenu, 0, 0, gp.screenWidth, gp.screenHeight, null);
         g2.setFont(maruMonica);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
-        String text = "v1.0.1";
+        String text = Constants.version;
         g2.drawString(text,4,gp.screenHeight-10);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));

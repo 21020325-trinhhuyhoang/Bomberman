@@ -30,7 +30,6 @@ import Enemy.Toxic;
 import Enemy.Doll;
 import Enemy.FBrick;
 
-
 public class GamePanel extends JPanel implements Runnable {
 
     //LENH DIEU CHINH MENU
@@ -45,8 +44,10 @@ public class GamePanel extends JPanel implements Runnable {
     public int timeCount;
     public int score;
     public int newscore = 0;
+    public int timeStage = 0;
+    public int timeGO = 0;
 
-    //SCREEN SETTING
+    //SCREEN SETTINGsss
     public final int originalTileSize = 16; // 16x16 tile
     public final int scale = 3;
     public final int tileSize = originalTileSize * scale; // 48x48 tile
@@ -118,11 +119,26 @@ public class GamePanel extends JPanel implements Runnable {
         listPowerUp = new ArrayList<>();
     }
 
+    /**
+     * choi lai tu dau.
+     */
+    public void resetAllData() {
+        maxBomb = 1;
+        maxFire = 1;
+        speed = 3;
+        level = 1;
+        score = 0;
+        newscore = 0;
+        live = 3;
+        reset();
+    }
+
     public void setupGame() {
         sound.loop("soundtrack1");
         time = Constants.maxTime;
         timeCount = 0;
         score = newscore;
+        player.alive = true;
 
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
@@ -155,6 +171,7 @@ public class GamePanel extends JPanel implements Runnable {
         time = Constants.maxTime;
         timeCount = 0;
         score = newscore;
+        player.alive = true;
 
         this.player = new Player(this, keyH, maxFire, maxBomb, speed);
 
@@ -207,9 +224,17 @@ public class GamePanel extends JPanel implements Runnable {
                 timer = 0;
             }
 
+            if (GameState == Constants.playing) {
+                if (player.alive == false && player.timeDeadth <= 0 && live > 0) {
+                    GameState = Constants.retry;
+                } else if (player.alive == false && player.timeDeadth <= 0 && live <= 0) {
+                    GameState = Constants.gameOver;
+                    timeGO = 2 * 60;
+                    //System.out.println(player.alive + " " + player.timeDeadth + " " + live);
+                }
+            } else
             //dung khi player chet
-            if (player.alive == false && player.timeDeadth <= 0) {
-                //this.gameThread = null;
+            if (player.alive == false && player.timeDeadth <= 0 && live > 0) {
                 GameState = Constants.retry;
             }
         }
@@ -230,6 +255,25 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void Pause() {
+        repaint();
+    }
+
+    public void Stage() {
+        timeStage --;
+        if (timeStage <= 0) {
+            timeStage = 0;
+            GameState = Constants.playing;
+        }
+        repaint();
+    }
+
+    public void gameOver() {
+        timeGO --;
+        if (timeGO <= 0) {
+            timeGO = 0;
+            resetAllData();
+            GameState = Constants.menu;
+        }
         repaint();
     }
 
@@ -506,6 +550,14 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (GameState == Constants.menu) {
             myUI.drawMenu(g2, se);
+        }
+
+        if (GameState == Constants.stage) {
+            myUI.drawStage(g2);
+        }
+
+        if (GameState == Constants.gameOver) {
+            myUI.drawGameOver(g2);
         }
 
         g2.dispose();
