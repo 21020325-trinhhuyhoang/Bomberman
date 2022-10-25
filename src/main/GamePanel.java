@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        sound.loop("soundtrack1");
+        sound.playmusic();
         time = Constants.maxTime;
         timeCount = 0;
         score = newscore;
@@ -228,6 +228,7 @@ public class GamePanel extends JPanel implements Runnable {
                 if (player.alive == false && player.timeDeadth <= 0 && live > 0) {
                     GameState = Constants.retry;
                 } else if (player.alive == false && player.timeDeadth <= 0 && live <= 0) {
+                    sound.play("gameover");
                     GameState = Constants.gameOver;
                     timeGO = 2 * 60;
                     //System.out.println(player.alive + " " + player.timeDeadth + " " + live);
@@ -441,7 +442,7 @@ public class GamePanel extends JPanel implements Runnable {
                 else if (checkColPlayer == true && player.alive == true) {
                     player.alive = false;
                     player.timeDeadth = Constants.timeDeadth;
-                    if (music == true) sound.play("enemydeadth");
+                    if (music == true) sound.play("playerdeadth");
                     live --;
                     //if (music == true) playSE(1);
                 }

@@ -109,7 +109,7 @@ public class Player extends Entity {
         if (checkDeadth() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            if (gp.music == true) gp.sound.play("enemydeadth");
+            if (gp.music == true) gp.sound.play("playerdeadth");
             gp.live --;
             //if (gp.music == true) gp.playSE(1);
         }
@@ -117,7 +117,7 @@ public class Player extends Entity {
         if (checkToxic() == true && alive == true) {
             alive = false;
             timeDeadth = Constants.timeDeadth;
-            if (gp.music == true) gp.sound.play("enemydeadth");
+            if (gp.music == true) gp.sound.play("playerdeadth");
             gp.live --;
             //if (gp.music == true) gp.playSE(1);
         }
