@@ -139,9 +139,16 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
         String text = "GAME OVER!";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
-        int y = gp.screenHeight / 2;
+        int y = gp.screenHeight / 2 - gp.tileSize;
         g2.setColor(Color.RED);
         g2.drawString(text,x,y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
+        g2.setColor(Color.WHITE);
+        text = "SCORE: " + String.valueOf(gp.score);
+        x = getXforCenteredText(text,g2) - gp.tileSize / 2;
+        y = y + gp.tileSize * 4 / 3;
+        g2.drawString(text, x, y);
     }
 
     public void drawMenu(Graphics2D g2, SuperEnemy se) {

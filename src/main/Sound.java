@@ -27,18 +27,41 @@ public class Sound {
         }).start();
     }
 
-    public void loop(String sound) {
+    public void playmusic() {
 
         new Thread(new Runnable() {
 
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrack1.wav"));
                     clip.open(inputStream);
                     while (true) {
                         Thread.sleep(500);
-                        if (gp.music == false) {
+                        if (gp.music == false || gp.GameState == 4 || gp.GameState == 6) {
+                            clip.stop();
+                            Thread.interrupted();
+                        } else {
+                            clip.loop(Clip.LOOP_CONTINUOUSLY);
+                            Thread.interrupted();
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+
+            public void run() {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrackmenu.wav"));
+                    clip.open(inputStream);
+                    while (true) {
+                        Thread.sleep(500);
+                        if (gp.music == false || gp.GameState != 4) {
                             clip.stop();
                             Thread.interrupted();
                         } else {
