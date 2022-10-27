@@ -14,7 +14,7 @@ public abstract class Enemy {
 
     //thu tu cua image duoc render
     public int time, imgNum;
-    public int hitPoint;
+    public int hitPoint, score;
     public GamePanel gp;
 
     public boolean collisionUp, collisionDown, collisionLeft, collisionRight;

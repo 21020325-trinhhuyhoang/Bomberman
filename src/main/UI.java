@@ -7,7 +7,7 @@ import Enemy.SuperEnemy;
 
 public class UI {
     GamePanel gp;
-    Font maruMonica, purisaB;
+    public Font maruMonica, purisaB;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -153,7 +153,7 @@ public class UI {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
         g2.setColor(Color.WHITE);
-        text = "Start";
+        text = "Continue";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
         int y = gp.screenHeight / 2 + 3 * gp.tileSize + gp.tileSize / 4;
         g2.drawString(text, x, y);
@@ -162,7 +162,7 @@ public class UI {
             g2.drawString(">", x - gp.tileSize, y);
         }
 
-        text = "Test Monster";
+        text = "New Game";
         y = y + gp.tileSize * 4 / 3;
         g2.drawString(text, x, y);
 

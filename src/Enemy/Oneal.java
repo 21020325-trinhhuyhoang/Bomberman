@@ -18,6 +18,7 @@ public class Oneal extends Enemy {
     public Oneal(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 1;
+        this.score = 150;
     }
 
     @Override

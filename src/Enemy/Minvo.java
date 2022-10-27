@@ -18,6 +18,7 @@ public class Minvo extends Enemy {
     public Minvo(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 2;
+        this.score = 200;
     }
 
     @Override

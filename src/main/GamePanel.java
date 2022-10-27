@@ -16,6 +16,7 @@ import Enemy.Enemy;
 import Enemy.SuperEnemy;
 import Tile.TileManager;
 import entity.Player;
+import entity.TextBox;
 import object.*;
 import main.UI;
 import Enemy.SuperEDeadth;
@@ -44,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int timeCount;
     public int score;
     public int newscore = 0;
+    public int scoreLive;
+    public int newScoreLive = 0;
     public int timeStage = 0;
     public int timeGO = 0;
 
@@ -86,6 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperEDeadth sed = new SuperEDeadth(this);
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
+    public ArrayList<TextBox> listText = new ArrayList<>();
     public int GameState = Constants.menu;
 
     //thong so player
@@ -117,6 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
+        listText = new ArrayList<>();
     }
 
     /**
@@ -138,6 +143,7 @@ public class GamePanel extends JPanel implements Runnable {
         time = Constants.maxTime;
         timeCount = 0;
         score = newscore;
+        scoreLive = newScoreLive;
         player.alive = true;
 
         superExplosion = new SuperExplosion();
@@ -161,6 +167,7 @@ public class GamePanel extends JPanel implements Runnable {
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
+        listText = new ArrayList<>();
     }
 
     /**
@@ -171,6 +178,7 @@ public class GamePanel extends JPanel implements Runnable {
         time = Constants.maxTime;
         timeCount = 0;
         score = newscore;
+        scoreLive = newScoreLive;
         player.alive = true;
 
         this.player = new Player(this, keyH, maxFire, maxBomb, speed);
@@ -188,6 +196,7 @@ public class GamePanel extends JPanel implements Runnable {
         sed = new SuperEDeadth(this);
         listEDeadth = new ArrayList<>();
         listPowerUp = new ArrayList<>();
+        listText = new ArrayList<>();
     }
 
     public void startGameThread() {
@@ -230,7 +239,6 @@ public class GamePanel extends JPanel implements Runnable {
                 } else if (player.alive == false && player.timeDeadth <= 0 && live <= 0) {
                     GameState = Constants.gameOver;
                     timeGO = 2 * 60;
-                    //System.out.println(player.alive + " " + player.timeDeadth + " " + live);
                 }
             } else
             //dung khi player chet
@@ -247,6 +255,7 @@ public class GamePanel extends JPanel implements Runnable {
         maxBomb = player.maxBombs;
         speed = player.speed;
         newscore = score;
+        newScoreLive = scoreLive;
     }
 
     public void Playing() {
@@ -305,6 +314,19 @@ public class GamePanel extends JPanel implements Runnable {
         //update Enemy
         updateEnemy();
 
+        //update TextBox
+        updateTextBox();
+
+    }
+
+    public void updateTextBox() {
+        for (int i = 0; i < listText.size(); ++i) {
+            TextBox tmp = listText.get(i);
+
+            if (tmp.time > 0) {
+                listText.get(i).updateText();
+            }
+        }
     }
 
     //update Bombs
@@ -401,7 +423,21 @@ public class GamePanel extends JPanel implements Runnable {
 
                     if (tmp.hitPoint <= 0) {
                         TotalEnemy --;
-                        score += 100;
+                        score += tmp.score;
+                        scoreLive += tmp.score;
+
+                        TextBox newTextBox;
+
+                        if (scoreLive >= 5000) {
+                            live = live + scoreLive / 5000;
+                            scoreLive = scoreLive % 5000;
+                            newTextBox = new TextBox(player.worldX, player.worldY + tileSize / 2 - 20, 121, "Life Up!",this);
+                            addTextBox(newTextBox);
+                        }
+
+                        newTextBox = new TextBox(tmp.worldX, tmp.worldY + tileSize / 2 - 20, 121, "" + tmp.score,this);
+                        addTextBox(newTextBox);
+
                         if (tmp instanceof Oneal) {
                             type = 1;
                         }
@@ -450,6 +486,26 @@ public class GamePanel extends JPanel implements Runnable {
                     tmp.move();
                 }
             }
+        }
+    }
+
+    /**
+     * them 1 textBOx.
+     */
+    public void addTextBox(TextBox newTextBox) {
+        int idx = -1;
+
+        for (int i = 0; i < listText.size(); ++i) {
+            if (listText.get(i).time <= 0) {
+                idx = i;
+                break;
+            }
+        }
+
+        if (idx != -1) {
+            listText.set(idx, newTextBox);
+        } else {
+            listText.add(newTextBox);
         }
     }
 
@@ -540,6 +596,9 @@ public class GamePanel extends JPanel implements Runnable {
         //Bomberman
         player.draw(g2);
 
+        //TextBox
+        paintTextBox(g2);
+
         //Draw live
         drawBox(g2);
 
@@ -561,6 +620,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         g2.dispose();
+    }
+
+    /**
+     * ve textBox.
+     */
+    void paintTextBox(Graphics2D g2) {
+        for (int i = 0; i < listText.size(); ++i) {
+            if (listText.get(i).time > 0) {
+                listText.get(i).renderText(g2,myUI);
+            }
+        }
     }
 
     /**

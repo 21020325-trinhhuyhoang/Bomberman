@@ -18,6 +18,7 @@ public class Doll extends Enemy {
     public Doll(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 3;
+        this.score = 350;
     }
 
     @Override

@@ -22,6 +22,7 @@ public class Kondoria extends Enemy {
         super(worldX, worldY, gp);
         this.speed = 2;
         this.timeMove = 0; //max = 2
+        this.score = 200;
         //speed cua Kondoria se la 2/3.
     }
 

@@ -53,7 +53,6 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 //tiep tuc game (Continue)
                 if (gp.command == 1) {
-                    //gp.GameState = Constants.playing;
                     upPressed = false;
                     downPressed = false;
                     leftPressed = false;
@@ -63,7 +62,13 @@ public class KeyHandler implements KeyListener {
                 }
                 //Game moi (New game)
                 else if (gp.command == 2) {
-
+                    upPressed = false;
+                    downPressed = false;
+                    leftPressed = false;
+                    rightPressed = false;
+                    gp.resetAllData();
+                    gp.GameState = Constants.stage;
+                    gp.timeStage = 2 * 60;
                 }
                 //thoat game (EXIT)
                 else {

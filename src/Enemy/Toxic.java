@@ -25,6 +25,7 @@ public class Toxic extends Enemy {
     public Toxic(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 1;
+        this.score = 350;
     }
 
     @Override

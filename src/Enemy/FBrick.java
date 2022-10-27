@@ -18,6 +18,7 @@ public class FBrick extends Enemy {
     public FBrick(int worldX, int worldY, GamePanel gp) {
         super(worldX, worldY, gp);
         this.speed = 4;
+        this.score = 300;
     }
 
     @Override

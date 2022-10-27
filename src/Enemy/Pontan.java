@@ -27,6 +27,7 @@ public class Pontan extends Enemy {
         this.timeChange = 1000;
         Random rand = new Random();
         this.color = rand.nextInt(1000) % 2 + 1;
+        this.score = 400;
     }
 
     @Override
