@@ -159,7 +159,7 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (gp.GameState == Constants.playing) {
+        //if (gp.GameState == Constants.playing) {
             if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 upPressed = false;
             }
@@ -175,6 +175,6 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_SPACE) {
                 spacePressed = false;
             }
-        }
+        //}
     }
 }
