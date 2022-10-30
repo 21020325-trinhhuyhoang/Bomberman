@@ -5,6 +5,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import main.GamePanel;
 
+import java.io.BufferedInputStream;
+
 public class Sound {
     public GamePanel gp;
 
@@ -17,8 +19,9 @@ public class Sound {
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
-                    clip.open(inputStream);
+                    BufferedInputStream bufferedIn = new BufferedInputStream(getClass().getResourceAsStream("/resouces/sound/" + sound + ".wav"));
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                    clip.open(audioStream);
                     clip.start();
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
@@ -34,8 +37,9 @@ public class Sound {
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrack1.wav"));
-                    clip.open(inputStream);
+                    BufferedInputStream bufferedIn = new BufferedInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrack1.wav"));
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                    clip.open(audioStream);
                     while (true) {
                         Thread.sleep(500);
                         if (gp.music == false || gp.GameState == 4 || gp.GameState == 6) {
@@ -57,8 +61,9 @@ public class Sound {
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrackmenu.wav"));
-                    clip.open(inputStream);
+                    BufferedInputStream bufferedIn = new BufferedInputStream(getClass().getResourceAsStream("/resouces/sound/soundtrackmenu.wav"));
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                    clip.open(audioStream);
                     while (true) {
                         Thread.sleep(500);
                         if (gp.music == false || gp.GameState != 4) {
