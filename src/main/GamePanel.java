@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import Bombs.Explosion;
 import Bombs.SuperExplosion;
-import Bombs.Bombs;
 import Bombs.SuperToxic;
 import Bombs.ExToxic;
 import BrickExplo.BrickExplo;
@@ -18,11 +17,9 @@ import Tile.TileManager;
 import entity.Player;
 import entity.TextBox;
 import object.*;
-import main.UI;
 import Enemy.SuperEDeadth;
 import Enemy.EDeadth;
 import Enemy.Balloom;
-import Enemy.AStar;
 import Enemy.Oneal;
 import Enemy.Kondoria;
 import Enemy.Pontan;
@@ -68,8 +65,6 @@ public class GamePanel extends JPanel implements Runnable {
     //World setting (hang va cot cua level)
     public int maxWorldCol = 15;
     public int maxWorldRow = 17;
-    public int worldWidth = tileSize * maxWorldCol;
-    public int worldHeight = tileSize * maxWorldRow;
 
     //FPS
     public int fps = 60;
@@ -80,8 +75,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player;
     public TileManager tileM;
-    public AssetSetter aSetter = new AssetSetter(this);
-
     public SuperExplosion superExplosion;
     public SuperToxic superToxic;
     public ArrayList<Explosion> listExplosion = new ArrayList<>();
@@ -115,7 +108,6 @@ public class GamePanel extends JPanel implements Runnable {
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
         tileM = new TileManager(this, name);
-        aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
@@ -162,7 +154,6 @@ public class GamePanel extends JPanel implements Runnable {
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
         tileM = new TileManager(this, name);
-        aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
@@ -191,7 +182,6 @@ public class GamePanel extends JPanel implements Runnable {
         TotalEnemy = 0;
         String name = Convert.nameLevel(level);
         tileM = new TileManager(this, name);
-        aSetter = new AssetSetter(this);
         listExplosion = new ArrayList<>();
         listToxic = new ArrayList<>();
         superBrickExplo = new SuperBrickExplo();
@@ -527,7 +517,6 @@ public class GamePanel extends JPanel implements Runnable {
                         newED = new EDeadth(tmp.worldX, tmp.worldY, type, this);
                         listEDeadth.add(newED);
                         if (music == true) sound.play("enemydeadth");
-                        //if (music == true) playSE(1);
                     }
                 }
                 else if (checkColPlayer == true && player.alive == true) {
@@ -535,7 +524,6 @@ public class GamePanel extends JPanel implements Runnable {
                     player.timeDeadth = Constants.timeDeadth;
                     if (music == true) sound.play("playerdeadth");
                     live --;
-                    //if (music == true) playSE(1);
                 }
 
                 if (tmp.hitPoint > 0) {
@@ -588,7 +576,6 @@ public class GamePanel extends JPanel implements Runnable {
 
                 if (collision == true) {
                     if (music == true) sound.play("item");
-                    //if (music == true) playSE(3);
                     //PW Bombs
                     if (tmp instanceof PowerUp_Bombs) {
                         player.maxBombs++;

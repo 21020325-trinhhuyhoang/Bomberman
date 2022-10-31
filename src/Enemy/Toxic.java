@@ -1,14 +1,9 @@
 package Enemy;
 
-import Bombs.Explosion;
-import BrickExplo.BrickExplo;
 import Convert.PositionScreen;
-import entity.Player;
 import main.Constants;
 import main.GamePanel;
-import Enemy.SuperEnemy;
 import Bombs.ExToxic;
-import Bombs.SuperToxic;
 
 import java.awt.*;
 import java.util.ArrayList;

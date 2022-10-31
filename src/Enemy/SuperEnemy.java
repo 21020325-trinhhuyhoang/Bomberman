@@ -1,18 +1,13 @@
 package Enemy;
 
-import Convert.Convert;
-import main.Constants;
 import main.GamePanel;
-import sun.plugin2.util.ColorUtil;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 
 public class SuperEnemy {
     public BufferedImage[][] image;

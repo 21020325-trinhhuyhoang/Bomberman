@@ -1,19 +1,16 @@
 package Bombs;
 
 import BrickExplo.BrickExplo;
-import BrickExplo.SuperBrickExplo;
 import Convert.PositionScreen;
 import main.GamePanel;
 import entity.Player;
 import main.Constants;
-import main.Sound;
 import object.Door;
 import object.PowerUp_Bombs;
 import object.PowerUp_Flames;
 import object.PowerUp_Speed;
 
 import javax.imageio.ImageIO;
-import javax.lang.model.type.ArrayType;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -93,7 +90,6 @@ public class Bombs {
         if (this.time <= 0) {
             player.totalBombs--;
             if (gp.music == true) gp.sound.play("explosion1");
-            //if (gp.music == true) gp.playSE(2);
             BombExplosion(listExplosion, player);
         }
     }

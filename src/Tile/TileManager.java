@@ -1,8 +1,5 @@
 package Tile;
 
-import Enemy.Enemy;
-import Enemy.Balloom;
-import main.Constants;
 import main.GamePanel;
 import Convert.Convert;
 import Convert.PositionScreen;
@@ -13,8 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TileManager {

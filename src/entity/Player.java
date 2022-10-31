@@ -3,10 +3,7 @@ package entity;
 import main.KeyHandler;
 import main.GamePanel;
 import main.Constants;
-
 import Bombs.Bombs;
-import main.Sound;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -111,7 +108,6 @@ public class Player extends Entity {
             timeDeadth = Constants.timeDeadth;
             if (gp.music == true) gp.sound.play("playerdeadth");
             gp.live --;
-            //if (gp.music == true) gp.playSE(1);
         }
 
         if (checkToxic() == true && alive == true) {
@@ -119,7 +115,6 @@ public class Player extends Entity {
             timeDeadth = Constants.timeDeadth;
             if (gp.music == true) gp.sound.play("playerdeadth");
             gp.live --;
-            //if (gp.music == true) gp.playSE(1);
         }
 
         if (alive == false) return;
@@ -186,7 +181,7 @@ public class Player extends Entity {
 
         if (keyH.spaceTyped == true) {
             if (totalBombs < maxBombs) {
-                //if (gp.music == true) Sound.play("dropbomb");
+                if (gp.music == true) gp.sound.play("dropbomb");
                 dropBomb();
             }
         }
@@ -206,7 +201,6 @@ public class Player extends Entity {
         for (int i = 0; i < maxBombs; ++i) {
             if (arrBombs[i].time <= 0) {
 
-                //System.out.println(_x + " " + _y);
                 gp.tileM.mapBombs[_x][_y] = i + Constants.bombsCode;
                 gp.tileM.mapEConllision[_x][_y]++;
 

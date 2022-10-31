@@ -3,10 +3,8 @@ package Enemy;
 import Convert.PositionScreen;
 import main.Constants;
 import main.GamePanel;
-import Enemy.SuperEnemy;
 
 import java.awt.*;
-import java.util.Random;
 
 /*
  FakeBrick

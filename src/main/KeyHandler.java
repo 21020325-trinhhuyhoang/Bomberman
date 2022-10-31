@@ -2,9 +2,6 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.security.Key;
-
-import main.GamePanel;
 
 public class KeyHandler implements KeyListener {
 
@@ -15,7 +12,6 @@ public class KeyHandler implements KeyListener {
     public boolean spaceTyped = false;
 
     public GamePanel gp;
-    public boolean pausePressed;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;

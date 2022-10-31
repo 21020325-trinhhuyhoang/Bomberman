@@ -1,7 +1,7 @@
-1 level
-1 fire
+2 level
+2 fire
 1 maxBombs
 3 speed
-0 score
-2100 scoreLive
+700 score
+2800 scoreLive
 3 live

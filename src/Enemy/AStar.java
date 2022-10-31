@@ -5,8 +5,6 @@ import main.GamePanel;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import Enemy.aPair;
-
 public class AStar {
     public static int FindPath(GamePanel gp, int x, int y, int gx, int gy) {
 

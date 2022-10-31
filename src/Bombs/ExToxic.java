@@ -1,6 +1,5 @@
 package Bombs;
 
-import Bombs.SuperToxic;
 import Convert.PositionScreen;
 import main.Constants;
 import main.GamePanel;

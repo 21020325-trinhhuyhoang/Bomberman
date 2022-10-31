@@ -1,11 +1,7 @@
 package object;
 
-import main.GamePanel;
-import Convert.PositionScreen;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class PowerUp_Speed extends SuperObject {
