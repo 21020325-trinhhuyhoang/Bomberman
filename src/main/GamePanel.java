@@ -33,6 +33,9 @@ import Enemy.FBrick;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    //Save
+    public SaveGame MySave = new SaveGame(this);
+
     //LENH DIEU CHINH MENU
     public int command = 1;
 
@@ -142,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable {
         sound.playmusic();
         time = Constants.maxTime;
         timeCount = 0;
+        MySave.LoadSave();
         score = newscore;
         scoreLive = newScoreLive;
         player.alive = true;
@@ -177,6 +181,7 @@ public class GamePanel extends JPanel implements Runnable {
         GameState = Constants.playing;
         time = Constants.maxTime;
         timeCount = 0;
+        MySave.LoadSave();
         score = newscore;
         scoreLive = newScoreLive;
         player.alive = true;
@@ -257,6 +262,8 @@ public class GamePanel extends JPanel implements Runnable {
         speed = player.speed;
         newscore = score;
         newScoreLive = scoreLive;
+        MySave.MakeSave("NEXT");
+
     }
 
     public void Playing() {
@@ -282,6 +289,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (timeGO <= 0) {
             timeGO = 0;
             resetAllData();
+            MySave.MakeSave("NEW");
             GameState = Constants.menu;
         }
         repaint();

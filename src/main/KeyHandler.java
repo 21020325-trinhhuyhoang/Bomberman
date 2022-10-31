@@ -69,6 +69,7 @@ public class KeyHandler implements KeyListener {
                     gp.resetAllData();
                     gp.GameState = Constants.stage;
                     gp.timeStage = 2 * 60;
+                    gp.MySave.MakeSave("NEW");
                 }
                 //thoat game (EXIT)
                 else {

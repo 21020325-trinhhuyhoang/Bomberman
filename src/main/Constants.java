@@ -49,5 +49,5 @@ public class Constants {
 
     public static final String [] nameStage = {"","Ballom","Oneal","Kondoria","Minvo","Pontan","Dalh","Toxic","Fake Brick"};
 
-    public static final String version = "v1.0.5";
+    public static final String version = "v1.0.6";
 }
