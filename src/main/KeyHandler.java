@@ -67,6 +67,7 @@ public class KeyHandler implements KeyListener {
                     leftPressed = false;
                     rightPressed = false;
                     gp.resetAllData();
+                    gp.saveGame();
                     gp.GameState = Constants.stage;
                     gp.timeStage = 2 * 60;
                 }

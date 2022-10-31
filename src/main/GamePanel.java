@@ -30,6 +30,10 @@ import Enemy.Minvo;
 import Enemy.Toxic;
 import Enemy.Doll;
 import Enemy.FBrick;
+import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -145,6 +149,7 @@ public class GamePanel extends JPanel implements Runnable {
         score = newscore;
         scoreLive = newScoreLive;
         player.alive = true;
+        loadGame();
 
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
@@ -257,6 +262,56 @@ public class GamePanel extends JPanel implements Runnable {
         speed = player.speed;
         newscore = score;
         newScoreLive = scoreLive;
+    }
+
+    public void loadGame() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("src/resouces/save/Save.txt");
+            Scanner scanner = new Scanner(fileInputStream);
+            level = scanner.nextInt();
+            scanner.nextLine();
+            maxFire = scanner.nextInt();
+            scanner.nextLine();
+            maxBomb = scanner.nextInt();
+            scanner.nextLine();;
+            speed = scanner.nextInt();
+            scanner.nextLine();
+            newscore = scanner.nextInt();
+            score = newscore;
+            scanner.nextLine();
+            newScoreLive = scanner.nextInt();
+            scoreLive = newScoreLive;
+            scanner.nextLine();
+            live = scanner.nextInt();
+            scanner.close();
+            fileInputStream.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void saveGame() {
+        try {
+            FileWriter fw = new FileWriter("src/resouces/save/Save.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(level + " level");
+            bw.newLine();
+            bw.write(maxFire + " fire");
+            bw.newLine();
+            bw.write(maxBomb + " maxBombs");
+            bw.newLine();
+            bw.write(speed + " speed");
+            bw.newLine();
+            bw.write(newscore + " score");
+            bw.newLine();
+            bw.write(newScoreLive + " scoreLive");
+            bw.newLine();
+            bw.write(live + " live");
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void Playing() {
@@ -569,7 +624,6 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-
         //Tile
         tileM.draw(g2);
 

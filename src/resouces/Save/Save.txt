@@ -1,1 +1,7 @@
-NEWGAME
+2 level
+2 fire
+1 maxBombs
+3 speed
+700 score
+2100 scoreLive
+2 live

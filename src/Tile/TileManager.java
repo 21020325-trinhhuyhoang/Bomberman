@@ -208,6 +208,9 @@ public class TileManager {
 
     public void draw(Graphics2D g2) {
 
+        g2.setColor(new Color(185, 185, 185));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
         int worldCol = 0;
         int worldRow = 0;
 

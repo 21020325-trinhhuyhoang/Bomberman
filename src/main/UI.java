@@ -29,6 +29,7 @@ public class UI {
         //game over
         if (gp.GameState == Constants.gameOver) {
             gp.gameOver();
+            gp.saveGame();
         }
 
         //stage
@@ -47,6 +48,7 @@ public class UI {
         }
 
         if (gp.GameState == Constants.retry) {
+            gp.saveGame();
             gp.reset();
         }
 
@@ -57,6 +59,7 @@ public class UI {
         //man tiep theo
         if (gp.GameState == Constants.nextLevel) {
             gp.makeToNextLevel();
+            gp.saveGame();
             gp.reset();
             gp.GameState = Constants.stage;
             gp.timeStage = 2 * 60;
