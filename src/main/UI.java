@@ -67,7 +67,6 @@ public class UI {
 
         if (gp.GameState == Constants.ranking) {
             gp.Ranking();
-            System.out.print(1);
         }
     }
 

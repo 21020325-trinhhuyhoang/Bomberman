@@ -34,20 +34,8 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
 
-        if (gp.GameState == Constants.menu) {
-
-            if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-                gp.command --;
-                if (gp.command == 0) gp.command = 3;
-                if (gp.music == true) gp.sound.play("button");
-            }
-            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-                gp.command ++;
-                if (gp.command == 5) gp.command = 1;
-                if (gp.music == true) gp.sound.play("button");
-            }
-
-            if (code == KeyEvent.VK_ENTER) {
+        if (code == KeyEvent.VK_ENTER) {
+            if (gp.GameState == Constants.menu) {
                 //tiep tuc game (Continue)
                 if (gp.command == 1) {
                     upPressed = false;
@@ -74,13 +62,31 @@ public class KeyHandler implements KeyListener {
                     downPressed = false;
                     leftPressed = false;
                     rightPressed = false;
-                    gp.GameState = Constants.ranking;
-                    gp.timeStage = 2 * 60;
+                    gp.GameState = 7;
+                    System.out.println("rank" + gp.GameState);
                 }
                 //thoat game (EXIT)
                 else {
                     System.exit(0);
                 }
+            }
+            //ranking
+            else if (gp.GameState == Constants.ranking) {
+                gp.GameState = Constants.menu;
+            }
+        }
+
+        if (gp.GameState == Constants.menu) {
+
+            if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                gp.command --;
+                if (gp.command == 0) gp.command = 3;
+                if (gp.music == true) gp.sound.play("button");
+            }
+            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                gp.command ++;
+                if (gp.command == 5) gp.command = 1;
+                if (gp.music == true) gp.sound.play("button");
             }
         }
 
@@ -158,12 +164,6 @@ public class KeyHandler implements KeyListener {
                     spaceTyped = true;
                 }
                 spacePressed = true;
-            }
-        }
-
-        if (gp.GameState == Constants.ranking) {
-            if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_ESCAPE) {
-                gp.GameState = Constants.menu;
             }
         }
 
