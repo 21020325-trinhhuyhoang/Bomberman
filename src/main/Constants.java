@@ -43,11 +43,13 @@ public class Constants {
     public static final int retry = 1;
     public static final int nextLevel = 2;
     public static final int pause = 3;
-    public static final int menu = 4;
-    public static final int stage = 5;
-    public static final int gameOver = 6;
+    public static final int menu = 6;
+    public static final int stage = 4;
+    public static final int gameOver = 5;
+    public static final int ranking = 7;
+    public static final int newHighScore = 8;
 
     public static final String [] nameStage = {"","Ballom","Oneal","Kondoria","Minvo","Pontan","Dalh","Toxic","Fake Brick"};
 
-    public static final String version = "v1.0.6";
+    public static final String version = "v1.0.7";
 }

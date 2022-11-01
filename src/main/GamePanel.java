@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int newscore = 0;
     public int scoreLive;
     public int newScoreLive = 0;
+    public int newHighScore = 5;
     public int timeStage = 0;
     public int timeGO = 0;
 
@@ -87,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<EDeadth> listEDeadth = new ArrayList<>();
     public ArrayList<SuperObject> listPowerUp = new ArrayList<>();
     public ArrayList<TextBox> listText = new ArrayList<>();
+    public ArrayList<Score> listScore = new ArrayList<>();
     public int GameState = Constants.menu;
 
     //thong so player
@@ -130,6 +132,7 @@ public class GamePanel extends JPanel implements Runnable {
         level = 1;
         score = 0;
         newscore = 0;
+        newScoreLive = 0;
         live = 3;
         reset();
     }
@@ -142,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable {
         scoreLive = newScoreLive;
         player.alive = true;
         loadGame();
+        loadRanking();
 
         superExplosion = new SuperExplosion();
         superExplosion.loadImage();
@@ -292,11 +296,43 @@ public class GamePanel extends JPanel implements Runnable {
             bw.newLine();
             bw.write(speed + " speed");
             bw.newLine();
-            bw.write(newscore + " score");
+            bw.write(score + " score");
             bw.newLine();
-            bw.write(newScoreLive + " scoreLive");
+            bw.write(scoreLive + " scoreLive");
             bw.newLine();
             bw.write(live + " live");
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void loadRanking() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("src/resouces/save/HighScores.txt");
+            Scanner scanner = new Scanner(fileInputStream);
+            for (int i = 0; i < 5; i++) {
+                int scorePlayer = scanner.nextInt();
+                String namePlayer = scanner.nextLine();
+                listScore.add(new Score(namePlayer.trim(), scorePlayer));
+            }
+            listScore.add(new Score("", 0));
+            scanner.close();
+            fileInputStream.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void saveRanking() {
+        try {
+            FileWriter fw = new FileWriter("src/resouces/save/HighScores.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < 5; i++) {
+                bw.write(String.valueOf(listScore.get(i).score) + " " + listScore.get(i).name);
+                bw.newLine();
+            }
             bw.close();
             fw.close();
         } catch (Exception e) {
@@ -326,13 +362,33 @@ public class GamePanel extends JPanel implements Runnable {
         timeGO --;
         if (timeGO <= 0) {
             timeGO = 0;
-            resetAllData();
-            GameState = Constants.menu;
+            if (score >= listScore.get(4).score) {
+                listScore.set(5, new Score("", score));
+                for (int i = 5; i > 0; i--) {
+                    if (listScore.get(i).score >= listScore.get(i - 1).score) {
+                        newHighScore = i - 1;
+                        Score temp = listScore.get(i);
+                        listScore.set(i, listScore.get(i - 1));
+                        listScore.set(i - 1, temp);
+                    } else {
+                        break;
+                    }
+                }
+                resetAllData();
+                GameState = Constants.newHighScore;
+            } else {
+                resetAllData();
+                GameState = Constants.menu;
+            }
         }
         repaint();
     }
 
     public void Menu() {
+        repaint();
+    }
+
+    public void Ranking() {
         repaint();
     }
 
@@ -659,6 +715,14 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (GameState == Constants.gameOver) {
             myUI.drawGameOver(g2);
+        }
+
+        if (GameState == Constants.ranking) {
+            myUI.drawRanking(g2);
+        }
+
+        if (GameState == Constants.newHighScore) {
+            myUI.drawNewHighScore(g2);
         }
 
         g2.dispose();

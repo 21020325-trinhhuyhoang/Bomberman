@@ -41,7 +41,7 @@ public class Sound {
                     clip.open(audioStream);
                     while (true) {
                         Thread.sleep(500);
-                        if (gp.music == false || gp.GameState == 4 || gp.GameState == 6) {
+                        if (gp.music == false || gp.GameState >= 5) {
                             clip.stop();
                             Thread.interrupted();
                         } else {
@@ -65,7 +65,7 @@ public class Sound {
                     clip.open(audioStream);
                     while (true) {
                         Thread.sleep(500);
-                        if (gp.music == false || gp.GameState != 4) {
+                        if (gp.music == false || gp.GameState <= 5) {
                             clip.stop();
                             Thread.interrupted();
                         } else {
