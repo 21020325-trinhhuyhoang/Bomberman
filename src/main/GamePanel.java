@@ -392,6 +392,10 @@ public class GamePanel extends JPanel implements Runnable {
         repaint();
     }
 
+    public void NewHighScore() {
+        repaint();
+    }
+
     public void update() {
         //updatePlayer
         player.update();

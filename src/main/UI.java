@@ -68,6 +68,10 @@ public class UI {
         if (gp.GameState == Constants.ranking) {
             gp.Ranking();
         }
+
+        if (gp.GameState == Constants.newHighScore) {
+            gp.NewHighScore();
+        }
     }
 
     public void drawPauseScreen(Graphics2D g2) {
@@ -165,7 +169,7 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 150F));
         String text = "RANKING";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
-        int y = gp.screenHeight / 2 - 5 * gp.tileSize;
+        int y = gp.screenHeight / 2 - 3 * gp.tileSize;
         g2.setColor(Color.CYAN);
         g2.drawString(text,x,y);
 
@@ -173,10 +177,10 @@ public class UI {
         g2.setColor(Color.BLUE);
         text = "NAME";
         x = gp.tileSize * 2;
-        y = y + gp.tileSize * 3;
+        y = y + gp.tileSize * 2;
         g2.drawString(text, x, y);
         text = "SCORE";
-        x =gp.tileSize * 8;
+        x =gp.tileSize * 12;
         g2.drawString(text, x, y);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
@@ -187,7 +191,7 @@ public class UI {
             y = y + gp.tileSize;
             g2.drawString(text, x, y);
             text = String.valueOf(gp.listScore.get(i).score);
-            x =gp.tileSize * 8;
+            x =gp.tileSize * 12;
             g2.drawString(text, x, y);
         }
     }
@@ -196,19 +200,37 @@ public class UI {
         g2.setColor(Color.BLACK);
         g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
         g2.setFont(maruMonica);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
-        String text = "GAME OVER!";
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 150F));
+        String text = "RANKING";
         int x = getXforCenteredText(text,g2) - gp.tileSize / 2;
-        int y = gp.screenHeight / 2 - gp.tileSize;
-        g2.setColor(Color.RED);
+        int y = gp.screenHeight / 2 - 3 * gp.tileSize;
+        g2.setColor(Color.CYAN);
         g2.drawString(text,x,y);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
-        g2.setColor(Color.WHITE);
-        text = "SCORE: " + String.valueOf(gp.score);
-        x = getXforCenteredText(text,g2) - gp.tileSize / 2;
-        y = y + gp.tileSize * 4 / 3;
+        g2.setColor(Color.BLUE);
+        text = "NAME";
+        x = gp.tileSize * 2;
+        y = y + gp.tileSize * 2;
         g2.drawString(text, x, y);
+        text = "SCORE";
+        x =gp.tileSize * 12;
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
+        g2.setColor(Color.WHITE);
+        for (int i = 0; i < 5; i++) {
+            text = gp.listScore.get(i).name;
+            if (gp.newHighScore == i) {
+                text = text + "_";
+            }
+            x = gp.tileSize * 2;
+            y = y + gp.tileSize;
+            g2.drawString(text, x, y);
+            text = String.valueOf(gp.listScore.get(i).score);
+            x =gp.tileSize * 12;
+            g2.drawString(text, x, y);
+        }
     }
 
     public void drawMenu(Graphics2D g2, SuperEnemy se) {

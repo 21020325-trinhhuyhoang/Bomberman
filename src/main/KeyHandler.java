@@ -62,8 +62,7 @@ public class KeyHandler implements KeyListener {
                     downPressed = false;
                     leftPressed = false;
                     rightPressed = false;
-                    gp.GameState = 7;
-                    System.out.println("rank" + gp.GameState);
+                    gp.GameState = Constants.ranking;
                 }
                 //thoat game (EXIT)
                 else {
